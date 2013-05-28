@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.usavich.db.account.dao.impl.AccountMapper">
+
+    <resultMap id="accountInfo" type="com.usavich.entity.account.model.UserInfo">
+        <id column="USER_ID" property="userId" />
+        <result column="USER_EMAIL" property="userEmail" />
+        <result column="NICK_NAME" property="nickName" />
+        <result column="LEVEL" property="level" />
+        <result column="SCORES" property="scores" />
+        <result column="EXPERIENCE" property="experience" />
+        <result column="BASE_ACC" property="baseAcc" />
+        <result column="INERTIA_ACC" property="inertiaAcc" />
+        <result column="CRIT" property="crit" />
+        <result column="LUCK" property="luck" />
+    </resultMap>
+
+    <sql id="accountInfoTable">
+        U.USER_ID,
+        U.USER_EMAIL,
+        U.NICK_NAME,
+        UD.SCORES,
+        UD.LEVEL,
+        UD.SCORES,
+        UD.EXPERIENCE,
+        UD.BASE_ACC,
+        UD.INERTIA_ACC,
+        UD.CRIT,
+        UD.LUCK
+    </sql>
+
+    <select id="getAccountInfo" resultMap="accountInfo">
+        SELECT <include refid="accountInfoTable" />
+        FROM USER AS U
+        INNER JOIN USER_DETAIL AS UD
+        ON U.USER_ID = UD.USER_ID
+        WHERE U.USER_EMAIL = #{userEmail}
+        AND U.USER_PASSWORD = #{password}
+    </select>
+
+    <insert id="createBase" parameterType="com.usavich.entity.account.model.UserBase" useGeneratedKeys="true" keyProperty="baseEntity.userId">
+        INSERT INTO USER
+        (
+            USER_EMAIL,
+            USER_PASSWORD,
+            NICK_NAME
+        )
+        VALUES
+        (
+            #{baseEntity.userEmail},
+            #{baseEntity.password},
+            #{baseEntity.nickName}
+        )
+    </insert>
+
+    <insert id="createDetail" parameterType="com.usavich.entity.account.model.UserInfo">
+        INSERT INTO USER_DETAIL
+        (
+          USER_ID,
+          LEVEL,
+          SCORES,
+          EXPERIENCE,
+          BASE_ACC,
+          CRIT,
+          INERTIA_ACC,
+          LUCK
+        )
+        VALUES
+        (
+          #{detailEntity.userId},
+          #{detailEntity.level},
+          #{detailEntity.scores},
+          #{detailEntity.experience},
+          #{detailEntity.baseAcc},
+          #{detailEntity.crit},
+          #{detailEntity.inertiaAcc},
+          #{detailEntity.luck}
+        );
+    </insert>
+
+</mapper>
