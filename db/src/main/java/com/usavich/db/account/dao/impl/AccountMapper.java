@@ -1,8 +1,9 @@
 package com.usavich.db.account.dao.impl;
 
+import com.usavich.entity.account.*;
 import org.apache.ibatis.annotations.Param;
 
-import com.usavich.entity.account.model.*;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,9 +15,13 @@ import com.usavich.entity.account.model.*;
 public interface AccountMapper {
 
     public UserInfo getAccountInfo(@Param("userEmail") String userEmail,
-                                      @Param("password") String password);
+                                   @Param("password") String password);
 
     public int createBase(@Param("baseEntity") UserBase userBase);
 
     public void createDetail(@Param("detailEntity") UserInfo accountInfo);
+
+    public UserInfo getAccountInfo(@Param("userId") Integer userId);
+
+    public List<UserFriend> getUserFriends(@Param("userId") Integer userId);
 }

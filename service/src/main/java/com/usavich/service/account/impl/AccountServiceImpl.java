@@ -4,7 +4,7 @@ import com.usavich.db.account.dao.def.AccountDAO;
 import com.usavich.service.account.def.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.usavich.entity.account.model.*;
+import com.usavich.entity.account.*;
 import org.springframework.transaction.annotation.Transactional;
 
 /**

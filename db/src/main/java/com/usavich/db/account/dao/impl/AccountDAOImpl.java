@@ -3,7 +3,9 @@ package com.usavich.db.account.dao.impl;
 import com.usavich.db.account.dao.def.AccountDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.usavich.entity.account.model.*;
+import com.usavich.entity.account.*;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,10 +25,20 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
+    public UserInfo getAccountInfo(Integer userId) {
+        return accountMapper.getAccountInfo(userId);
+    }
+
+    @Override
     public UserInfo createAccountInfo(UserBase userBase) {
         accountMapper.createBase(userBase);
         UserInfo accountInfo = new UserInfo(userBase);
         accountMapper.createDetail(accountInfo);
         return accountInfo;
+    }
+
+    @Override
+    public List<UserFriend> getUserFriends(Integer userId) {
+        return accountMapper.getUserFriends(userId);
     }
 }

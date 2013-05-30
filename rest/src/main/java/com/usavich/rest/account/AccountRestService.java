@@ -1,6 +1,6 @@
 package com.usavich.rest.account;
 
-import com.usavich.entity.account.model.*;
+import com.usavich.entity.account.*;
 import com.usavich.service.account.def.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 

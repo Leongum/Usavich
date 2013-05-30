@@ -1,7 +1,7 @@
 package com.usavich.service;
 
 import com.usavich.db.account.dao.def.AccountDAO;
-import com.usavich.entity.account.model.*;
+import com.usavich.entity.account.*;
 import junit.framework.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;

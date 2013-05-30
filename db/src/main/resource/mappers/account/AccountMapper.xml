@@ -3,7 +3,20 @@
 
 <mapper namespace="com.usavich.db.account.dao.impl.AccountMapper">
 
-    <resultMap id="accountInfo" type="com.usavich.entity.account.model.UserInfo">
+    <resultMap id="accountInfo" type="com.usavich.entity.account.UserInfo">
+        <id column="USER_ID" property="userId" />
+        <result column="USER_EMAIL" property="userEmail" />
+        <result column="NICK_NAME" property="nickName" />
+        <result column="LEVEL" property="level" />
+        <result column="SCORES" property="scores" />
+        <result column="EXPERIENCE" property="experience" />
+        <result column="BASE_ACC" property="baseAcc" />
+        <result column="INERTIA_ACC" property="inertiaAcc" />
+        <result column="CRIT" property="crit" />
+        <result column="LUCK" property="luck" />
+    </resultMap>
+
+    <resultMap id="accountInfo" type="com.usavich.entity.account.UserFriend">
         <id column="USER_ID" property="userId" />
         <result column="USER_EMAIL" property="userEmail" />
         <result column="NICK_NAME" property="nickName" />

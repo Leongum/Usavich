@@ -1,6 +1,6 @@
 package com.usavich.service.account.def;
 
-import com.usavich.entity.account.model.*;
+import com.usavich.entity.account.*;
 
 /**
  * Created with IntelliJ IDEA.

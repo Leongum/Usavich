@@ -1,6 +1,6 @@
 package com.usavich.rest.account;
 
-import com.usavich.entity.account.model.*;
+import com.usavich.entity.account.*;
 import com.usavich.rest.common.RestDef;
 
 import javax.ws.rs.*;

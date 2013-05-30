@@ -1,4 +1,4 @@
-package com.usavich.entity.account.common;
+package com.usavich.entity.common;
 
 /**
  * Created with IntelliJ IDEA.
