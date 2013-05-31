@@ -21,7 +21,23 @@ public interface AccountMapper {
 
     public void createDetail(@Param("detailEntity") UserInfo accountInfo);
 
-    public UserInfo getAccountInfo(@Param("userId") Integer userId);
+    public UserInfo getAccountInfoByID(@Param("userId") Integer userId);
 
     public List<UserFriend> getUserFriends(@Param("userId") Integer userId);
+
+    public void createUserFriend(@Param("entity") UserFriend userFriend);
+
+    public void updateUserFriend(@Param("entity") UserFriend userFriend);
+
+    public UserInfo updateAccountInfo(@Param("entity") UserInfo userInfo);
+
+    public UserInfo updateAccountBase(@Param("entity") UserBase userBase);
+
+    public UserLocation getUserLocation(@Param("userId") Integer userId);
+
+    public List<UserLocation> getUserLocations();
+
+    public void createUserLocation(@Param("entity") UserLocation userLocation);
+
+    public void updateUserLocation(@Param("entity") UserLocation userLocation);
 }

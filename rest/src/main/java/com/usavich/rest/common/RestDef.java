@@ -10,5 +10,6 @@ package com.usavich.rest.common;
 public interface RestDef {
     static final String PARAM_USER_EMAIL = "userEmail";
     static final String PARAM_PASSWORD = "password";
+    static final String PARAM_USER_ID = "userId";
     static final String PARAM_PLATFORM = "platform";
 }

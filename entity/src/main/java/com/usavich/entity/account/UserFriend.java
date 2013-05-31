@@ -9,7 +9,7 @@ import java.util.Date;
  * Time: 5:29 PM
  * To change this template use File | Settings | File Templates.
  */
-public class UserFriend extends UserBase{
+public class UserFriend extends UserLocation{
 
     private Integer userId;
 

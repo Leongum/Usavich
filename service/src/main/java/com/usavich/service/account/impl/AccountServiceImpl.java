@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.usavich.entity.account.*;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: LeonLu
@@ -20,7 +22,6 @@ public class AccountServiceImpl implements AccountService {
     private AccountDAO accountDAO;
 
     @Override
-    @Transactional
     public UserInfo getAccountInfo(String userEmail, String password) {
         return accountDAO.getAccountInfo(userEmail, password);
     }
@@ -31,4 +32,53 @@ public class AccountServiceImpl implements AccountService {
         return accountDAO.createAccountInfo(userBase);
     }
 
+    @Override
+    public UserInfo getAccountInfoByID(Integer userId) {
+        return accountDAO.getAccountInfoByID(userId);
+    }
+
+    @Override
+    public List<UserFriend> getUserFriends(Integer userId) {
+        return accountDAO.getUserFriends(userId);
+    }
+
+    @Override
+    @Transactional
+    public UserInfo updateAccountInfo(UserInfo userInfo) {
+        return accountDAO.updateAccountInfo(userInfo);
+    }
+
+    @Override
+    @Transactional
+    public UserInfo updateAccountBase(UserBase userBase) {
+        return accountDAO.updateAccountBase(userBase);
+    }
+
+    @Override
+    @Transactional
+    public void createUserFriendInvite(UserFriend userFriend) {
+        accountDAO.createUserFriendInvite(userFriend);
+    }
+
+    @Override
+    @Transactional
+    public void updateUserFriendStatus(UserFriend userFriend) {
+        accountDAO.updateUserFriendStatus(userFriend);
+    }
+
+    @Override
+    public UserLocation getUserLocation(Integer userId) {
+        return accountDAO.getUserLocation(userId);
+    }
+
+    @Override
+    @Transactional
+    public void updateUserLocation(UserLocation userLocation) {
+        accountDAO.updateUserLocation(userLocation);
+    }
+
+    @Override
+    public List<UserLocation> getUserLocations() {
+        return accountDAO.getUserLocations();
+    }
 }

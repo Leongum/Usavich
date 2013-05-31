@@ -5,6 +5,7 @@ import com.usavich.rest.common.RestDef;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,7 +26,42 @@ public interface AccountRestDef extends RestDef {
             @PathParam(PARAM_USER_EMAIL) String userEmail,
             @PathParam(PARAM_PASSWORD) String password);
 
+    @GET
+    @Path("/{" + PARAM_USER_ID + "}")
+    UserInfo getAccountInfoByID(
+            @PathParam(PARAM_USER_ID) String userId);
+
     @POST
     @Path("/")
     UserInfo createAccountInfo(UserBase userBase);
+
+    @PUT
+    @Path("/{" + PARAM_USER_ID + "}")
+    UserInfo updateAccountBase(UserBase userBase);
+
+    @GET
+    @Path("/friends/{" + PARAM_USER_ID + "}")
+    List<UserFriend> getUserFriends(
+            @PathParam(PARAM_USER_ID) String userId);
+
+
+    @POST
+    @Path("/friends/{" + PARAM_USER_ID + "}")
+    void createUserFriendInvite(UserFriend userFriend);
+
+
+    @PUT
+    @Path("/friends/{" + PARAM_USER_ID + "}")
+    void updateUserFriendStatus(UserFriend userFriend);
+
+
+    @GET
+    @Path("/location/{" + PARAM_USER_ID + "}")
+    UserLocation getUserLocation(
+            @PathParam(PARAM_USER_ID) String userId);
+
+    @PUT
+    @Path("/location/{" + PARAM_USER_ID + "}")
+    void updateUserLocation(UserLocation userLocation);
+
 }

@@ -4,29 +4,37 @@
 <mapper namespace="com.usavich.db.account.dao.impl.AccountMapper">
 
     <resultMap id="accountInfo" type="com.usavich.entity.account.UserInfo">
-        <id column="USER_ID" property="userId" />
-        <result column="USER_EMAIL" property="userEmail" />
-        <result column="NICK_NAME" property="nickName" />
-        <result column="LEVEL" property="level" />
-        <result column="SCORES" property="scores" />
-        <result column="EXPERIENCE" property="experience" />
-        <result column="BASE_ACC" property="baseAcc" />
-        <result column="INERTIA_ACC" property="inertiaAcc" />
-        <result column="CRIT" property="crit" />
-        <result column="LUCK" property="luck" />
+        <id column="USER_ID" property="userId"/>
+        <result column="USER_EMAIL" property="userEmail"/>
+        <result column="NICK_NAME" property="nickName"/>
+        <result column="LEVEL" property="level"/>
+        <result column="SCORES" property="scores"/>
+        <result column="EXPERIENCE" property="experience"/>
+        <result column="BASE_ACC" property="baseAcc"/>
+        <result column="INERTIA_ACC" property="inertiaAcc"/>
+        <result column="CRIT" property="crit"/>
+        <result column="LUCK" property="luck"/>
     </resultMap>
 
-    <resultMap id="accountInfo" type="com.usavich.entity.account.UserFriend">
-        <id column="USER_ID" property="userId" />
-        <result column="USER_EMAIL" property="userEmail" />
-        <result column="NICK_NAME" property="nickName" />
-        <result column="LEVEL" property="level" />
-        <result column="SCORES" property="scores" />
-        <result column="EXPERIENCE" property="experience" />
-        <result column="BASE_ACC" property="baseAcc" />
-        <result column="INERTIA_ACC" property="inertiaAcc" />
-        <result column="CRIT" property="crit" />
-        <result column="LUCK" property="luck" />
+    <resultMap id="userFriendInfo" type="com.usavich.entity.account.UserFriend">
+        <id column="USER_ID" property="userId"/>
+        <result column="USER_EMAIL" property="userEmail"/>
+        <result column="NICK_NAME" property="nickName"/>
+        <result column="FRIEND_ID" property="friendId"/>
+        <result column="FRIEND_STATUS" property="friendStatus"/>
+        <result column="ADD_TIME" property="addTime"/>
+        <result column="LAST_LOCATION_CONTENT" property="lastLocationContent"/>
+        <result column="LAST_LOCATION_POINT" property="lastLocationPoint"/>
+        <result column="LAST_ACTIVE_TIME" property="lastActiveTime"/>
+    </resultMap>
+
+    <resultMap id="userLocation" type="com.usavich.entity.account.UserLocation">
+        <id column="USER_ID" property="userId"/>
+        <result column="USER_EMAIL" property="userEmail"/>
+        <result column="NICK_NAME" property="nickName"/>
+        <result column="LAST_LOCATION_CONTENT" property="lastLocationContent"/>
+        <result column="LAST_LOCATION_POINT" property="lastLocationPoint"/>
+        <result column="LAST_ACTIVE_TIME" property="lastActiveTime"/>
     </resultMap>
 
     <sql id="accountInfoTable">
@@ -43,8 +51,30 @@
         UD.LUCK
     </sql>
 
+    <sql id="userFriendInfoTable">
+        U.USER_EMAIL,
+        U.NICK_NAME,
+        UF.USER_ID,
+        UF.FRIEND_ID,
+        UF.FRIEND_STATUS,
+        UF.ADD_TIME,
+        UL.LAST_LOCATION_CONTENT,
+        UL.LAST_LOCATION_POINT,
+        UL.LAST_ACTIVE_TIME
+    </sql>
+
+    <sql id="userLocationTable">
+        U.USER_ID,
+        U.USER_EMAIL,
+        U.NICK_NAME,
+        UL.LAST_LOCATION_CONTENT,
+        UL.LAST_LOCATION_POINT,
+        UL.LAST_ACTIVE_TIME
+    </sql>
+
     <select id="getAccountInfo" resultMap="accountInfo">
-        SELECT <include refid="accountInfoTable" />
+        SELECT
+        <include refid="accountInfoTable"/>
         FROM USER AS U
         INNER JOIN USER_DETAIL AS UD
         ON U.USER_ID = UD.USER_ID
@@ -52,7 +82,8 @@
         AND U.USER_PASSWORD = #{password}
     </select>
 
-    <insert id="createBase" parameterType="com.usavich.entity.account.model.UserBase" useGeneratedKeys="true" keyProperty="baseEntity.userId">
+    <insert id="createBase" parameterType="com.usavich.entity.account.UserBase" useGeneratedKeys="true"
+            keyProperty="baseEntity.userId">
         INSERT INTO USER
         (
             USER_EMAIL,
@@ -67,7 +98,7 @@
         )
     </insert>
 
-    <insert id="createDetail" parameterType="com.usavich.entity.account.model.UserInfo">
+    <insert id="createDetail" parameterType="com.usavich.entity.account.UserInfo">
         INSERT INTO USER_DETAIL
         (
           USER_ID,
@@ -92,4 +123,113 @@
         );
     </insert>
 
+    <select id="getAccountInfoByID" resultMap="accountInfo">
+        SELECT
+        <include refid="accountInfoTable"/>
+        FROM USER AS U
+        INNER JOIN USER_DETAIL AS UD
+        ON U.USER_ID = UD.USER_ID
+        WHERE U.USER_ID = #{userId}
+    </select>
+
+    <select id="getUserFriends" resultMap="userFriendInfo">
+        SELECT
+        <include refid="userFriendInfoTable"/>
+        FROM USER_FRIEND AS UF
+        INNER JOIN USER AS U
+        ON UF.FRIEND_ID = U.USER_ID
+        LEFT JOIN USER_LOCATION AS UL
+        UF.FRIEND_ID = UL.USER_ID
+        WHERE UF.USER_ID = #{userId}
+    </select>
+
+    <insert id="createUserFriend" parameterType="com.usavich.entity.account.UserInfo">
+        INSERT INTO USER_FRIEND
+        (
+            USER_ID,
+            FRIEND_ID,
+            FRIEND_STATUS,
+            ADD_TIME
+        )
+        VALUES
+        (
+            #{entity.userId},
+            #{entity.friendId},
+            #{entity.friendStatus},
+            #{entity.addTime}
+        )
+    </insert>
+
+    <update id="updateUserFriend" parameterType="com.usavich.entity.account.UserFriend">
+         UPDATE USER_FRIEND
+         SET
+             FRIEND_STATUS = #{entity.friendStatus},
+             ADD_TIME = #{entity.addTime}
+         WHERE USER_ID = #{entity.userId} AND FIREND_ID = #{entity.friendId}
+    </update>
+
+    <update id="updateAccountInfo" parameterType="com.usavich.entity.account.UserInfo">
+        UPDATE USER_DETAIL
+        SET
+            LEVEL = #{entity.level},
+            SCORES = #{entity.scores},
+            EXPERIENCE = #{entity.experience},
+            BASE_ACC = #{entity.baseAcc},
+            CRIT = #{entity.crit},
+            INERTIA_ACC = #{entity.inertiaAcc},
+            LUCK = #{entity.luck}
+        WHERE USER_ID = #{entity.userId};
+    </update>
+
+    <update id="updateAccountBase" parameterType="com.usavich.entity.account.UserBase">
+        UPDATE USER
+        SET
+            USER_EMAIL = #{entity.userEmail},
+            USER_PASSWORD = #{entity.password},
+            NICK_NAME = #{entity.nickName}
+        WHERE USER_ID = #{entity.userId};
+    </update>
+
+    <select id="getUserLocation" resultMap="userLocation">
+        SELECT
+        <include refid="userLocationTable"/>
+        FROM USER AS U
+        LEFT JOIN USER_LOCATION AS UL
+        U.USER_ID = UL.USER_ID
+        WHERE UF.USER_ID = #{userId}
+    </select>
+
+    <select id="getUserLocations" resultMap="userLocation">
+        SELECT
+        <include refid="userLocationTable"/>
+        FROM USER AS U
+        LEFT JOIN USER_LOCATION AS UL
+        U.USER_ID = UL.USER_ID
+    </select>
+
+    <insert id="createUserLocation" parameterType="com.usavich.entity.account.UserLocation">
+        INSERT INTO USER_LOCATION
+        (
+            USER_ID,
+            LAST_LOCATION_CONTENT,
+            LAST_LOCATION_POINT,
+            LAST_ACTIVE_TIME
+        )
+        VALUES
+        (
+            #{entity.userId},
+            #{entity.lastLocationContent},
+            #{entity.lastLocationPoint},
+            #{entity.lastActiveTime}
+        )
+    </insert>
+
+    <update id="updateUserLocation" parameterType="com.usavich.entity.account.UserLocation">
+         UPDATE USER_LOCATION
+         SET
+            LAST_LOCATION_CONTENT = #{entity.lastLocationContent},
+            LAST_LOCATION_POINT = #{entity.lastLocationPoint},
+            LAST_ACTIVE_TIME = #{entity.lastActiveTime}
+         WHERE USER_ID = #{entity.userId}
+    </update>
 </mapper>

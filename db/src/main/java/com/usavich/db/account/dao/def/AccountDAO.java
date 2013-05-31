@@ -16,9 +16,25 @@ public interface AccountDAO {
 
     public UserInfo getAccountInfo(String userEmail, String password);
 
-    public UserInfo getAccountInfo(Integer userId);
+    public UserInfo getAccountInfoByID(Integer userId);
+
+    public UserInfo updateAccountInfo(UserInfo userInfo);
+
+    public UserInfo updateAccountBase(UserBase userBase);
 
     public UserInfo createAccountInfo(UserBase userBase);
 
     public List<UserFriend> getUserFriends(Integer userId);
+
+    public void createUserFriendInvite(UserFriend userFriend);
+
+    public void updateUserFriendStatus(UserFriend userFriend);
+
+    public UserLocation getUserLocation(Integer userId);
+
+    public void createUserLocation(UserLocation userLocation);
+
+    public void updateUserLocation(UserLocation userLocation);
+
+    public List<UserLocation> getUserLocations();
 }

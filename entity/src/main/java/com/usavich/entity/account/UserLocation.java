@@ -11,11 +11,21 @@ import java.util.Date;
  */
 public class UserLocation extends UserBase {
 
+    private Integer userId;
+
     private String lastLocationContent;
 
     private String lastLocationPoint;
 
     private Date lastActiveTime;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public String getLastLocationContent() {
         return lastLocationContent;

@@ -1,4 +1,4 @@
-package com.usavich.entity.common;
+package com.usavich.entity.enums;
 
 /**
  * Created with IntelliJ IDEA.
