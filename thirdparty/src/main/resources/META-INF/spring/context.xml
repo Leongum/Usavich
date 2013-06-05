@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.usavich.thirdparty"/>
+
+    <bean id="httpClientConnectionPool" class="com.usavich.thirdparty.httpService.HttpClientConnectionPool"
+          init-method="afterPropertiesSet" destroy-method="destroy">
+    </bean>
+
+    <bean id="pm25GetRequest" class="com.usavich.thirdparty.httpService.impl.PM25GetRequest">
+        <property name="token" value="5j1znBVAsnSf5xQyNQyq"/>
+        <property name="pm25getUrl" value="http://www.pm25.in/api/querys/pm2_5.json"/>
+        <!-- <property name="token" value="${pm25.token}"/>
+        <property name="pm25getUrl" value="${pm25.pm25getUrl}"/> -->
+        <property name="client" ref="httpClientConnectionPool"/>
+    </bean>
+
+    <bean id="weatherService" class="com.usavich.thirdparty.weather.impl.WeatherServiceImpl"/>
+
+</beans>
