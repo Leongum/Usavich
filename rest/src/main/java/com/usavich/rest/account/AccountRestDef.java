@@ -46,12 +46,12 @@ public interface AccountRestDef extends RestDef {
 
 
     @POST
-    @Path("/friends/{" + PARAM_USER_ID + "}")
+    @Path("/friends/")
     void createUserFriendInvite(UserFriend userFriend);
 
 
     @PUT
-    @Path("/friends/{" + PARAM_USER_ID + "}")
+    @Path("/friends/")
     void updateUserFriendStatus(UserFriend userFriend);
 
 

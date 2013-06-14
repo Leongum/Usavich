@@ -31,6 +31,7 @@
     <orderEntry type="module" module-name="service" />
     <orderEntry type="module" module-name="common" />
     <orderEntry type="module" module-name="db" />
+    <orderEntry type="module" module-name="thirdparty" />
   </component>
 </module>
 

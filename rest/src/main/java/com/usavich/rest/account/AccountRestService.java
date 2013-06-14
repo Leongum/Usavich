@@ -26,7 +26,7 @@ public class AccountRestService implements AccountRestDef {
 
     @Override
     public UserInfo getAccountInfoByID(String userId) {
-        return accountService.getAccountInfoByID(Integer.getInteger(userId));
+        return accountService.getAccountInfoByID(Integer.valueOf(userId));
     }
 
     @Override
@@ -41,7 +41,7 @@ public class AccountRestService implements AccountRestDef {
 
     @Override
     public List<UserFriend> getUserFriends(String userId) {
-        return accountService.getUserFriends(Integer.getInteger(userId));
+        return accountService.getUserFriends(Integer.valueOf(userId));
     }
 
     @Override
@@ -56,7 +56,7 @@ public class AccountRestService implements AccountRestDef {
 
     @Override
     public UserLocation getUserLocation(String userId) {
-        return accountService.getUserLocation(Integer.getInteger(userId));
+        return accountService.getUserLocation(Integer.valueOf(userId));
     }
 
     @Override

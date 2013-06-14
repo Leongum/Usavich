@@ -17,6 +17,8 @@ public class UserBase {
 
     private String nickName;
 
+    private String sex;
+
     public Integer getUserId() {
         return userId;
     }
@@ -47,5 +49,13 @@ public class UserBase {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 }

@@ -111,9 +111,10 @@ CREATE TABLE `user` (
   `user_email` varchar(200) NOT NULL,
   `user_password` varchar(200) NOT NULL,
   `nick_name` varchar(100) NOT NULL,
+  `sex` varchar(45) DEFAULT NULL,
   `user_picture` text,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='user login information.'$$
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='user login information.'$$
 
 
 delimiter $$
@@ -145,8 +146,8 @@ delimiter $$
 CREATE TABLE `user_location` (
   `user_id` int(11) NOT NULL,
   `last_location_content` varchar(200) DEFAULT NULL,
-  `last_location_point` varchar(200) NOT NULL,
-  `last_active_time` datetime NOT NULL
+  `last_location_point` varchar(200) DEFAULT NULL,
+  `last_active_time` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='user last time location'$$
 
 
@@ -202,5 +203,3 @@ CREATE TABLE `version_control` (
   `version` int(11) NOT NULL,
   `sub_version` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8$$
-
-
