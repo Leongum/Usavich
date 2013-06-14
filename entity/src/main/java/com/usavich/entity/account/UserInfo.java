@@ -32,6 +32,7 @@ public class UserInfo extends UserBase {
         this.setUserEmail(userBase.getUserEmail());
         this.setNickName(userBase.getNickName());
         this.setPassword(userBase.getPassword());
+        this.setSex(userBase.getSex());
         this.level = 1;
         this.scores = 0;
         this.experience = 0;
