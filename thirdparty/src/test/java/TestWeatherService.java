@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
  */
 public class TestWeatherService extends TestBase {
 
-    LogHelper logger = new LogHelper("TestWeatherService");
+    LogHelper logger = new LogHelper(TestWeatherService.class);
     @Autowired
     private WeatherService weatherService;
 

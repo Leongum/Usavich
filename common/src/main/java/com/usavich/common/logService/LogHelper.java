@@ -21,8 +21,7 @@ public class LogHelper {
         logger = LogFactory.getLog(clazz);
     }
 
-    public void logMessage(String message) {
-        System.out.println(message);
+    public void logInfo(String message) {
         logger.info(message);
     }
 

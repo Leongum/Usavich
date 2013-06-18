@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class HttpClientConnectionPool {
 
-    private static LogHelper logger = new LogHelper("HttpClientConnectionPool");
+    private static LogHelper logger = new LogHelper(AbstractExecuteRequest.class);
     /**
      * The client.
      */
@@ -122,18 +122,18 @@ public class HttpClientConnectionPool {
     }
 
     private void LogRequest(HttpUriRequest request) throws IOException {
-        logger.logMessage("*** EXECUTING " + request.getMethod());
-        logger.logMessage("*** URI: " + request.getURI());
+        logger.logInfo("*** EXECUTING " + request.getMethod());
+        logger.logInfo("*** URI: " + request.getURI());
         String headers = "*** Headers: [";
         for (Header h : request.getAllHeaders())
             headers += h.getName() + ": " + h.getValue() + ", ";
         headers = headers.substring(0, headers.length() - 2) + "]";
-        logger.logMessage(headers);
+        logger.logInfo(headers);
         if (request instanceof HttpEntityEnclosingRequest) {
             HttpEntity entity = ((HttpEntityEnclosingRequest) request).getEntity();
-            logger.logMessage("*** Body:");
+            logger.logInfo("*** Body:");
             if (entity != null) {
-                logger.logMessage(EntityUtils.toString(entity));
+                logger.logInfo(EntityUtils.toString(entity));
             }
         }
     }

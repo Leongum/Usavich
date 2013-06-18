@@ -1,5 +1,6 @@
 package com.usavich.service.account.impl;
 
+import com.usavich.common.exception.*;
 import com.usavich.db.account.dao.def.AccountDAO;
 import com.usavich.service.account.def.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,12 @@ public class AccountServiceImpl implements AccountService {
     private AccountDAO accountDAO;
 
     @Override
-    public UserInfo getAccountInfo(String userEmail, String password) {
-        return accountDAO.getAccountInfo(userEmail, password);
+    public UserInfo getAccountInfo(String userEmail, String password){
+        UserInfo userInfo = accountDAO.getAccountInfo(userEmail, password);
+        if(userInfo == null || userInfo.getUserId() == null){
+            throw new RuntimeException(String.valueOf(ErrorMessageMapper.USER_NOT_FOUND.ordinal()));
+        }
+        return  userInfo;
     }
 
     @Override

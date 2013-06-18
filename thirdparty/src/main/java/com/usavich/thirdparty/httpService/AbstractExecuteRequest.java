@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public abstract class AbstractExecuteRequest {
 
-    protected LogHelper logger = new LogHelper("AbstractExecuteRequest");
+    protected LogHelper logger = new LogHelper(AbstractExecuteRequest.class);
 
     /**
      * The client.

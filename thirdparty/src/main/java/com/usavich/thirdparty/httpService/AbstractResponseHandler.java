@@ -87,19 +87,19 @@ public abstract class AbstractResponseHandler extends AbstractExecuteRequest imp
     public ResponseStatus handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
 
         try {
-            logger.logMessage("===========response body==============");
+            logger.logInfo("===========response body==============");
             statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == 200 || statusCode == 204) {
                 if(response.getEntity() != null) {
 
                     responseMessage = EntityUtils.toString(response.getEntity(), "UTF-8");
-                    logger.logMessage(responseMessage);
+                    logger.logInfo(responseMessage);
                 }
                 return ResponseStatus.SUCCESS;
             }
             if(response.getEntity() != null) {
                 errorMessage = EntityUtils.toString(response.getEntity());
-                logger.logMessage(errorMessage);
+                logger.logInfo(errorMessage);
             }
             return ResponseStatus.FAILURE;
         } finally {
