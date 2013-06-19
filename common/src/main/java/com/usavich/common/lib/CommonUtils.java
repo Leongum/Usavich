@@ -49,6 +49,13 @@ public class CommonUtils {
         return parseDate(date);
     }
 
+    public static Integer parseIntegerToNull(String value){
+        if (StringUtils.isEmpty(value))
+            return null;
+
+        return Integer.valueOf(value);
+    }
+
     public static Date parseDate(String date) {
         Assert.hasText(date, "date");
 

@@ -49,11 +49,11 @@ public class RestExceptionMapper implements ExceptionMapper {
 
     public Response toResponse(Throwable ex) {
         Response.ResponseBuilder rb = Response.status(Response.Status.INTERNAL_SERVER_ERROR);
-        InvalidRequestMessage entity = new InvalidRequestMessage(ErrorMessageMapper.UNKNOWN_SERVER_ERROR.toString());
+        InvalidRequestMessage entity = new InvalidRequestMessage(ErrorMessageMapper.PARAM_ERROR.toString());
         if (ex instanceof ServerRequestException) {
             entity = new InvalidRequestMessage(ex.getMessage());
         } else {
-            logger.logError(ex.getMessage() + "/r/n" + ex.getStackTrace());
+            logger.logError(ex.getMessage() + "\r\n" + ex.getStackTrace());
         }
         rb.type("application/json;charset=UTF-8");
         rb.entity(entity);

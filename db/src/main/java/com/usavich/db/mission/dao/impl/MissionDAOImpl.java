@@ -20,7 +20,7 @@ public class MissionDAOImpl implements MissionDAO {
     private MissionMapper missionMapper;
 
     @Override
-    public Mission getMissionById(Integer missionId) {
+    public List<Mission> getMissionById(Integer missionId) {
         return missionMapper.getMissionById(missionId);
     }
 
@@ -35,7 +35,7 @@ public class MissionDAOImpl implements MissionDAO {
     }
 
     @Override
-    public MissionPackage getMissionPackageListById(Integer missionPackageId) {
+    public List<MissionPackage> getMissionPackageListById(Integer missionPackageId) {
         return missionMapper.getMissionPackageListById(missionPackageId);
     }
 

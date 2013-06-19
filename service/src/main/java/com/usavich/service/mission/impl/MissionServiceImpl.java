@@ -1,5 +1,7 @@
 package com.usavich.service.mission.impl;
 
+import com.usavich.common.exception.ErrorMessageMapper;
+import com.usavich.common.exception.ServerRequestException;
 import com.usavich.db.mission.dao.def.MissionDAO;
 import com.usavich.entity.mission.Mission;
 import com.usavich.entity.mission.MissionPackage;
@@ -7,6 +9,7 @@ import com.usavich.entity.mission.MissionPlacePackage;
 import com.usavich.service.mission.def.MissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,20 +26,17 @@ public class MissionServiceImpl implements MissionService {
     private MissionDAO missionDAO;
 
     @Override
-    public Mission getMissionById(Integer missionId) {
-        Mission mission = missionDAO.getMissionById(missionId);
-
-        if (mission.getMissionPlacePackage() != null) {
-            List<MissionPlacePackage> missionPlacePackageList = missionDAO.getMissionPlacePackage(mission.getMissionPlacePackage());
-            mission.setMissionPlacePackages(missionPlacePackageList);
+    public List<Mission> getMissions(Integer missionId, Integer minId, Date lastUpdateTime) {
+        List<Mission> missionList = new ArrayList<Mission>();
+        if (missionId != null) {
+            missionList = missionDAO.getMissionById(missionId);
+        } else if (minId != null) {
+            missionList = missionDAO.getMissionListByMinId(minId);
+        } else if (lastUpdateTime != null) {
+            missionList = missionDAO.getMissionListByTime(lastUpdateTime);
+        }else{
+            throw new ServerRequestException(ErrorMessageMapper.PARAM_ERROR.toString());
         }
-
-        return mission;
-    }
-
-    @Override
-    public List<Mission> getMissionListByMinId(Integer minMissionId) {
-        List<Mission> missionList = missionDAO.getMissionListByMinId(minMissionId);
 
         for (Mission mission : missionList) {
             if (mission.getMissionPlacePackage() != null) {
@@ -49,32 +49,18 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
-    public List<Mission> getMissionListByTime(Date lastUpdateTime) {
-        List<Mission> missionList = missionDAO.getMissionListByTime(lastUpdateTime);
-
-        for (Mission mission : missionList) {
-            if (mission.getMissionPlacePackage() != null) {
-                List<MissionPlacePackage> missionPlacePackageList = missionDAO.getMissionPlacePackage(mission.getMissionPlacePackage());
-                mission.setMissionPlacePackages(missionPlacePackageList);
-            }
+    public List<MissionPackage> getMissionPackages(Integer packageId, Integer minId, Date lastUpdateTime) {
+        List<MissionPackage> missionPackagesList = new ArrayList<MissionPackage>();
+        if (packageId != null) {
+            missionPackagesList = missionDAO.getMissionPackageListById(packageId);
+        } else if (minId != null) {
+            missionPackagesList = missionDAO.getMissionPackageListByMinId(minId);
+        } else if (lastUpdateTime != null) {
+            missionPackagesList = missionDAO.getMissionPackageListByTime(lastUpdateTime);
+        }else{
+            throw new ServerRequestException(ErrorMessageMapper.PARAM_ERROR.toString());
         }
-
-        return missionList;
-    }
-
-    @Override
-    public MissionPackage getMissionPackageListById(Integer missionPackageId) {
-        return missionDAO.getMissionPackageListById(missionPackageId);
-    }
-
-    @Override
-    public List<MissionPackage> getMissionPackageListByMinId(Integer minMissionPackageId) {
-        return missionDAO.getMissionPackageListByMinId(minMissionPackageId);
-    }
-
-    @Override
-    public List<MissionPackage> getMissionPackageListByTime(Date lastUpdateTime) {
-        return missionDAO.getMissionPackageListByTime(lastUpdateTime);
+        return missionPackagesList;
     }
 
     @Override

@@ -9,7 +9,7 @@ package com.usavich.common.exception;
  */
 public enum ErrorMessageMapper {
 
-    UNKNOWN_SERVER_ERROR,
+    PARAM_ERROR,
 
     USER_NOT_FOUND,
 

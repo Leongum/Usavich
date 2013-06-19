@@ -14,13 +14,13 @@ import java.util.List;
  */
 public interface MissionDAO {
 
-    public Mission getMissionById(Integer missionId);
+    public List<Mission> getMissionById(Integer missionId);
 
     public List<Mission> getMissionListByMinId(Integer minMissionId);
 
     public List<Mission> getMissionListByTime(Date lastUpdateTime);
 
-    public MissionPackage getMissionPackageListById(Integer missionPackageId);
+    public List<MissionPackage> getMissionPackageListById(Integer missionPackageId);
 
     public List<MissionPackage> getMissionPackageListByMinId(Integer minMissionPackageId);
 

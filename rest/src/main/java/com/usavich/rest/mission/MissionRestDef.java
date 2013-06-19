@@ -17,41 +17,25 @@ import java.util.List;
 @Path("/missions")
 @Consumes({"*/xml", MediaType.APPLICATION_JSON})
 @Produces({MediaType.APPLICATION_JSON})
-public interface MissionRestDef extends RestDef{
+public interface MissionRestDef extends RestDef {
 
     @GET
     @Path("/mission")
-    Mission getMissionById(
-            @QueryParam(PARAM_MISSION_ID) String missionId);
-
-    @GET
-    @Path("/mission")
-    List<Mission> getMissionListByMinId(
-            @QueryParam(PARAM_MISSION_MIN_ID) String missionMinId);
-
-    @GET
-    @Path("/mission")
-    List<Mission> getMissionListByTime(
+    List<Mission> getMissions(
+            @QueryParam(PARAM_MISSION_ID) String missionId,
+            @QueryParam(PARAM_MIN_ID) String minId,
             @QueryParam(PARAM_LAST_UPDATE_TIME) String lastUpdateTime);
 
     @GET
     @Path("/package")
-    MissionPackage getMissionPackageListById(
-            @QueryParam(PARAM_MISSION_PACKAGE_ID) String missionPackageId);
-
-    @GET
-    @Path("/package")
-    List<MissionPackage> getMissionPackageListByMinId(
-            @QueryParam(PARAM_MISSION_MIN_PACKAGE_ID) String missionPackageMinId);
-
-    @GET
-    @Path("/package")
-    List<MissionPackage> getMissionPackageListByTime(
+    List<MissionPackage> getMissionPackages(
+            @QueryParam(PARAM_PACKAGE_ID) String packageId,
+            @QueryParam(PARAM_MIN_ID) String minId,
             @QueryParam(PARAM_LAST_UPDATE_TIME) String lastUpdateTime);
 
     @GET
-    @Path("/placepackage")
-    List<MissionPlacePackage> getMissionPlacePackage(
-            @QueryParam(PARAM_MISSION_PLACE_PACKAGE_ID) String missionPlacePackageId);
+    @Path("/place")
+    List<MissionPlacePackage> getMissionPlacePackages(
+            @QueryParam(PARAM_PACKAGE_ID) String packageId);
 
 }
