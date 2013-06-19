@@ -27,7 +27,7 @@
     <!-- Load all spring bean definitions -->
     <import resource="classpath*:META-INF/spring/context.xml"/>
 
-    <bean id="cryptoService" class="com.usavich.common.cryptoservice.impl.CryptoServiceImpl" />
+    <bean id="cryptoService" class="com.usavich.common.cryptoservice.impl.CryptoServiceImpl"/>
 
     <bean class="com.usavich.common.lib.ConfigurationService">
         <property name="cryptoService" ref="cryptoService"/>
@@ -61,6 +61,7 @@
         <jaxrs:serviceBeans>
             <ref bean="accountRestService"/>
             <ref bean="versionRestService"/>
+            <ref bean="missionRestService"/>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <ref bean="jsonProvider"/>

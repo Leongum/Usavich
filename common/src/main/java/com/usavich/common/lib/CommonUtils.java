@@ -1,6 +1,12 @@
 package com.usavich.common.lib;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
+import org.springframework.util.Assert;
+
+import java.text.ParseException;
+import java.util.Arrays;
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,6 +16,9 @@ import org.apache.commons.lang3.StringUtils;
  * To change this template use File | Settings | File Templates.
  */
 public class CommonUtils {
+
+    private static final String[] DATE_PATTERNS = {"yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd", "dd/MM/yyyy HH:mm:ss",
+            "yyyy-MM-dd'T'HH:mm:ss'Z'", "yyyy-MM-dd'T'HH:mm:ss", "yyyy-MM-dd HH:mm:ss.SSS"};
 
     public static String checkString(String param, String paramName) {
         checkNull(param, paramName);
@@ -31,5 +40,22 @@ public class CommonUtils {
 
     public static String leftPadInt(int value) {
         return StringUtils.leftPad(String.valueOf(value), 3, "0");
+    }
+
+    public static Date parseDateDefaultToNull(String date) {
+        if (StringUtils.isEmpty(date))
+            return null;
+
+        return parseDate(date);
+    }
+
+    public static Date parseDate(String date) {
+        Assert.hasText(date, "date");
+
+        try {
+            return DateUtils.parseDate(date, DATE_PATTERNS);
+        } catch (ParseException ex) {
+            throw new IllegalArgumentException(String.format("Date format should be one of %s", Arrays.toString(DATE_PATTERNS)));
+        }
     }
 }

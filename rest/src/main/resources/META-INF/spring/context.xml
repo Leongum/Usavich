@@ -13,6 +13,7 @@
 
     <bean id="accountRestService" class="com.usavich.rest.account.AccountRestService"/>
     <bean id="versionRestService" class="com.usavich.rest.version.VersionRestService"/>
+    <bean id="missionRestService" class="com.usavich.rest.mission.MissionRestService"/>
 
     <bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
     <bean id="txtProvider" class="org.apache.cxf.jaxrs.provider.PrimitiveTextProvider"/>
