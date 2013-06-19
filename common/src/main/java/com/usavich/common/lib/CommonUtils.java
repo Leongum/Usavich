@@ -1,5 +1,7 @@
 package com.usavich.common.lib;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * Created with IntelliJ IDEA.
  * User: LeonLu
@@ -25,5 +27,9 @@ public class CommonUtils {
         }
 
         return param;
+    }
+
+    public static String leftPadInt(int value) {
+        return StringUtils.leftPad(String.valueOf(value), 3, "0");
     }
 }

@@ -1,5 +1,8 @@
 package com.usavich.entity.account;
 
+import com.usavich.common.lib.CustomDateSerializer;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.util.Date;
 
 /**
@@ -43,6 +46,7 @@ public class UserFriend extends UserLocation{
         this.friendStatus = friendStatus;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getAddTime() {
         return addTime;
     }

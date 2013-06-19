@@ -9,11 +9,11 @@ package com.usavich.entity.enums;
  */
 public enum FriendStatus {
 
-    Accept,
+    Invited,
 
     NeedAccept,
 
-    Invited,
+    Accept,
 
     Refused
 }

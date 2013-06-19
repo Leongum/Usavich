@@ -37,7 +37,8 @@ public interface AccountRestDef extends RestDef {
 
     @PUT
     @Path("/{" + PARAM_USER_ID + "}")
-    UserInfo updateAccountBase(UserBase userBase);
+    void updateAccountBase(@PathParam(PARAM_USER_ID) String userId,
+                           UserBase userBase);
 
     @GET
     @Path("/friends/{" + PARAM_USER_ID + "}")
@@ -46,13 +47,15 @@ public interface AccountRestDef extends RestDef {
 
 
     @POST
-    @Path("/friends/")
-    void createUserFriendInvite(UserFriend userFriend);
+    @Path("/friends/{" + PARAM_USER_ID + "}")
+    void createUserFriendInvite(@PathParam(PARAM_USER_ID) String userId,
+                                UserFriend userFriend);
 
 
     @PUT
-    @Path("/friends/")
-    void updateUserFriendStatus(UserFriend userFriend);
+    @Path("/friends/{" + PARAM_USER_ID + "}")
+    void updateUserFriendStatus(@PathParam(PARAM_USER_ID) String userId,
+                                UserFriend userFriend);
 
 
     @GET
@@ -62,6 +65,7 @@ public interface AccountRestDef extends RestDef {
 
     @PUT
     @Path("/location/{" + PARAM_USER_ID + "}")
-    void updateUserLocation(UserLocation userLocation);
+    void updateUserLocation(@PathParam(PARAM_USER_ID) String userId,
+                            UserLocation userLocation);
 
 }

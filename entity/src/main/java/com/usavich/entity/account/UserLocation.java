@@ -1,5 +1,8 @@
 package com.usavich.entity.account;
 
+import com.usavich.common.lib.CustomDateSerializer;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.util.Date;
 
 /**
@@ -43,6 +46,7 @@ public class UserLocation extends UserBase {
         this.lastLocationPoint = lastLocationPoint;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getLastActiveTime() {
         return lastActiveTime;
     }

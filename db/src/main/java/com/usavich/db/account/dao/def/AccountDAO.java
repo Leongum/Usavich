@@ -16,15 +16,19 @@ public interface AccountDAO {
 
     public UserInfo getAccountInfo(String userEmail, String password);
 
+    public UserInfo getAccountInfoByMail(String userEmail);
+
     public UserInfo getAccountInfoByID(Integer userId);
 
     public UserInfo updateAccountInfo(UserInfo userInfo);
 
-    public UserInfo updateAccountBase(UserBase userBase);
+    public void updateAccountBase(UserBase userBase);
 
     public UserInfo createAccountInfo(UserBase userBase);
 
     public List<UserFriend> getUserFriends(Integer userId);
+
+    public UserFriend getUserFriend(Integer userId, Integer friendId);
 
     public void createUserFriendInvite(UserFriend userFriend);
 

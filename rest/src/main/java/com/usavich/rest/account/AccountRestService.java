@@ -35,8 +35,9 @@ public class AccountRestService implements AccountRestDef {
     }
 
     @Override
-    public UserInfo updateAccountBase(UserBase userBase) {
-        return accountService.updateAccountBase(userBase);
+    public void updateAccountBase(String userId, UserBase userBase) {
+        userBase.setUserId(Integer.valueOf(userId));
+        accountService.updateAccountBase(userBase);
     }
 
     @Override
@@ -45,12 +46,14 @@ public class AccountRestService implements AccountRestDef {
     }
 
     @Override
-    public void createUserFriendInvite(UserFriend userFriend) {
+    public void createUserFriendInvite(String userId, UserFriend userFriend) {
+        userFriend.setUserId(Integer.valueOf(userId));
         accountService.createUserFriendInvite(userFriend);
     }
 
     @Override
-    public void updateUserFriendStatus(UserFriend userFriend) {
+    public void updateUserFriendStatus(String userId, UserFriend userFriend) {
+        userFriend.setUserId(Integer.valueOf(userId));
         accountService.updateUserFriendStatus(userFriend);
     }
 
@@ -60,7 +63,8 @@ public class AccountRestService implements AccountRestDef {
     }
 
     @Override
-    public void updateUserLocation(UserLocation userLocation) {
+    public void updateUserLocation(String userId, UserLocation userLocation) {
+        userLocation.setUserId(Integer.valueOf(userId));
         accountService.updateUserLocation(userLocation);
     }
 

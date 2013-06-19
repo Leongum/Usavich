@@ -68,6 +68,13 @@
         UL.LAST_ACTIVE_TIME
     </sql>
 
+    <sql id="userFriend">
+        USER_ID,
+        FRIEND_ID,
+        FRIEND_STATUS,
+        ADD_TIME
+    </sql>
+
     <sql id="userLocationTable">
         U.USER_ID,
         U.USER_EMAIL,
@@ -86,6 +93,15 @@
         ON U.USER_ID = UD.USER_ID
         WHERE U.USER_EMAIL = #{userEmail}
         AND U.USER_PASSWORD = #{password}
+    </select>
+
+    <select id="getAccountInfoByMail" resultMap="accountInfo">
+        SELECT
+        <include refid="accountInfoTable"/>
+        FROM USER AS U
+        INNER JOIN USER_DETAIL AS UD
+        ON U.USER_ID = UD.USER_ID
+        WHERE U.USER_EMAIL = #{userEmail}
     </select>
 
     <insert id="createBase" parameterType="com.usavich.entity.account.UserBase" useGeneratedKeys="true"
@@ -151,6 +167,14 @@
         WHERE UF.USER_ID = #{userId}
     </select>
 
+    <select id="getUserFriend" resultMap="userFriendInfo">
+        SELECT
+        <include refid="userFriend"/>
+        FROM USER_FRIEND
+        WHERE USER_ID = #{userId}
+        AND FRIEND_ID = #{friendId}
+    </select>
+
     <insert id="createUserFriend" parameterType="com.usavich.entity.account.UserInfo">
         INSERT INTO USER_FRIEND
         (
@@ -173,7 +197,7 @@
          SET
              FRIEND_STATUS = #{entity.friendStatus},
              ADD_TIME = #{entity.addTime}
-         WHERE USER_ID = #{entity.userId} AND FIREND_ID = #{entity.friendId}
+         WHERE USER_ID = #{entity.userId} AND FRIEND_ID = #{entity.friendId}
     </update>
 
     <update id="updateAccountInfo" parameterType="com.usavich.entity.account.UserInfo">
@@ -186,17 +210,17 @@
             CRIT = #{entity.crit},
             INERTIA_ACC = #{entity.inertiaAcc},
             LUCK = #{entity.luck}
-        WHERE USER_ID = #{entity.userId};
+        WHERE USER_ID = #{entity.userId}
     </update>
 
     <update id="updateAccountBase" parameterType="com.usavich.entity.account.UserBase">
         UPDATE USER
         SET
-            USER_EMAIL = #{entity.userEmail},
             USER_PASSWORD = #{entity.password},
             SEX = #{entity.sex},
             NICK_NAME = #{entity.nickName}
-        WHERE USER_ID = #{entity.userId};
+        WHERE USER_ID = #{entity.userId}
+        AND USER_EMAIL = #{entity.userEmail}
     </update>
 
     <select id="getUserLocation" resultMap="userLocation">
@@ -205,7 +229,7 @@
         FROM USER AS U
         LEFT JOIN USER_LOCATION AS UL
         ON U.USER_ID = UL.USER_ID
-        WHERE UF.USER_ID = #{userId}
+        WHERE U.USER_ID = #{userId}
     </select>
 
     <select id="getUserLocations" resultMap="userLocation">

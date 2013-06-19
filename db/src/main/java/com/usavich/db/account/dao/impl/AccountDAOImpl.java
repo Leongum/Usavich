@@ -26,6 +26,11 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
+    public UserInfo getAccountInfoByMail(String userEmail) {
+        return accountMapper.getAccountInfoByMail(userEmail);
+    }
+
+    @Override
     public UserInfo getAccountInfoByID(Integer userId) {
         return accountMapper.getAccountInfoByID(userId);
     }
@@ -36,8 +41,8 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public UserInfo updateAccountBase(UserBase userBase) {
-        return accountMapper.updateAccountBase(userBase);
+    public void updateAccountBase(UserBase userBase) {
+        accountMapper.updateAccountBase(userBase);
     }
 
     @Override
@@ -57,12 +62,17 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
+    public UserFriend getUserFriend(Integer userId, Integer friendId) {
+        return accountMapper.getUserFriend(userId, friendId);
+    }
+
+    @Override
     public void createUserFriendInvite(UserFriend userFriend) {
         userFriend.setFriendStatus(FriendStatus.Invited.ordinal());
         accountMapper.createUserFriend(userFriend);
         UserFriend userFriendInvited = new UserFriend();
         userFriendInvited.setUserId(userFriend.getFriendId());
-        userFriendInvited.setFriendId(userFriendInvited.getUserId());
+        userFriendInvited.setFriendId(userFriend.getUserId());
         userFriendInvited.setFriendStatus(FriendStatus.NeedAccept.ordinal());
         userFriendInvited.setAddTime(userFriend.getAddTime());
         accountMapper.createUserFriend(userFriendInvited);
@@ -73,15 +83,16 @@ public class AccountDAOImpl implements AccountDAO {
         accountMapper.updateUserFriend(userFriend);
         UserFriend userFriendStatus = new UserFriend();
         userFriendStatus.setUserId(userFriend.getFriendId());
-        userFriendStatus.setFriendId(userFriendStatus.getUserId());
-        userFriendStatus.setFriendStatus(userFriendStatus.getFriendStatus());
+        userFriendStatus.setFriendId(userFriend.getUserId());
+        userFriendStatus.setFriendStatus(userFriend.getFriendStatus());
         userFriendStatus.setAddTime(userFriend.getAddTime());
         accountMapper.updateUserFriend(userFriendStatus);
     }
 
     @Override
     public UserLocation getUserLocation(Integer userId) {
-        return accountMapper.getUserLocation(userId);
+        UserLocation ul = accountMapper.getUserLocation(userId);
+        return  ul;
     }
 
     @Override

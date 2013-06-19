@@ -9,7 +9,15 @@ package com.usavich.common.exception;
  */
 public enum ErrorMessageMapper {
 
+    UNKNOWN_SERVER_ERROR,
+
     USER_NOT_FOUND,
 
-    USER_ALREADY_EXISTS
+    USER_ALREADY_EXISTS,
+
+    FRIENDSHIP_EXISTS,
+
+    FRIENDSHIP_NOT_EXISTS,
+
+    FRIEND_STATUS_ERROR
 }

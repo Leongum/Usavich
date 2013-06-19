@@ -1,6 +1,5 @@
 package com.usavich.service.account.def;
 
-import com.usavich.common.exception.InvalidRequestException;
 import com.usavich.entity.account.*;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public interface AccountService {
 
     UserInfo updateAccountInfo(UserInfo userInfo);
 
-    UserInfo updateAccountBase(UserBase userBase);
+    void updateAccountBase(UserBase userBase);
 
     void createUserFriendInvite(UserFriend userFriend);
 

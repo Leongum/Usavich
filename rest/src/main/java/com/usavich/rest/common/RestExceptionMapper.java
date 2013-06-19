@@ -1,5 +1,10 @@
 package com.usavich.rest.common;
 
+import com.usavich.common.exception.ErrorMessageMapper;
+import com.usavich.common.exception.ServerRequestException;
+import com.usavich.common.lib.CommonUtils;
+import com.usavich.common.logService.LogHelper;
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
@@ -15,28 +20,42 @@ import javax.ws.rs.ext.Provider;
 public class RestExceptionMapper implements ExceptionMapper {
 
     public class InvalidRequestMessage {
-        private String message;
+        private String errorcode;
+        private String errormessage;
 
-        public InvalidRequestMessage(String message) {
-            this.message = message;
+        public InvalidRequestMessage(String errormessage) {
+            this.errorcode = CommonUtils.leftPadInt(ErrorMessageMapper.valueOf(errormessage).ordinal());
+            this.errormessage = ErrorMessageMapper.valueOf(errormessage).toString();
         }
 
-        public String getMessage() {
-            return message;
+        public String getErrorcode() {
+            return errorcode;
         }
 
-        public void setMessage(String message) {
-            this.message = message;
+        public void setErrorcode(String errorcode) {
+            this.errorcode = errorcode;
+        }
+
+        public String getErrormessage() {
+            return errormessage;
+        }
+
+        public void setErrormessage(String errormessage) {
+            this.errormessage = errormessage;
         }
     }
 
+    private static LogHelper logger = new LogHelper(RestExceptionMapper.class);
+
     public Response toResponse(Throwable ex) {
-        StackTraceElement[] trace = new StackTraceElement[1];
-        trace[0] = ex.getStackTrace()[0];
-        ex.setStackTrace(trace);
         Response.ResponseBuilder rb = Response.status(Response.Status.INTERNAL_SERVER_ERROR);
+        InvalidRequestMessage entity = new InvalidRequestMessage(ErrorMessageMapper.UNKNOWN_SERVER_ERROR.toString());
+        if (ex instanceof ServerRequestException) {
+            entity = new InvalidRequestMessage(ex.getMessage());
+        } else {
+            logger.logError(ex.getMessage() + "/r/n" + ex.getStackTrace());
+        }
         rb.type("application/json;charset=UTF-8");
-        InvalidRequestMessage entity = new InvalidRequestMessage(ex.getMessage());
         rb.entity(entity);
         return rb.build();
     }

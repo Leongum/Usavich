@@ -31,7 +31,7 @@ public interface AccountMapper {
 
     public UserInfo updateAccountInfo(@Param("entity") UserInfo userInfo);
 
-    public UserInfo updateAccountBase(@Param("entity") UserBase userBase);
+    public void updateAccountBase(@Param("entity") UserBase userBase);
 
     public UserLocation getUserLocation(@Param("userId") Integer userId);
 
@@ -40,4 +40,8 @@ public interface AccountMapper {
     public void createUserLocation(@Param("entity") UserLocation userLocation);
 
     public void updateUserLocation(@Param("entity") UserLocation userLocation);
+
+    public UserInfo getAccountInfoByMail(@Param("userEmail") String userEmail);
+
+    public UserFriend getUserFriend(@Param("userId")Integer userId,@Param("friendId") Integer friendId);
 }
