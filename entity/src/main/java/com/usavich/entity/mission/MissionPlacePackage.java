@@ -8,4 +8,32 @@ package com.usavich.entity.mission;
  * To change this template use File | Settings | File Templates.
  */
 public class MissionPlacePackage {
+
+    private Integer packageId;
+    private String placeName;
+    private String placePoint;
+
+    public Integer getPackageId() {
+        return packageId;
+    }
+
+    public void setPackageId(Integer packageId) {
+        this.packageId = packageId;
+    }
+
+    public String getPlaceName() {
+        return placeName;
+    }
+
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
+    }
+
+    public String getPlacePoint() {
+        return placePoint;
+    }
+
+    public void setPlacePoint(String placePoint) {
+        this.placePoint = placePoint;
+    }
 }

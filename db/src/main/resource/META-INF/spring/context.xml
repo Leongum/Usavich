@@ -48,6 +48,8 @@
 
     <bean id="versionControlDAO" class="com.usavich.db.version.dao.impl.VersionControlDAOImpl"/>
 
+    <bean id="missionDAO" class="com.usavich.db.mission.dao.impl.MissionDAOImpl"/>
+
     <!-- Mappers-->
     <bean id="baseMapper" class="org.mybatis.spring.support.SqlSessionDaoSupport" abstract="true">
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
@@ -59,6 +61,10 @@
 
     <bean id="versionMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" parent="baseMapper">
         <property name="mapperInterface" value="com.usavich.db.version.dao.impl.VersionMapper"/>
+    </bean>
+
+    <bean id="missionMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" parent="baseMapper">
+        <property name="mapperInterface" value="com.usavich.db.mission.dao.impl.MissionMapper"/>
     </bean>
 
 </beans>

@@ -1,268 +1,126 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.usavich.db.account.dao.impl.AccountMapper">
-
-    <resultMap id="accountInfo" type="com.usavich.entity.account.UserInfo">
-        <id column="USER_ID" property="userId"/>
-        <result column="USER_EMAIL" property="userEmail"/>
-        <result column="SEX" property="sex"/>
-        <result column="NICK_NAME" property="nickName"/>
-        <result column="LEVEL" property="level"/>
+<mapper namespace="com.usavich.db.mission.dao.impl.MissionMapper">
+    <resultMap id="missionInfo" type="com.usavich.entity.mission.Mission">
+        <id column="MISSION_ID" property="missionId"/>
+        <result column="MISSION_TYPE_ID" property="missionTypeId"/>
+        <result column="MISSION_NAME" property="missionName"/>
+        <result column="MISSION_CONTENT" property="missionContent"/>
         <result column="SCORES" property="scores"/>
         <result column="EXPERIENCE" property="experience"/>
-        <result column="BASE_ACC" property="baseAcc"/>
-        <result column="INERTIA_ACC" property="inertiaAcc"/>
-        <result column="CRIT" property="crit"/>
-        <result column="LUCK" property="luck"/>
+        <result column="MISSION_FLAG" property="missionFlag"/>
+        <result column="LEVEL_LIMITED" property="levelLimited"/>
+        <result column="MISSION_TIME" property="missionTime"/>
+        <result column="MISSION_DISTANCE" property="missionDistance"/>
+        <result column="CYCLE_TIME" property="cycleTime"/>
+        <result column="MISSION_FROM" property="missionFrom"/>
+        <result column="MISSION_TO" property="missionTo"/>
+        <result column="MISSION_PLACE_PACKAGE" property="missionPlacePackage"/>
+        <result column="MISSION_STEPS" property="missionSteps"/>
+        <result column="MISSION_SPEED" property="missionSpeed"/>
+        <result column="LAST_UPDATE_TIME" property="lastUpdateTime"/>
     </resultMap>
 
-    <resultMap id="userFriendInfo" type="com.usavich.entity.account.UserFriend">
-        <id column="USER_ID" property="userId"/>
-        <result column="USER_EMAIL" property="userEmail"/>
-        <result column="NICK_NAME" property="nickName"/>
-        <result column="SEX" property="sex"/>
-        <result column="FRIEND_ID" property="friendId"/>
-        <result column="FRIEND_STATUS" property="friendStatus"/>
-        <result column="ADD_TIME" property="addTime"/>
-        <result column="LAST_LOCATION_CONTENT" property="lastLocationContent"/>
-        <result column="LAST_LOCATION_POINT" property="lastLocationPoint"/>
-        <result column="LAST_ACTIVE_TIME" property="lastActiveTime"/>
+    <resultMap id="missionPackageInfo" type="com.usavich.entity.mission.MissionPackage">
+        <id column="MISSION_PACKAGE_ID" property="missionPackageId"/>
+        <result column="MISSION_PACKAGE_NAME" property="missionPackageName"/>
+        <result column="MISSION_PACKAGE_DESCRIPTION" property="missionPackageDescription"/>
+        <result column="MISSION_ID" property="missionId"/>
+        <result column="MISSION_TYPE_ID" property="missionTypeId"/>
+        <result column="SEQUENCE" property="sequence"/>
+        <result column="LAST_UPDATE_TIME" property="lastUpdateTime"/>
     </resultMap>
 
-    <resultMap id="userLocation" type="com.usavich.entity.account.UserLocation">
-        <id column="USER_ID" property="userId"/>
-        <result column="USER_EMAIL" property="userEmail"/>
-        <result column="NICK_NAME" property="nickName"/>
-        <result column="SEX" property="sex"/>
-        <result column="LAST_LOCATION_CONTENT" property="lastLocationContent"/>
-        <result column="LAST_LOCATION_POINT" property="lastLocationPoint"/>
-        <result column="LAST_ACTIVE_TIME" property="lastActiveTime"/>
+    <resultMap id="missionPlacePackageInfo" type="com.usavich.entity.mission.MissionPlacePackage">
+        <id column="PACKAGE_ID" property="packageId"/>
+        <result column="PLACE_NAME" property="placeName"/>
+        <result column="PLACE_POINT" property="placePoint"/>
     </resultMap>
 
-    <sql id="accountInfoTable">
-        U.USER_ID,
-        U.USER_EMAIL,
-        U.NICK_NAME,
-        U.SEX,
-        UD.SCORES,
-        UD.LEVEL,
-        UD.SCORES,
-        UD.EXPERIENCE,
-        UD.BASE_ACC,
-        UD.INERTIA_ACC,
-        UD.CRIT,
-        UD.LUCK
+    <sql id="missionTable">
+        MISSION_ID,
+        MISSION_TYPE_ID,
+        MISSION_NAME,
+        MISSION_CONTENT,
+        SCORES,
+        EXPERIENCE,
+        MISSION_FLAG,
+        LEVEL_LIMITED,
+        MISSION_TIME,
+        MISSION_DISTANCE,
+        CYCLE_TIME,
+        MISSION_FROM,
+        MISSION_TO,
+        MISSION_PLACE_PACKAGE,
+        MISSION_STEPS,
+        MISSION_SPEED,
+        LAST_UPDATE_TIME
     </sql>
 
-    <sql id="userFriendInfoTable">
-        U.USER_EMAIL,
-        U.NICK_NAME,
-        U.SEX,
-        UF.USER_ID,
-        UF.FRIEND_ID,
-        UF.FRIEND_STATUS,
-        UF.ADD_TIME,
-        UL.LAST_LOCATION_CONTENT,
-        UL.LAST_LOCATION_POINT,
-        UL.LAST_ACTIVE_TIME
+    <sql id="missionPackageTable">
+        MISSION_PACKAGE_ID,
+        MISSION_PACKAGE_NAME,
+        MISSION_PACKAGE_DESCRIPTION,
+        MISSION_ID,
+        MISSION_TYPE_ID,
+        SEQUENCE,
+        LAST_UPDATE_TIME
     </sql>
 
-    <sql id="userFriend">
-        USER_ID,
-        FRIEND_ID,
-        FRIEND_STATUS,
-        ADD_TIME
+    <sql id="missionPlacePackageTable">
+        PACKAGE_ID,
+        PLACE_NAME,
+        PLACE_POINT
     </sql>
 
-    <sql id="userLocationTable">
-        U.USER_ID,
-        U.USER_EMAIL,
-        U.NICK_NAME,
-        U.SEX,
-        UL.LAST_LOCATION_CONTENT,
-        UL.LAST_LOCATION_POINT,
-        UL.LAST_ACTIVE_TIME
-    </sql>
-
-    <select id="getAccountInfo" resultMap="accountInfo">
+    <select id="getMissionById" resultMap="missionInfo">
         SELECT
-        <include refid="accountInfoTable"/>
-        FROM USER AS U
-        INNER JOIN USER_DETAIL AS UD
-        ON U.USER_ID = UD.USER_ID
-        WHERE U.USER_EMAIL = #{userEmail}
-        AND U.USER_PASSWORD = #{password}
+        <include refid="missionTable"/>
+        FROM MISSION
+        WHERE MISSION_ID = #{missionId}
     </select>
 
-    <select id="getAccountInfoByMail" resultMap="accountInfo">
+    <select id="getMissionListByMinId" resultMap="missionInfo">
         SELECT
-        <include refid="accountInfoTable"/>
-        FROM USER AS U
-        INNER JOIN USER_DETAIL AS UD
-        ON U.USER_ID = UD.USER_ID
-        WHERE U.USER_EMAIL = #{userEmail}
+        <include refid="missionTable"/>
+        FROM MISSION
+        WHERE MISSION_ID > #{minMissionId}
     </select>
 
-    <insert id="createBase" parameterType="com.usavich.entity.account.UserBase" useGeneratedKeys="true"
-            keyProperty="baseEntity.userId">
-        INSERT INTO USER
-        (
-            USER_EMAIL,
-            USER_PASSWORD,
-            SEX,
-            NICK_NAME
-        )
-        VALUES
-        (
-            #{baseEntity.userEmail},
-            #{baseEntity.password},
-            #{baseEntity.sex},
-            #{baseEntity.nickName}
-        )
-    </insert>
-
-    <insert id="createDetail" parameterType="com.usavich.entity.account.UserInfo">
-        INSERT INTO USER_DETAIL
-        (
-          USER_ID,
-          LEVEL,
-          SCORES,
-          EXPERIENCE,
-          BASE_ACC,
-          CRIT,
-          INERTIA_ACC,
-          LUCK
-        )
-        VALUES
-        (
-          #{detailEntity.userId},
-          #{detailEntity.level},
-          #{detailEntity.scores},
-          #{detailEntity.experience},
-          #{detailEntity.baseAcc},
-          #{detailEntity.crit},
-          #{detailEntity.inertiaAcc},
-          #{detailEntity.luck}
-        );
-    </insert>
-
-    <select id="getAccountInfoByID" resultMap="accountInfo">
+    <select id="getMissionListByTime" resultMap="missionInfo">
         SELECT
-        <include refid="accountInfoTable"/>
-        FROM USER AS U
-        INNER JOIN USER_DETAIL AS UD
-        ON U.USER_ID = UD.USER_ID
-        WHERE U.USER_ID = #{userId}
+        <include refid="missionTable"/>
+        FROM MISSION
+        WHERE LAST_UPDATE_TIME > #{lastUpdateTime}
     </select>
 
-    <select id="getUserFriends" resultMap="userFriendInfo">
+    <select id="getMissionPackageListById" resultMap="missionPackageInfo">
         SELECT
-        <include refid="userFriendInfoTable"/>
-        FROM USER_FRIEND AS UF
-        INNER JOIN USER AS U
-        ON UF.FRIEND_ID = U.USER_ID
-        LEFT JOIN USER_LOCATION AS UL
-        ON UF.FRIEND_ID = UL.USER_ID
-        WHERE UF.USER_ID = #{userId}
+        <include refid="missionPackageTable"/>
+        FROM MISSION_PACKAGE
+        WHERE MISSION_PACKAGE_ID = #{missionPackageId}
     </select>
 
-    <select id="getUserFriend" resultMap="userFriendInfo">
+    <select id="getMissionPackageListByMinId" resultMap="missionPackageInfo">
         SELECT
-        <include refid="userFriend"/>
-        FROM USER_FRIEND
-        WHERE USER_ID = #{userId}
-        AND FRIEND_ID = #{friendId}
+        <include refid="missionPackageTable"/>
+        FROM MISSION_PACKAGE
+        WHERE MISSION_PACKAGE_ID > #{minMissionPackageId}
     </select>
 
-    <insert id="createUserFriend" parameterType="com.usavich.entity.account.UserInfo">
-        INSERT INTO USER_FRIEND
-        (
-            USER_ID,
-            FRIEND_ID,
-            FRIEND_STATUS,
-            ADD_TIME
-        )
-        VALUES
-        (
-            #{entity.userId},
-            #{entity.friendId},
-            #{entity.friendStatus},
-            #{entity.addTime}
-        )
-    </insert>
-
-    <update id="updateUserFriend" parameterType="com.usavich.entity.account.UserFriend">
-         UPDATE USER_FRIEND
-         SET
-             FRIEND_STATUS = #{entity.friendStatus},
-             ADD_TIME = #{entity.addTime}
-         WHERE USER_ID = #{entity.userId} AND FRIEND_ID = #{entity.friendId}
-    </update>
-
-    <update id="updateAccountInfo" parameterType="com.usavich.entity.account.UserInfo">
-        UPDATE USER_DETAIL
-        SET
-            LEVEL = #{entity.level},
-            SCORES = #{entity.scores},
-            EXPERIENCE = #{entity.experience},
-            BASE_ACC = #{entity.baseAcc},
-            CRIT = #{entity.crit},
-            INERTIA_ACC = #{entity.inertiaAcc},
-            LUCK = #{entity.luck}
-        WHERE USER_ID = #{entity.userId}
-    </update>
-
-    <update id="updateAccountBase" parameterType="com.usavich.entity.account.UserBase">
-        UPDATE USER
-        SET
-            USER_PASSWORD = #{entity.password},
-            SEX = #{entity.sex},
-            NICK_NAME = #{entity.nickName}
-        WHERE USER_ID = #{entity.userId}
-        AND USER_EMAIL = #{entity.userEmail}
-    </update>
-
-    <select id="getUserLocation" resultMap="userLocation">
+    <select id="getMissionPackageListByTime" resultMap="missionPackageInfo">
         SELECT
-        <include refid="userLocationTable"/>
-        FROM USER AS U
-        LEFT JOIN USER_LOCATION AS UL
-        ON U.USER_ID = UL.USER_ID
-        WHERE U.USER_ID = #{userId}
+        <include refid="missionPackageTable"/>
+        FROM MISSION_PACKAGE
+        WHERE LAST_UPDATE_TIME > #{lastUpdateTime}
     </select>
 
-    <select id="getUserLocations" resultMap="userLocation">
+    <select id="getMissionPlacePackage" resultMap="missionPlacePackageInfo">
         SELECT
-        <include refid="userLocationTable"/>
-        FROM USER AS U
-        LEFT JOIN USER_LOCATION AS UL
-        ON U.USER_ID = UL.USER_ID
+        <include refid="missionPlacePackageTable"/>
+        FROM MISSION_PLACE_PACKAGE
+        WHERE PACKAGE_ID = #{missionPlacePackageId}
     </select>
 
-    <insert id="createUserLocation" parameterType="com.usavich.entity.account.UserLocation">
-        INSERT INTO USER_LOCATION
-        (
-            USER_ID,
-            LAST_LOCATION_CONTENT,
-            LAST_LOCATION_POINT,
-            LAST_ACTIVE_TIME
-        )
-        VALUES
-        (
-            #{entity.userId},
-            #{entity.lastLocationContent},
-            #{entity.lastLocationPoint},
-            #{entity.lastActiveTime}
-        )
-    </insert>
-
-    <update id="updateUserLocation" parameterType="com.usavich.entity.account.UserLocation">
-         UPDATE USER_LOCATION
-         SET
-            LAST_LOCATION_CONTENT = #{entity.lastLocationContent},
-            LAST_LOCATION_POINT = #{entity.lastLocationPoint},
-            LAST_ACTIVE_TIME = #{entity.lastActiveTime}
-         WHERE USER_ID = #{entity.userId}
-    </update>
 </mapper>

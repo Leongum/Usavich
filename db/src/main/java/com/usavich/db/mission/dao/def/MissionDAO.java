@@ -1,5 +1,10 @@
 package com.usavich.db.mission.dao.def;
 
+import com.usavich.entity.mission.*;
+
+import java.util.Date;
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: LeonLu
@@ -8,4 +13,19 @@ package com.usavich.db.mission.dao.def;
  * To change this template use File | Settings | File Templates.
  */
 public interface MissionDAO {
+
+    public Mission getMissionById(Integer missionId);
+
+    public List<Mission> getMissionListByMinId(Integer minMissionId);
+
+    public List<Mission> getMissionListByTime(Date lastUpdateTime);
+
+    public MissionPackage getMissionPackageListById(Integer missionPackageId);
+
+    public List<MissionPackage> getMissionPackageListByMinId(Integer minMissionPackageId);
+
+    public List<MissionPackage> getMissionPackageListByTime(Date lastUpdateTime);
+
+    public List<MissionPlacePackage> getMissionPlacePackage(Integer missionPlacePackageId);
+
 }

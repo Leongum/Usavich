@@ -1,5 +1,11 @@
 package com.usavich.db.mission.dao.impl;
 
+import com.usavich.entity.mission.*;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: LeonLu
@@ -8,4 +14,17 @@ package com.usavich.db.mission.dao.impl;
  * To change this template use File | Settings | File Templates.
  */
 public interface MissionMapper {
+    public Mission getMissionById(@Param("missionId") Integer missionId);
+
+    public List<Mission> getMissionListByMinId(@Param("minMissionId") Integer minMissionId);
+
+    public List<Mission> getMissionListByTime(@Param("lastUpdateTime") Date lastUpdateTime);
+
+    public MissionPackage getMissionPackageListById(@Param("missionPackageId") Integer missionPackageId);
+
+    public List<MissionPackage> getMissionPackageListByMinId(@Param("minMissionPackageId") Integer minMissionPackageId);
+
+    public List<MissionPackage> getMissionPackageListByTime(@Param("lastUpdateTime") Date lastUpdateTime);
+
+    public List<MissionPlacePackage> getMissionPlacePackage(@Param("missionPlacePackageId") Integer missionPlacePackageId);
 }

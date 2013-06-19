@@ -8,5 +8,5 @@
 
     <bean id="accountService" class="com.usavich.service.account.impl.AccountServiceImpl"/>
     <bean id="versionControlService" class="com.usavich.service.version.impl.VersionControlServiceImpl"/>
-
+    <bean id="missionService" class="com.usavich.service.mission.impl.MissionServiceImpl"/>
 </beans>
