@@ -16,7 +16,7 @@
         <result column="CYCLE_TIME" property="cycleTime"/>
         <result column="MISSION_FROM" property="missionFrom"/>
         <result column="MISSION_TO" property="missionTo"/>
-        <result column="MISSION_PLACE_PACKAGE" property="missionPlacePackage"/>
+        <result column="MISSION_PLACE_PACKAGE" property="missionPlacePackageId"/>
         <result column="MISSION_STEPS" property="missionSteps"/>
         <result column="MISSION_SPEED" property="missionSpeed"/>
         <result column="LAST_UPDATE_TIME" property="lastUpdateTime"/>
@@ -36,6 +36,7 @@
         <id column="PACKAGE_ID" property="packageId"/>
         <result column="PLACE_NAME" property="placeName"/>
         <result column="PLACE_POINT" property="placePoint"/>
+        <result column="SEQUENCE" property="sequence"/>
     </resultMap>
 
     <sql id="missionTable">
@@ -71,7 +72,8 @@
     <sql id="missionPlacePackageTable">
         PACKAGE_ID,
         PLACE_NAME,
-        PLACE_POINT
+        PLACE_POINT,
+        SEQUENCE
     </sql>
 
     <select id="getMissionById" resultMap="missionInfo">
@@ -100,6 +102,7 @@
         <include refid="missionPackageTable"/>
         FROM MISSION_PACKAGE
         WHERE MISSION_PACKAGE_ID = #{missionPackageId}
+        ORDER BY SEQUENCE ASC
     </select>
 
     <select id="getMissionPackageListByMinId" resultMap="missionPackageInfo">
@@ -107,6 +110,7 @@
         <include refid="missionPackageTable"/>
         FROM MISSION_PACKAGE
         WHERE MISSION_PACKAGE_ID > #{minMissionPackageId}
+        ORDER BY MISSION_PACKAGE_ID ASC, SEQUENCE ASC
     </select>
 
     <select id="getMissionPackageListByTime" resultMap="missionPackageInfo">
@@ -114,6 +118,7 @@
         <include refid="missionPackageTable"/>
         FROM MISSION_PACKAGE
         WHERE LAST_UPDATE_TIME > #{lastUpdateTime}
+        ORDER BY MISSION_PACKAGE_ID ASC, SEQUENCE ASC
     </select>
 
     <select id="getMissionPlacePackage" resultMap="missionPlacePackageInfo">
@@ -121,6 +126,7 @@
         <include refid="missionPlacePackageTable"/>
         FROM MISSION_PLACE_PACKAGE
         WHERE PACKAGE_ID = #{missionPlacePackageId}
+        ORDER BY SEQUENCE ASC
     </select>
 
 </mapper>

@@ -33,12 +33,12 @@ public class MissionServiceImpl implements MissionService {
         } else if (lastUpdateTime != null) {
             missionList = missionDAO.getMissionListByTime(lastUpdateTime);
         }else{
-            throw new ServerRequestException(ErrorMessageMapper.PARAM_ERROR.toString());
+            missionList = missionDAO.getMissionListByMinId(-1);
         }
 
         for (Mission mission : missionList) {
-            if (mission.getMissionPlacePackage() != null) {
-                List<MissionPlacePackage> missionPlacePackageList = missionDAO.getMissionPlacePackage(mission.getMissionPlacePackage());
+            if (mission.getMissionPlacePackageId() != null) {
+                List<MissionPlacePackage> missionPlacePackageList = missionDAO.getMissionPlacePackage(mission.getMissionPlacePackageId());
                 mission.setMissionPlacePackages(missionPlacePackageList);
             }
         }
@@ -56,7 +56,7 @@ public class MissionServiceImpl implements MissionService {
         } else if (lastUpdateTime != null) {
             missionPackagesList = missionDAO.getMissionPackageListByTime(lastUpdateTime);
         }else{
-            throw new ServerRequestException(ErrorMessageMapper.PARAM_ERROR.toString());
+            missionPackagesList = missionDAO.getMissionPackageListByMinId(-1);
         }
         return missionPackagesList;
     }

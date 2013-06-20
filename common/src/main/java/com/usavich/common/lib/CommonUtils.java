@@ -5,8 +5,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.util.Assert;
 
 import java.text.ParseException;
-import java.util.Arrays;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -65,4 +64,36 @@ public class CommonUtils {
             throw new IllegalArgumentException(String.format("Date format should be one of %s", Arrays.toString(DATE_PATTERNS)));
         }
     }
+
+    public static interface IGetKey<K, V> {
+        K getKey(V obj);
+    }
+
+    public static interface IGetValue<V, O> {
+        V getValue(O obj);
+    }
+
+    public static <K, V> Map<K, List<V>> toListMap(List<V> list, IGetKey<K, V> keyMapper) {
+        if (list == null) {
+            return new HashMap<K, List<V>>();
+        }
+
+        Map<K, List<V>> result = new HashMap<K, List<V>>();
+        for (V item : list) {
+            K key = keyMapper.getKey(item);
+
+            // exists
+            if (result.get(key) != null) {
+                result.get(key).add(item);
+            }
+            // not exists
+            else {
+                List<V> itemList = new ArrayList<V>();
+                itemList.add(item);
+                result.put(key, itemList);
+            }
+        }
+        return result;
+    }
+
 }

@@ -2,7 +2,6 @@ package com.usavich.entity.mission;
 
 import com.usavich.common.lib.CustomDateSerializer;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.springframework.dao.DataAccessException;
 
 import java.math.BigInteger;
 import java.util.Date;
@@ -30,7 +29,7 @@ public class Mission {
     private double cycleTime;
     private String missionFrom;
     private String missionTo;
-    private Integer missionPlacePackage;
+    private Integer missionPlacePackageId;
     private List<MissionPlacePackage> missionPlacePackages;
     private BigInteger missionSteps;
     private double missionSpeed;
@@ -140,12 +139,12 @@ public class Mission {
         this.missionTo = missionTo;
     }
 
-    public Integer getMissionPlacePackage() {
-        return missionPlacePackage;
+    public Integer getMissionPlacePackageId() {
+        return missionPlacePackageId;
     }
 
-    public void setMissionPlacePackage(Integer missionPlacePackage) {
-        this.missionPlacePackage = missionPlacePackage;
+    public void setMissionPlacePackageId(Integer missionPlacePackageId) {
+        this.missionPlacePackageId = missionPlacePackageId;
     }
 
     public BigInteger getMissionSteps() {

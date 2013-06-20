@@ -3,6 +3,7 @@ package com.usavich.entity.mission.rest;
 import com.usavich.common.lib.CustomDateSerializer;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class MissionPackageRest {
     private Integer missionPackageId;
     private String missionPackageName;
     private String missionPackageDescription;
-    private List<MissionPackageList> missionPackageListList;
+    private List<MissionPackageList> missionPackageListList = new ArrayList<MissionPackageList>();
     private Date lastUpdateTime;
 
     public Integer getMissionPackageId() {

@@ -12,6 +12,7 @@ public class MissionPlacePackage {
     private Integer packageId;
     private String placeName;
     private String placePoint;
+    private String sequence;
 
     public Integer getPackageId() {
         return packageId;
@@ -35,5 +36,13 @@ public class MissionPlacePackage {
 
     public void setPlacePoint(String placePoint) {
         this.placePoint = placePoint;
+    }
+
+    public String getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(String sequence) {
+        this.sequence = sequence;
     }
 }
