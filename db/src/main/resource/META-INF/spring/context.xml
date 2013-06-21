@@ -50,6 +50,8 @@
 
     <bean id="missionDAO" class="com.usavich.db.mission.dao.impl.MissionDAOImpl"/>
 
+    <bean id="productDAO" class="com.usavich.db.product.dao.impl.ProductADOImpl"/>
+
     <!-- Mappers-->
     <bean id="baseMapper" class="org.mybatis.spring.support.SqlSessionDaoSupport" abstract="true">
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
@@ -65,6 +67,10 @@
 
     <bean id="missionMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" parent="baseMapper">
         <property name="mapperInterface" value="com.usavich.db.mission.dao.impl.MissionMapper"/>
+    </bean>
+
+    <bean id="productMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" parent="baseMapper">
+        <property name="mapperInterface" value="com.usavich.db.product.dao.impl.ProductMapper"/>
     </bean>
 
 </beans>
