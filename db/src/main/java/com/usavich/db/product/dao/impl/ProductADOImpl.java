@@ -2,6 +2,7 @@ package com.usavich.db.product.dao.impl;
 
 import com.usavich.db.product.dao.def.ProductDAO;
 import com.usavich.entity.product.Product;
+import com.usavich.entity.product.ProductHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
@@ -32,5 +33,20 @@ public class ProductADOImpl implements ProductDAO{
     @Override
     public List<Product> getProductListByTime(Date lastUpdateTime) {
         return productMapper.getProductListByTime(lastUpdateTime);
+    }
+
+    @Override
+    public List<ProductHistory> getProductHistoryList(Integer userId) {
+        return productMapper.getProductHistoryList(userId);
+    }
+
+    @Override
+    public List<ProductHistory> getProductHistoryById(Integer userId, Integer productId) {
+        return productMapper.getProductHistoryById(userId, productId);
+    }
+
+    @Override
+    public void createProductHistory(ProductHistory productHistory) {
+        productMapper.createProductHistory(productHistory);
     }
 }
