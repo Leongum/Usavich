@@ -1,6 +1,7 @@
 package com.usavich.db.product.dao.impl;
 
 import com.usavich.entity.product.Product;
+import com.usavich.entity.product.ProductHistory;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -19,4 +20,10 @@ public interface ProductMapper {
     public List<Product> getProductListByMinId(@Param("minProductId") Integer minProductId);
 
     public List<Product> getProductListByTime(@Param("lastUpdateTime") Date lastUpdateTime);
+
+    public List<ProductHistory> getProductHistoryList(@Param("userId") Integer userId);
+
+    public List<ProductHistory> getProductHistoryById(@Param("userId") Integer userId, @Param("productId") Integer productId);
+
+    public void createProductHistory(@Param("entity") ProductHistory productHistory);
 }

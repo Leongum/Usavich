@@ -1,6 +1,6 @@
 package com.usavich.service.product.def;
 
-import com.usavich.entity.product.Product;
+import com.usavich.entity.product.*;
 
 import java.util.Date;
 import java.util.List;
@@ -15,4 +15,8 @@ import java.util.List;
 public interface ProductService {
 
     List<Product> getProducts(Integer productId, Integer minId, Date lastUpdateTime);
+
+    void createProductHistory(ProductHistory productHistory);
+
+    List<ProductHistory> getProductHistoryList(Integer userId, Integer productId);
 }

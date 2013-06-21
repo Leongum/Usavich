@@ -23,6 +23,14 @@
         <result column="LAST_UPDATE_TIME" property="lastUpdateTime"/>
     </resultMap>
 
+    <resultMap id="productHistoryInfo" type="com.usavich.entity.product.ProductHistory">
+        <id column="USER_ID" property="userId"/>
+        <result column="PRODUCT_ID" property="productId"/>
+        <result column="SCORES" property="scores"/>
+        <result column="MONEY" property="money"/>
+        <result column="BUY_TIME" property="buyTime"/>
+    </resultMap>
+
     <sql id="productTable">
         PRODUCT_ID,
         PRODUCT_NAME,
@@ -42,6 +50,14 @@
         INERTIA,
         LUCK,
         LAST_UPDATE_TIME
+    </sql>
+
+    <sql id="productHistoryTable">
+        USER_ID,
+        PRODUCT_ID,
+        SCORES,
+        MONEY,
+        BUY_TIME
     </sql>
 
     <select id="getProductById" resultMap="productInfo">
@@ -64,5 +80,39 @@
         FROM PRODUCTS
         WHERE LAST_UPDATE_TIME > #{lastUpdateTime}
     </select>
+
+    <select id="getProductHistoryList" resultMap="productHistoryInfo">
+        SELECT
+        <include refid="productHistoryTable"/>
+        FROM USER_PRODUCTS_HISTORY
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <select id="getProductHistoryById" resultMap="productHistoryInfo">
+        SELECT
+        <include refid="productHistoryTable"/>
+        FROM USER_PRODUCTS_HISTORY
+        WHERE USER_ID = #{userId}
+        AND PRODUCT_ID = #{productId}
+    </select>
+
+    <insert id="createProductHistory" parameterType="com.usavich.entity.product.ProductHistory">
+        INSERT INTO USER_PRODUCTS_HISTORY
+        (
+            USER_ID,
+            PRODUCTS_ID,
+            SCORES,
+            MONEY,
+            BUY_TIME
+        )
+        VALUES
+        (
+            #{entity.userId},
+            #{entity.productId},
+            #{entity.scores},
+            #{entity.money},
+            #{entity.buyTime}
+        )
+    </insert>
 
 </mapper>

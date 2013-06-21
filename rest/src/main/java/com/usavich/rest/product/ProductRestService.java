@@ -1,7 +1,7 @@
 package com.usavich.rest.product;
 
 import com.usavich.common.lib.CommonUtils;
-import com.usavich.entity.product.Product;
+import com.usavich.entity.product.*;
 import com.usavich.service.product.def.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,5 +23,17 @@ public class ProductRestService implements ProductRestDef {
         return productService.getProducts(CommonUtils.parseIntegerToNull(productId),
                 CommonUtils.parseIntegerToNull(minId),
                 CommonUtils.parseDateDefaultToNull(lastUpdateTime));
+    }
+
+    @Override
+    public List<ProductHistory> getProductHistoryList(String userId, String productId) {
+        return productService.getProductHistoryList(CommonUtils.parseIntegerToNull(userId),
+                CommonUtils.parseIntegerToNull(productId));
+    }
+
+    @Override
+    public void createAccountInfo(String userId,ProductHistory productHistory) {
+        productHistory.setUserId(CommonUtils.parseIntegerToNull(userId));
+        productService.createProductHistory(productHistory);
     }
 }

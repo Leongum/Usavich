@@ -1,6 +1,6 @@
 package com.usavich.db.product.dao.def;
 
-import com.usavich.entity.product.Product;
+import com.usavich.entity.product.*;
 
 import java.util.Date;
 import java.util.List;
@@ -19,4 +19,10 @@ public interface ProductDAO {
     public List<Product> getProductListByMinId(Integer minProductId);
 
     public List<Product> getProductListByTime(Date lastUpdateTime);
+
+    public List<ProductHistory> getProductHistoryList(Integer userId);
+
+    public List<ProductHistory> getProductHistoryById(Integer userId, Integer productId);
+
+    public void createProductHistory(ProductHistory productHistory);
 }
