@@ -1,41 +1,46 @@
-package com.usavich.db.running.dao.impl;
+package com.usavich.service.running.impl;
 
 import com.usavich.db.running.dao.def.RunningDAO;
 import com.usavich.entity.running.OnGoingRunning;
 import com.usavich.entity.running.RunningHistory;
+import com.usavich.service.running.def.RunningService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
  * User: LeonLu
- * Date: 6/21/13
- * Time: 6:41 PM
+ * Date: 6/24/13
+ * Time: 3:21 PM
  * To change this template use File | Settings | File Templates.
  */
-public class RunningDAOImpl implements RunningDAO {
+public class RunningServiceImpl implements RunningService{
 
     @Autowired
-    private RunningMapper runningMapper;
+    private RunningDAO runningDAO;
 
     @Override
     public List<RunningHistory> getRunningHistories(Integer userId, Integer missionId) {
-        return runningMapper.getRunningHistories(userId, missionId);
+        return runningDAO.getRunningHistories(userId,missionId);
     }
 
     @Override
+    @Transactional
     public void createRunningHistory(RunningHistory runningHistory) {
-        runningMapper.createRunningHistory(runningHistory);
+        runningDAO.createRunningHistory(runningHistory);
+        //need add user info
     }
 
     @Override
     public List<OnGoingRunning> getOnGoingRunning(Integer userId) {
-        return runningMapper.getOnGoingRunning(userId);
+        return runningDAO.getOnGoingRunning(userId);
     }
 
     @Override
+    @Transactional
     public void createOnGoingRunning(OnGoingRunning goingRunning) {
-        runningMapper.createOnGoingRunning(goingRunning);
+        runningDAO.createOnGoingRunning(goingRunning);
     }
 }

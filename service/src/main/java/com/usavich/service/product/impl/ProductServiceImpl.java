@@ -9,6 +9,7 @@ import com.usavich.entity.product.Product;
 import com.usavich.entity.product.ProductHistory;
 import com.usavich.service.product.def.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,6 +55,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
+    @Transactional
     public void createProductHistory(ProductHistory productHistory) {
         productDAO.createProductHistory(productHistory);
     }
@@ -65,7 +67,7 @@ public class ProductServiceImpl implements ProductService{
         if (productId == null) {
             productHistoryList = productDAO.getProductHistoryList(userId);
         } else {
-            productHistoryList = productDAO.getProductHistoryById(userId,productId);
+            productHistoryList = productDAO.getProductHistoryById(userId, productId);
         }
         return productHistoryList;
     }

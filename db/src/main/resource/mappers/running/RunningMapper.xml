@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.usavich.db.running.dao.impl.RunningMapper">
+    <resultMap id="runningHistoryInfo" type="com.usavich.entity.running.RunningHistory">
+        <id column="USER_ID" property="userId"/>
+        <result column="MISSION_ID" property="missionId"/>
+        <result column="MISSION_TYPE_ID" property="missionTypeId"/>
+        <result column="MISSION_ROUTE" property="missionRoute"/>
+        <result column="MISSION_START_TIME" property="missionStartTime"/>
+        <result column="MISSION_END_TIME" property="missionEndTime"/>
+        <result column="MISSION_DATE" property="missionDate"/>
+        <result column="SPEND_CARLORIE" property="spendCarlorie"/>
+        <result column="DURATION" property="duration"/>
+        <result column="AVG_SPEED" property="avgSpeed"/>
+        <result column="DISTANCE" property="distance"/>
+        <result column="OFFER_USERS" property="offerUsers"/>
+        <result column="MISSION_GRADE" property="missionGrade"/>
+        <result column="SCORES" property="scores"/>
+        <result column="EXPERIENCE" property="experience"/>
+        <result column="COMMENT" property="comment"/>
+    </resultMap>
+
+    <resultMap id="runningOnGoingInfo" type="com.usavich.entity.running.OnGoingRunning">
+        <id column="USER_ID" property="userId"/>
+        <result column="MISSION_ID" property="missionId"/>
+        <result column="MISSION_TYPE_ID" property="missionTypeId"/>
+        <result column="MISSION_STATUS" property="missionStatus"/>
+        <result column="START_TIME" property="startTime"/>
+    </resultMap>
+
+    <sql id="runningHistoryTable">
+        USER_ID,
+        MISSION_ID,
+        MISSION_TYPE_ID,
+        MISSION_ROUTE,
+        MISSION_START_TIME,
+        MISSION_END_TIME,
+        MISSION_DATE,
+        SPEND_CARLORIE,
+        DURATION,
+        AVG_SPEED,
+        DISTANCE,
+        OFFER_USERS,
+        MISSION_GRADE,
+        SCORES,
+        EXPERIENCE,
+        COMMENT
+    </sql>
+
+    <sql id="runningOnGoingTable">
+        USER_ID,
+        MISSION_ID,
+        MISSION_TYPE_ID,
+        MISSION_STATUS,
+        START_TIME
+    </sql>
+
+    <select id="getRunningHistories" resultMap="runningHistoryInfo">
+        SELECT
+        <include refid="runningHistoryTable"/>
+        FROM USER_RUNNING_HISTORY
+        WHERE USER_ID = #{userId}
+        <if test="missionId != null"><![CDATA[
+        AND MISSION_ID = #{missionId}
+        ]]></if>
+    </select>
+
+    <insert id="createRunningHistory" parameterType="com.usavich.entity.running.RunningHistory">
+        INSERT INTO USER_RUNNING_HISTORY
+        (
+            USER_ID,
+            MISSION_ID,
+            MISSION_TYPE_ID,
+            MISSION_ROUTE,
+            MISSION_START_TIME,
+            MISSION_END_TIME,
+            MISSION_DATE,
+            SPEND_CARLORIE,
+            DURATION,
+            AVG_SPEED,
+            DISTANCE,
+            OFFER_USERS,
+            MISSION_GRADE,
+            SCORES,
+            EXPERIENCE,
+            COMMENT
+        )
+        VALUES
+        (
+            #{entity.userId},
+            #{entity.missionId},
+            #{entity.missionTypeId},
+            #{entity.missionRoute},
+            #{entity.missionStartTime},
+            #{entity.missionEndTime},
+            #{entity.missionDate},
+            #{entity.spendCarlorie},
+            #{entity.duration},
+            #{entity.avgSpeed},
+            #{entity.distance},
+            #{entity.offerUsers},
+            #{entity.missionGrade},
+            #{entity.scores},
+            #{entity.experience},
+            #{entity.comment}
+        )
+    </insert>
+
+    <select id="getOnGoingRunning" resultMap="OnGoingRunning">
+        SELECT
+        <include refid="runningOnGoingTable"/>
+        FROM USER_RUNNING
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <insert id="createOnGoingRunning" parameterType="com.usavich.entity.running.OnGoingRunning">
+        INSERT INTO ACCOUNT_TEST.USER_RUNNING
+        (
+            USER_ID,
+            MISSION_ID,
+            MISSION_TYPE_ID,
+            MISSION_STATUS,
+            START_TIME
+        )
+        VALUES
+        (
+            #{entity.userId},
+            #{entity.missionId},
+            #{entity.missionTypeId},
+            #{entity.missionStatus},
+            #{entity.startTime}
+        );
+
+    </insert>
+
+</mapper>

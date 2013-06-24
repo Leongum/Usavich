@@ -19,7 +19,7 @@ public class MissionPackageRest {
     private Integer missionPackageId;
     private String missionPackageName;
     private String missionPackageDescription;
-    private List<MissionPackageList> missionPackageListList = new ArrayList<MissionPackageList>();
+    private List<MissionPackageList> missionPackageList = new ArrayList<MissionPackageList>();
     private Date lastUpdateTime;
 
     public Integer getMissionPackageId() {
@@ -46,12 +46,12 @@ public class MissionPackageRest {
         this.missionPackageDescription = missionPackageDescription;
     }
 
-    public List<MissionPackageList> getMissionPackageListList() {
-        return missionPackageListList;
+    public List<MissionPackageList> getMissionPackageList() {
+        return missionPackageList;
     }
 
-    public void setMissionPackageListList(List<MissionPackageList> missionPackageListList) {
-        this.missionPackageListList = missionPackageListList;
+    public void setMissionPackageList(List<MissionPackageList> missionPackageList) {
+        this.missionPackageList = missionPackageList;
     }
 
     @JsonSerialize(using = CustomDateSerializer.class)

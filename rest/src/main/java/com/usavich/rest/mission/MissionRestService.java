@@ -45,7 +45,7 @@ public class MissionRestService implements MissionRestDef {
                         missionPackageInnerList.setMissionId(missionPackage.getMissionId());
                         missionPackageInnerList.setMissionTypeId(missionPackage.getMissionTypeId());
                         missionPackageInnerList.setSequence(missionPackage.getSequence());
-                        missionPackageRest.getMissionPackageListList().add(missionPackageInnerList);
+                        missionPackageRest.getMissionPackageList().add(missionPackageInnerList);
                     }
                 }
                 missionPackageRestList.add(missionPackageRest);

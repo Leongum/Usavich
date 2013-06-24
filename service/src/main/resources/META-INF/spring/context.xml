@@ -10,4 +10,5 @@
     <bean id="versionControlService" class="com.usavich.service.version.impl.VersionControlServiceImpl"/>
     <bean id="missionService" class="com.usavich.service.mission.impl.MissionServiceImpl"/>
     <bean id="productService" class="com.usavich.service.product.impl.ProductServiceImpl"/>
+    <bean id="runningService" class="com.usavich.service.running.impl.RunningServiceImpl"/>
 </beans>

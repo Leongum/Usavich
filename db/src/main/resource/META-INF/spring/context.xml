@@ -52,6 +52,8 @@
 
     <bean id="productDAO" class="com.usavich.db.product.dao.impl.ProductADOImpl"/>
 
+    <bean id="runningDAO" class="com.usavich.db.running.dao.impl.RunningDAOImpl"/>
+
     <!-- Mappers-->
     <bean id="baseMapper" class="org.mybatis.spring.support.SqlSessionDaoSupport" abstract="true">
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
@@ -71,6 +73,10 @@
 
     <bean id="productMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" parent="baseMapper">
         <property name="mapperInterface" value="com.usavich.db.product.dao.impl.ProductMapper"/>
+    </bean>
+
+    <bean id="runningMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" parent="baseMapper">
+        <property name="mapperInterface" value="com.usavich.db.running.dao.impl.RunningMapper"/>
     </bean>
 
 </beans>
