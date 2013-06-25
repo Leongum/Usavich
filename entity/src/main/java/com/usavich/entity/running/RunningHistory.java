@@ -1,5 +1,10 @@
 package com.usavich.entity.running;
 
+import com.usavich.common.lib.CustomDateDeserializer;
+import com.usavich.common.lib.CustomDateSerializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.math.BigInteger;
 import java.util.Date;
 
@@ -60,26 +65,32 @@ public class RunningHistory {
         this.missionRoute = missionRoute;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getMissionStartTime() {
         return missionStartTime;
     }
 
+    @JsonDeserialize(using = CustomDateDeserializer.class)
     public void setMissionStartTime(Date missionStartTime) {
         this.missionStartTime = missionStartTime;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getMissionEndTime() {
         return missionEndTime;
     }
 
+    @JsonDeserialize(using = CustomDateDeserializer.class)
     public void setMissionEndTime(Date missionEndTime) {
         this.missionEndTime = missionEndTime;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getMissionDate() {
         return missionDate;
     }
 
+    @JsonDeserialize(using = CustomDateDeserializer.class)
     public void setMissionDate(Date missionDate) {
         this.missionDate = missionDate;
     }

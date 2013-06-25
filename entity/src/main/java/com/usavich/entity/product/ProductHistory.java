@@ -1,5 +1,10 @@
 package com.usavich.entity.product;
 
+import com.usavich.common.lib.CustomDateDeserializer;
+import com.usavich.common.lib.CustomDateSerializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.util.Date;
 
 /**
@@ -11,7 +16,7 @@ import java.util.Date;
  */
 public class ProductHistory {
     private Integer userId;
-    private Integer productsId;
+    private Integer productId;
     private double scores;
     private double money;
     private Date buyTime;
@@ -24,12 +29,12 @@ public class ProductHistory {
         this.userId = userId;
     }
 
-    public Integer getProductsId() {
-        return productsId;
+    public Integer getProductId() {
+        return productId;
     }
 
-    public void setProductsId(Integer productsId) {
-        this.productsId = productsId;
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     public double getScores() {
@@ -48,10 +53,12 @@ public class ProductHistory {
         this.money = money;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getBuyTime() {
         return buyTime;
     }
 
+    @JsonDeserialize(using = CustomDateDeserializer.class)
     public void setBuyTime(Date buyTime) {
         this.buyTime = buyTime;
     }

@@ -1,5 +1,10 @@
 package com.usavich.entity.running;
 
+import com.usavich.common.lib.CustomDateDeserializer;
+import com.usavich.common.lib.CustomDateSerializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.util.Date;
 
 /**
@@ -48,10 +53,12 @@ public class OnGoingRunning {
         this.missionStatus = missionStatus;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getStartTime() {
         return startTime;
     }
 
+    @JsonDeserialize(using = CustomDateDeserializer.class)
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }

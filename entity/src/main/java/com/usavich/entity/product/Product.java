@@ -1,5 +1,10 @@
 package com.usavich.entity.product;
 
+import com.usavich.common.lib.CustomDateDeserializer;
+import com.usavich.common.lib.CustomDateSerializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.util.Date;
 
 /**
@@ -85,18 +90,21 @@ public class Product {
         this.levelLimit = levelLimit;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getStartTime() {
         return startTime;
     }
 
+    @JsonDeserialize(using = CustomDateDeserializer.class)
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getEndTime() {
         return endTime;
     }
-
+    @JsonDeserialize(using = CustomDateDeserializer.class)
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
@@ -165,10 +173,12 @@ public class Product {
         this.luck = luck;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getLastUpdateTime() {
         return lastUpdateTime;
     }
 
+    @JsonDeserialize(using = CustomDateDeserializer.class)
     public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
     }

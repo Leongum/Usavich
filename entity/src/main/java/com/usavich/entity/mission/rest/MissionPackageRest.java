@@ -1,6 +1,8 @@
 package com.usavich.entity.mission.rest;
 
+import com.usavich.common.lib.CustomDateDeserializer;
 import com.usavich.common.lib.CustomDateSerializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.util.ArrayList;
@@ -59,6 +61,7 @@ public class MissionPackageRest {
         return lastUpdateTime;
     }
 
+    @JsonDeserialize(using = CustomDateDeserializer.class)
     public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
     }

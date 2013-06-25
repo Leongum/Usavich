@@ -62,7 +62,7 @@
             <ref bean="accountRestService"/>
             <ref bean="versionRestService"/>
             <ref bean="missionRestService"/>
-            <ref bean="productService"/>
+            <ref bean="productRestService"/>
             <ref bean="runningRestService"/>
         </jaxrs:serviceBeans>
         <jaxrs:providers>

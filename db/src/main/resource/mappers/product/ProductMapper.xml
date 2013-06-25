@@ -100,7 +100,7 @@
         INSERT INTO USER_PRODUCTS_HISTORY
         (
             USER_ID,
-            PRODUCTS_ID,
+            PRODUCT_ID,
             SCORES,
             MONEY,
             BUY_TIME
