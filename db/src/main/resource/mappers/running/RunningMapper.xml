@@ -107,7 +107,7 @@
         )
     </insert>
 
-    <select id="getOnGoingRunning" resultMap="OnGoingRunning">
+    <select id="getOnGoingRunning" resultMap="runningOnGoingInfo">
         SELECT
         <include refid="runningOnGoingTable"/>
         FROM USER_RUNNING
