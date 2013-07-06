@@ -16,21 +16,23 @@ import java.util.List;
  * Time: 3:21 PM
  * To change this template use File | Settings | File Templates.
  */
-public class RunningServiceImpl implements RunningService{
+public class RunningServiceImpl implements RunningService {
 
     @Autowired
     private RunningDAO runningDAO;
 
     @Override
     public List<RunningHistory> getRunningHistories(Integer userId, Integer missionId) {
-        return runningDAO.getRunningHistories(userId,missionId);
+        return runningDAO.getRunningHistories(userId, missionId);
     }
 
     @Override
     @Transactional
-    public void createRunningHistory(RunningHistory runningHistory) {
-        runningDAO.createRunningHistory(runningHistory);
-        //need add user info
+    public void createRunningHistory(List<RunningHistory> runningHistoryList) {
+        for (RunningHistory runningHistory : runningHistoryList) {
+            runningDAO.createRunningHistory(runningHistory);
+            //need add user info
+        }
     }
 
     @Override
@@ -40,7 +42,9 @@ public class RunningServiceImpl implements RunningService{
 
     @Override
     @Transactional
-    public void createOnGoingRunning(OnGoingRunning goingRunning) {
-        runningDAO.createOnGoingRunning(goingRunning);
+    public void createOnGoingRunning(List<OnGoingRunning> goingRunningList) {
+        for (OnGoingRunning onGoingRunning : goingRunningList) {
+            runningDAO.createOnGoingRunning(onGoingRunning);
+        }
     }
 }

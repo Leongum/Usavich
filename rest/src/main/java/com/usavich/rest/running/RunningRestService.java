@@ -32,14 +32,18 @@ public class RunningRestService implements RunningRestDef {
     }
 
     @Override
-    public void createRunningHistory(String userId, RunningHistory runningHistory) {
-        runningHistory.setUserId(CommonUtils.parseIntegerToNull(userId));
-        runningService.createRunningHistory(runningHistory);
+    public void createRunningHistory(String userId, List<RunningHistory> runningHistoryList) {
+        for (RunningHistory runningHistory : runningHistoryList) {
+            runningHistory.setUserId(CommonUtils.parseIntegerToNull(userId));
+        }
+        runningService.createRunningHistory(runningHistoryList);
     }
 
     @Override
-    public void createOnGoingRunning(String userId, OnGoingRunning onGoingRunning) {
+    public void createOnGoingRunning(String userId, List<OnGoingRunning> onGoingRunningList) {
+        for(OnGoingRunning onGoingRunning:onGoingRunningList){
         onGoingRunning.setUserId(CommonUtils.parseIntegerToNull(userId));
-        runningService.createOnGoingRunning(onGoingRunning);
+        }
+        runningService.createOnGoingRunning(onGoingRunningList);
     }
 }

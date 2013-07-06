@@ -16,9 +16,9 @@ public interface RunningService {
 
     List<RunningHistory> getRunningHistories(Integer userId, Integer missionId);
 
-    void createRunningHistory(RunningHistory runningHistory);
+    void createRunningHistory(List<RunningHistory> runningHistoryList);
 
     List<OnGoingRunning> getOnGoingRunning(Integer userId);
 
-    void createOnGoingRunning(OnGoingRunning goingRunning);
+    void createOnGoingRunning(List<OnGoingRunning> goingRunningList);
 }

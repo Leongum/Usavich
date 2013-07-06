@@ -33,11 +33,11 @@ public interface RunningRestDef extends RestDef {
     @POST
     @Path("/history/{" + PARAM_USER_ID + "}")
     void createRunningHistory( @PathParam(PARAM_USER_ID) String userId,
-                            RunningHistory runningHistory);
+                            List<RunningHistory> runningHistoryList);
 
     @POST
     @Path("/ongoing/{" + PARAM_USER_ID + "}")
     void createOnGoingRunning( @PathParam(PARAM_USER_ID) String userId,
-                               OnGoingRunning onGoingRunning);
+                               List<OnGoingRunning> onGoingRunningList);
 
 }
