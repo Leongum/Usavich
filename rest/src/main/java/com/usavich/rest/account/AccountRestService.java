@@ -68,5 +68,4 @@ public class AccountRestService implements AccountRestDef {
         userLocation.setUserId(CommonUtils.parseIntegerToNull(userId));
         accountService.updateUserLocation(userLocation);
     }
-
 }
