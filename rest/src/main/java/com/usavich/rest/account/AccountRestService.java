@@ -69,5 +69,4 @@ public class AccountRestService implements AccountRestDef {
         accountService.updateUserLocation(userLocation);
     }
 
-
 }
