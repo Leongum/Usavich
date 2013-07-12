@@ -31,4 +31,7 @@
     </bean>
     <bean id="schemaHandler" class="org.apache.cxf.jaxrs.utils.schemas.SchemaHandler"/>
 
+    <!-- interceptors -->
+    <bean id="headerInterceptor" class="com.usavich.rest.common.HeaderInterceptor"/>
+
 </beans>

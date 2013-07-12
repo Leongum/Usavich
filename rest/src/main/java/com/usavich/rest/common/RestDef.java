@@ -17,4 +17,7 @@ public interface RestDef {
     static final String PARAM_MIN_ID = "minId";
     static final String PARAM_PACKAGE_ID = "packageId";
     static final String PARAM_PRODUCT_ID = "productId";
+
+
+    static final String HEADER_PARAM_KEY = "X-CLIENT-KEY";
 }
