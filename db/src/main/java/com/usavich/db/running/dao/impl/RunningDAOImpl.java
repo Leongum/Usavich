@@ -5,6 +5,7 @@ import com.usavich.entity.running.OnGoingRunning;
 import com.usavich.entity.running.RunningHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,13 +26,18 @@ public class RunningDAOImpl implements RunningDAO {
     }
 
     @Override
+    public List<RunningHistory> getRunningHistoriesByDate(Integer userId, Date lastUpdateTime, int startSize, int pageSize) {
+        return runningMapper.getRunningHistoriesByDate(userId, lastUpdateTime, startSize, pageSize);
+    }
+
+    @Override
     public void createRunningHistory(RunningHistory runningHistory) {
         runningMapper.createRunningHistory(runningHistory);
     }
 
     @Override
-    public List<OnGoingRunning> getOnGoingRunning(Integer userId) {
-        return runningMapper.getOnGoingRunning(userId);
+    public List<OnGoingRunning> getOnGoingRunning(Integer userId, Date lastUpdateTime) {
+        return runningMapper.getOnGoingRunning(userId, lastUpdateTime);
     }
 
     @Override

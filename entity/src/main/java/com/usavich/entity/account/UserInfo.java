@@ -1,5 +1,12 @@
 package com.usavich.entity.account;
 
+import com.usavich.common.lib.CustomDateDeserializer;
+import com.usavich.common.lib.CustomDateSerializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import java.util.Date;
+
 /**
  * Created with IntelliJ IDEA.
  * User: LeonLu
@@ -15,15 +22,29 @@ public class UserInfo extends UserBase {
 
     private double experience;
 
-    private double baseAcc;
+    private double maxPower;
 
-    private double inertiaAcc;
+    private double remainingPower;
 
-    private double crit;
+    private double endurance;
 
-    private double luck;
+    private double spirit;
 
-    public UserInfo(){
+    private double rapidly;
+
+    private double recoverSpeed;
+
+    private Date systemTime;
+
+    //private double baseAcc;
+
+    //private double inertiaAcc;
+
+    //private double crit;
+
+    //private double luck;
+
+    public UserInfo() {
 
     }
 
@@ -32,14 +53,22 @@ public class UserInfo extends UserBase {
         this.setUserEmail(userBase.getUserEmail());
         this.setNickName(userBase.getNickName());
         this.setPassword(userBase.getPassword());
+        this.setUuid(userBase.getUuid());
         this.setSex(userBase.getSex());
-        this.level = 1;
+        this.level = 0;
         this.scores = 0;
         this.experience = 0;
-        this.baseAcc = 1;
-        this.inertiaAcc = 1;
-        this.crit = 1;
-        this.luck = 1;
+        this.maxPower = 0;
+        this.remainingPower = 0;
+        this.endurance = 0;
+        this.spirit = 0;
+        this.rapidly = 0;
+        this.recoverSpeed = 0;
+        this.systemTime = new Date();
+        //this.baseAcc = 1;
+        //this.inertiaAcc = 1;
+        //this.crit = 1;
+        //this.luck = 1;
     }
 
     public double getLevel() {
@@ -66,36 +95,61 @@ public class UserInfo extends UserBase {
         this.experience = experience;
     }
 
-    public double getBaseAcc() {
-        return baseAcc;
+    public double getMaxPower() {
+        return maxPower;
     }
 
-    public void setBaseAcc(double baseAcc) {
-        this.baseAcc = baseAcc;
+    public void setMaxPower(double maxPower) {
+        this.maxPower = maxPower;
     }
 
-    public double getInertiaAcc() {
-        return inertiaAcc;
+    public double getRemainingPower() {
+        return remainingPower;
     }
 
-    public void setInertiaAcc(double inertiaAcc) {
-        this.inertiaAcc = inertiaAcc;
+    public void setRemainingPower(double remainingPower) {
+        this.remainingPower = remainingPower;
     }
 
-    public double getCrit() {
-        return crit;
+    public double getEndurance() {
+        return endurance;
     }
 
-    public void setCrit(double crit) {
-        this.crit = crit;
+    public void setEndurance(double endurance) {
+        this.endurance = endurance;
     }
 
-    public double getLuck() {
-        return luck;
+    public double getSpirit() {
+        return spirit;
     }
 
-    public void setLuck(double luck) {
-        this.luck = luck;
+    public void setSpirit(double spirit) {
+        this.spirit = spirit;
     }
 
+    public double getRapidly() {
+        return rapidly;
+    }
+
+    public void setRapidly(double rapidly) {
+        this.rapidly = rapidly;
+    }
+
+    public double getRecoverSpeed() {
+        return recoverSpeed;
+    }
+
+    public void setRecoverSpeed(double recoverSpeed) {
+        this.recoverSpeed = recoverSpeed;
+    }
+
+    @JsonSerialize(using = CustomDateSerializer.class)
+    public Date getSystemTime() {
+        return systemTime;
+    }
+
+    @JsonDeserialize(using = CustomDateDeserializer.class)
+    public void setSystemTime(Date systemTime) {
+        this.systemTime = systemTime;
+    }
 }

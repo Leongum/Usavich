@@ -11,6 +11,8 @@ public enum ErrorMessageMapper {
 
     PARAM_ERROR,
 
+    LOGIN_CHECK_FAIL,
+
     USER_NOT_FOUND,
 
     USER_ALREADY_EXISTS,

@@ -2,6 +2,7 @@ package com.usavich.service.account.def;
 
 import com.usavich.entity.account.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public interface AccountService {
 
     UserInfo getAccountInfoByID(Integer userId);
 
-    List<UserFriend> getUserFriends(Integer userId);
+    List<UserFriend> getUserFriends(Integer userId, Date lastUpdateTime);
 
     UserInfo updateAccountInfo(UserInfo userInfo);
 

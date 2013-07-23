@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.usavich.entity.account.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,6 +47,11 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
+    public void updateAccountPowerInfo(Integer userId, double remainingPower) {
+        accountMapper.updateAccountPowerInfo(userId, remainingPower);
+    }
+
+    @Override
     public UserInfo createAccountInfo(UserBase userBase) {
         accountMapper.createBase(userBase);
         UserInfo accountInfo = new UserInfo(userBase);
@@ -57,8 +63,8 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public List<UserFriend> getUserFriends(Integer userId) {
-        return accountMapper.getUserFriends(userId);
+    public List<UserFriend> getUserFriends(Integer userId, Date lastUpdateTime) {
+        return accountMapper.getUserFriends(userId, lastUpdateTime);
     }
 
     @Override
@@ -75,6 +81,7 @@ public class AccountDAOImpl implements AccountDAO {
         userFriendInvited.setFriendId(userFriend.getUserId());
         userFriendInvited.setFriendStatus(FriendStatus.NeedAccept.ordinal());
         userFriendInvited.setAddTime(userFriend.getAddTime());
+        userFriendInvited.setUpdateTime(userFriend.getUpdateTime());
         accountMapper.createUserFriend(userFriendInvited);
     }
 
@@ -86,13 +93,13 @@ public class AccountDAOImpl implements AccountDAO {
         userFriendStatus.setFriendId(userFriend.getUserId());
         userFriendStatus.setFriendStatus(userFriend.getFriendStatus());
         userFriendStatus.setAddTime(userFriend.getAddTime());
+        userFriendStatus.setUpdateTime(userFriend.getUpdateTime());
         accountMapper.updateUserFriend(userFriendStatus);
     }
 
     @Override
     public UserLocation getUserLocation(Integer userId) {
-        UserLocation ul = accountMapper.getUserLocation(userId);
-        return  ul;
+        return accountMapper.getUserLocation(userId);
     }
 
     @Override

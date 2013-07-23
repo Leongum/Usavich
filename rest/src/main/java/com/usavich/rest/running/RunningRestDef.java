@@ -23,12 +23,15 @@ public interface RunningRestDef extends RestDef {
     @Path("/history/{" + PARAM_USER_ID + "}")
     List<RunningHistory> getRunningHistories(
             @PathParam(PARAM_USER_ID) String userId,
-            @QueryParam(PARAM_MISSION_ID) String missionId);
+            @QueryParam(PARAM_LAST_UPDATE_TIME) String lastUpdateTime,
+            @QueryParam(PARAM_PAGE_NUMBER) int pageNo,
+            @QueryParam(PARAM_PAGE_SIZE) int pageSize);
 
     @GET
     @Path("/ongoing/{" + PARAM_USER_ID + "}")
     List<OnGoingRunning> getOnGoingRunning(
-            @PathParam(PARAM_USER_ID) String userId);
+            @PathParam(PARAM_USER_ID) String userId,
+            @QueryParam(PARAM_LAST_UPDATE_TIME) String lastUpdateTime);
 
     @POST
     @Path("/history/{" + PARAM_USER_ID + "}")

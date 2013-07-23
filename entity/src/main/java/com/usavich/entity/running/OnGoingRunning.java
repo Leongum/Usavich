@@ -16,10 +16,13 @@ import java.util.Date;
  */
 public class OnGoingRunning {
     private Integer userId;
+    private Integer missionPackageId;
     private Integer missionId;
     private Integer missionTypeId;
     private Integer missionStatus;
     private Date startTime;
+    private Date endTime;
+    private Date commitTime;
 
     public Integer getUserId() {
         return userId;
@@ -27,6 +30,14 @@ public class OnGoingRunning {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Integer getMissionPackageId() {
+        return missionPackageId;
+    }
+
+    public void setMissionPackageId(Integer missionPackageId) {
+        this.missionPackageId = missionPackageId;
     }
 
     public Integer getMissionId() {
@@ -61,5 +72,25 @@ public class OnGoingRunning {
     @JsonDeserialize(using = CustomDateDeserializer.class)
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
+    }
+
+    @JsonSerialize(using = CustomDateSerializer.class)
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    @JsonDeserialize(using = CustomDateDeserializer.class)
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    @JsonSerialize(using = CustomDateSerializer.class)
+    public Date getCommitTime() {
+        return commitTime;
+    }
+
+    @JsonDeserialize(using = CustomDateDeserializer.class)
+    public void setCommitTime(Date commitTime) {
+        this.commitTime = commitTime;
     }
 }

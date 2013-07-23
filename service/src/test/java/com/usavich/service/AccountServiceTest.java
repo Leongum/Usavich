@@ -6,7 +6,6 @@ import junit.framework.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
-
 /**
  * Created with IntelliJ IDEA.
  * User: LeonLu
@@ -34,4 +33,5 @@ public class AccountServiceTest extends com.usavich.service.TestBase {
         UserInfo accountInfo = accountDAO.createAccountInfo(userBase);
         Assert.assertNotNull(accountInfo.getUserId());
     }
+
 }

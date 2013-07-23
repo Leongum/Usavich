@@ -28,10 +28,13 @@ public class Product {
     private double discount;
     private String image;
     private String details;
-    private double baseAcc;
-    private double crit;
-    private double inertia;
-    private double luck;
+    private double endurance;
+    private double spirit;
+    private double rapidly;
+    //private double baseAcc;
+    //private double crit;
+    //private double inertia;
+    //private double luck;
     private Date lastUpdateTime;
 
     public Integer getProductId() {
@@ -141,36 +144,28 @@ public class Product {
         this.details = details;
     }
 
-    public double getBaseAcc() {
-        return baseAcc;
+    public double getEndurance() {
+        return endurance;
     }
 
-    public void setBaseAcc(double baseAcc) {
-        this.baseAcc = baseAcc;
+    public void setEndurance(double endurance) {
+        this.endurance = endurance;
     }
 
-    public double getCrit() {
-        return crit;
+    public double getSpirit() {
+        return spirit;
     }
 
-    public void setCrit(double crit) {
-        this.crit = crit;
+    public void setSpirit(double spirit) {
+        this.spirit = spirit;
     }
 
-    public double getInertia() {
-        return inertia;
+    public double getRapidly() {
+        return rapidly;
     }
 
-    public void setInertia(double inertia) {
-        this.inertia = inertia;
-    }
-
-    public double getLuck() {
-        return luck;
-    }
-
-    public void setLuck(double luck) {
-        this.luck = luck;
+    public void setRapidly(double rapidly) {
+        this.rapidly = rapidly;
     }
 
     @JsonSerialize(using = CustomDateSerializer.class)

@@ -3,6 +3,7 @@ package com.usavich.db.account.dao.impl;
 import com.usavich.entity.account.*;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public interface AccountMapper {
 
     public UserInfo getAccountInfoByID(@Param("userId") Integer userId);
 
-    public List<UserFriend> getUserFriends(@Param("userId") Integer userId);
+    public List<UserFriend> getUserFriends(@Param("userId") Integer userId, @Param("lastUpdateTime") Date lastUpdateTime);
 
     public void createUserFriend(@Param("entity") UserFriend userFriend);
 
@@ -43,5 +44,7 @@ public interface AccountMapper {
 
     public UserInfo getAccountInfoByMail(@Param("userEmail") String userEmail);
 
-    public UserFriend getUserFriend(@Param("userId")Integer userId,@Param("friendId") Integer friendId);
+    public UserFriend getUserFriend(@Param("userId") Integer userId, @Param("friendId") Integer friendId);
+
+    public void updateAccountPowerInfo(@Param("userId") Integer userId, @Param("remainingPower") double remainingPower);
 }

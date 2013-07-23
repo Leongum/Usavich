@@ -33,5 +33,5 @@
 
     <!-- interceptors -->
     <bean id="headerInterceptor" class="com.usavich.rest.common.HeaderInterceptor"/>
-
+    <bean id="cleanupInterceptor" class="com.usavich.rest.common.CleanupInterceptor"/>
 </beans>

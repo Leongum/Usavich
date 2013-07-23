@@ -3,6 +3,7 @@ package com.usavich.db.account.dao.def;
 
 import com.usavich.entity.account.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,9 +25,11 @@ public interface AccountDAO {
 
     public void updateAccountBase(UserBase userBase);
 
+    public void updateAccountPowerInfo(Integer userId, double remainingPower);
+
     public UserInfo createAccountInfo(UserBase userBase);
 
-    public List<UserFriend> getUserFriends(Integer userId);
+    public List<UserFriend> getUserFriends(Integer userId, Date lastUpdateTime);
 
     public UserFriend getUserFriend(Integer userId, Integer friendId);
 

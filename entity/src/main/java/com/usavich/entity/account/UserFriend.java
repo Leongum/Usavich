@@ -24,6 +24,8 @@ public class UserFriend extends UserLocation{
 
     private Date addTime;
 
+    private Date updateTime;
+
     public Integer getUserId() {
         return userId;
     }
@@ -56,5 +58,15 @@ public class UserFriend extends UserLocation{
     @JsonDeserialize(using = CustomDateDeserializer.class)
     public void setAddTime(Date addTime) {
         this.addTime = addTime;
+    }
+
+    @JsonSerialize(using = CustomDateSerializer.class)
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    @JsonDeserialize(using = CustomDateDeserializer.class)
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

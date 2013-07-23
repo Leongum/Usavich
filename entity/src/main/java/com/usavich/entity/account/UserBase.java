@@ -1,5 +1,6 @@
 package com.usavich.entity.account;
 
+
 /**
  * Created with IntelliJ IDEA.
  * User: LeonLu
@@ -18,6 +19,19 @@ public class UserBase {
     private String nickName;
 
     private String sex;
+
+    private String uuid;
+
+    public UserBase initUserBase(UserInfo userInfo) {
+        UserBase userBase = new UserBase();
+        userBase.setUserId(userInfo.getUserId());
+        userBase.setUserEmail(userInfo.getUserEmail());
+        userBase.setNickName(userInfo.getNickName());
+        userBase.setPassword(userInfo.getPassword());
+        userBase.setUuid(userInfo.getUuid());
+        userBase.setSex(userInfo.getSex());
+        return  userBase;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -57,5 +71,13 @@ public class UserBase {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }

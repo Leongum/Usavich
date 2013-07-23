@@ -1,11 +1,14 @@
 package com.usavich.rest.account;
 
 import com.usavich.common.lib.CommonUtils;
+import com.usavich.common.lib.Universe;
 import com.usavich.entity.account.*;
+import com.usavich.rest.common.RestUtils;
 import com.usavich.service.account.def.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -22,7 +25,13 @@ public class AccountRestService implements AccountRestDef {
 
     @Override
     public UserInfo getAccountInfo(String userEmail, String password) {
-        return accountService.getAccountInfo(userEmail, password);
+        UserInfo userInfo = accountService.getAccountInfo(userEmail, password);
+        userInfo.setUuid(UUID.randomUUID().toString());
+        userInfo.setSystemTime(Universe.current().getSystemTime());
+        UserBase userBase = new UserBase();
+        userBase.initUserBase(userInfo);
+        accountService.updateAccountBase(userBase);
+        return  userInfo;
     }
 
     @Override
@@ -32,28 +41,34 @@ public class AccountRestService implements AccountRestDef {
 
     @Override
     public UserInfo createAccountInfo(UserBase userBase) {
-        return accountService.createAccountInfo(userBase);
+        userBase.setUuid(UUID.randomUUID().toString());
+        UserInfo userInfo = accountService.createAccountInfo(userBase);
+        userInfo.setSystemTime(Universe.current().getSystemTime());
+        return  userInfo;
     }
 
     @Override
     public void updateAccountBase(String userId, UserBase userBase) {
+        RestUtils.checkUserId(userId);
         userBase.setUserId(CommonUtils.parseIntegerToNull(userId));
         accountService.updateAccountBase(userBase);
     }
 
     @Override
-    public List<UserFriend> getUserFriends(String userId) {
-        return accountService.getUserFriends(CommonUtils.parseIntegerToNull(userId));
+    public List<UserFriend> getUserFriends(String userId,String lastUpdateTime) {
+        return accountService.getUserFriends(CommonUtils.parseIntegerToNull(userId),CommonUtils.parseDateDefaultToNull(lastUpdateTime));
     }
 
     @Override
     public void createUserFriendInvite(String userId, UserFriend userFriend) {
+        RestUtils.checkUserId(userId);
         userFriend.setUserId(CommonUtils.parseIntegerToNull(userId));
         accountService.createUserFriendInvite(userFriend);
     }
 
     @Override
     public void updateUserFriendStatus(String userId, UserFriend userFriend) {
+        RestUtils.checkUserId(userId);
         userFriend.setUserId(CommonUtils.parseIntegerToNull(userId));
         accountService.updateUserFriendStatus(userFriend);
     }
@@ -65,6 +80,7 @@ public class AccountRestService implements AccountRestDef {
 
     @Override
     public void updateUserLocation(String userId, UserLocation userLocation) {
+        RestUtils.checkUserId(userId);
         userLocation.setUserId(CommonUtils.parseIntegerToNull(userId));
         accountService.updateUserLocation(userLocation);
     }

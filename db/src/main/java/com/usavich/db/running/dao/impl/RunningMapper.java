@@ -4,6 +4,7 @@ import com.usavich.entity.running.OnGoingRunning;
 import com.usavich.entity.running.RunningHistory;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,7 +20,10 @@ public interface RunningMapper {
 
     public void createRunningHistory(@Param("entity") RunningHistory runningHistory);
 
-    public List<OnGoingRunning> getOnGoingRunning(@Param("userId") Integer userId);
+    public List<OnGoingRunning> getOnGoingRunning(@Param("userId") Integer userId, @Param("lastUpdateTime") Date lastUpdateTime);
 
     public void createOnGoingRunning(@Param("entity") OnGoingRunning goingRunning);
+
+    public List<RunningHistory> getRunningHistoriesByDate(@Param("userId") Integer userId, @Param("lastUpdateTime") Date lastUpdateTime, @Param("startSize") int startSize, @Param("pageSize") int pageSize);
+
 }

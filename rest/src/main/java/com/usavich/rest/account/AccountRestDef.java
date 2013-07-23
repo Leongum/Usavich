@@ -43,7 +43,8 @@ public interface AccountRestDef extends RestDef {
     @GET
     @Path("/friends/{" + PARAM_USER_ID + "}")
     List<UserFriend> getUserFriends(
-            @PathParam(PARAM_USER_ID) String userId);
+            @PathParam(PARAM_USER_ID) String userId,
+            @QueryParam(PARAM_LAST_UPDATE_TIME) String lastUpdateTime);
 
 
     @POST

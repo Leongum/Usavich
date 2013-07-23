@@ -18,6 +18,11 @@ public interface RestDef {
     static final String PARAM_PACKAGE_ID = "packageId";
     static final String PARAM_PRODUCT_ID = "productId";
 
+    static final String PARAM_PAGE_NUMBER = "pageNo";
+    static final String PARAM_PAGE_SIZE = "pageSize";
 
     static final String HEADER_PARAM_KEY = "X-CLIENT-KEY";
+
+    static final int defaultPageNo=1;
+    static final int defaultPageSize=100;
 }

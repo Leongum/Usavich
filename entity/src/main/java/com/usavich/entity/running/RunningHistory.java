@@ -32,6 +32,8 @@ public class RunningHistory {
     private double scores;
     private double experience;
     private String comment;
+    private Date commitTime;
+    private String uuid;
 
     public Integer getUserId() {
         return userId;
@@ -165,5 +167,23 @@ public class RunningHistory {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    @JsonSerialize(using = CustomDateSerializer.class)
+    public Date getCommitTime() {
+        return commitTime;
+    }
+
+    @JsonDeserialize(using = CustomDateDeserializer.class)
+    public void setCommitTime(Date commitTime) {
+        this.commitTime = commitTime;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }

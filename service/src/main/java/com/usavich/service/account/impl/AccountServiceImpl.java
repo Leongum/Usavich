@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.usavich.entity.account.*;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -56,9 +57,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<UserFriend> getUserFriends(Integer userId) {
+    public List<UserFriend> getUserFriends(Integer userId, Date lastUpdateTime) {
         checkUserExisting(userId);
-        return accountDAO.getUserFriends(userId);
+        return accountDAO.getUserFriends(userId,lastUpdateTime);
     }
 
     @Override

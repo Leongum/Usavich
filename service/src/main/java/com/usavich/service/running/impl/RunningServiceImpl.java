@@ -7,6 +7,7 @@ import com.usavich.service.running.def.RunningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,6 +28,11 @@ public class RunningServiceImpl implements RunningService {
     }
 
     @Override
+    public List<RunningHistory> getRunningHistoriesByDate(Integer userId, Date lastUpdateTime, int startSize, int pageSize) {
+        return runningDAO.getRunningHistoriesByDate(userId, lastUpdateTime, startSize, pageSize);
+    }
+
+    @Override
     @Transactional
     public void createRunningHistory(List<RunningHistory> runningHistoryList) {
         for (RunningHistory runningHistory : runningHistoryList) {
@@ -36,8 +42,8 @@ public class RunningServiceImpl implements RunningService {
     }
 
     @Override
-    public List<OnGoingRunning> getOnGoingRunning(Integer userId) {
-        return runningDAO.getOnGoingRunning(userId);
+    public List<OnGoingRunning> getOnGoingRunning(Integer userId, Date lastUpdateTime) {
+        return runningDAO.getOnGoingRunning(userId, lastUpdateTime);
     }
 
     @Override
