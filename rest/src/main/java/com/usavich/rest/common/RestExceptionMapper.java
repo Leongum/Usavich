@@ -48,7 +48,7 @@ public class RestExceptionMapper implements ExceptionMapper {
     private static LogHelper logger = new LogHelper(RestExceptionMapper.class);
 
     public Response toResponse(Throwable ex) {
-        Response.ResponseBuilder rb = Response.status(Response.Status.INTERNAL_SERVER_ERROR);
+        Response.ResponseBuilder rb = Response.status(Response.Status.NOT_ACCEPTABLE);
         InvalidRequestMessage entity = new InvalidRequestMessage(ErrorMessageMapper.PARAM_ERROR.toString());
         if (ex instanceof ServerRequestException) {
             entity = new InvalidRequestMessage(ex.getMessage());
