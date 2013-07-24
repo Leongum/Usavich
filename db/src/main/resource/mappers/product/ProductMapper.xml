@@ -16,10 +16,6 @@
         <result column="DISCOUNT" property="discount"/>
         <result column="IMAGE" property="image"/>
         <result column="DETAILS" property="details"/>
-        <!--<result column="BASE_ACC" property="baseAcc"/>-->
-        <!--<result column="CRIT" property="crit"/>-->
-        <!--<result column="INERTIA" property="inertia"/>-->
-        <!--<result column="LUCK" property="luck"/>-->
         <result column="ENDURANCE" property="endurance"/>
         <result column="SPIRIT" property="spirit"/>
         <result column="RAPIDLY" property="rapidly"/>
@@ -48,10 +44,6 @@
         DISCOUNT,
         IMAGE,
         DETAILS,
-        -- BASE_ACC,
-        -- CRIT,
-        -- INERTIA,
-        -- LUCK,
         ENDURANCE,
         SPIRIT,
         RAPIDLY,

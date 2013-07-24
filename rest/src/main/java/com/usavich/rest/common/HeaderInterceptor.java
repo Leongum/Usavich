@@ -26,38 +26,20 @@ import java.util.Map;
 public class HeaderInterceptor extends AbstractPhaseInterceptor<Message> {
     private static final int UNIQUE = 0;
 
-    @Autowired
-    private AccountService accountService;
-
     public HeaderInterceptor() {
         super(Phase.READ);
     }
 
     @Override
     public void handleMessage(Message message) throws Fault {
-
         Universe.clear();
-
         Map<String, List<String>> headers = CastUtils.cast((Map) message.get(Message.PROTOCOL_HEADERS));
         if (headers != null) {
             List<String> keyList = headers.get(RestDef.HEADER_PARAM_KEY);
             if (keyList != null && keyList.size() > 0) {
                 String key = keyList.get(UNIQUE);
-                Universe.current().setUuid(key.split("|")[0]);
-                Universe.current().setUserId(CommonUtils.parseIntegerToNull(key.split("|")[1]));
-            }
-        }
-        checkUserLoginStatus();
-    }
-
-    private void checkUserLoginStatus() {
-        if (Universe.current().getUserId() > 0) {
-            UserInfo userInfo = accountService.getAccountInfoByID(Universe.current().getUserId());
-            if (userInfo == null || userInfo.getUserId() != Universe.current().getUserId()) {
-                throw new ServerRequestException(ErrorMessageMapper.LOGIN_CHECK_FAIL.toString());
-            }
-            if (userInfo.getUuid().equalsIgnoreCase(Universe.current().getUuid())) {
-                throw new ServerRequestException(ErrorMessageMapper.LOGIN_CHECK_FAIL.toString());
+                Universe.current().setUuid(key.split("#")[0]);
+                Universe.current().setUserId(CommonUtils.parseIntegerToNull(key.split("#")[1]));
             }
         }
     }

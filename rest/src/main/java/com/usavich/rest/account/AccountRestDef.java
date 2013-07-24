@@ -29,7 +29,8 @@ public interface AccountRestDef extends RestDef {
     @GET
     @Path("/{" + PARAM_USER_ID + "}")
     UserInfo getAccountInfoByID(
-            @PathParam(PARAM_USER_ID) String userId);
+            @PathParam(PARAM_USER_ID) String userId,
+            @QueryParam(PARAM_CHECK_USER_UUID) String checkUuid);
 
     @POST
     @Path("/")

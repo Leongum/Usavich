@@ -1,7 +1,7 @@
 package com.usavich.service.account.impl;
 
 import com.usavich.common.exception.*;
-import com.usavich.common.lib.CommonUtils;
+import com.usavich.common.lib.Universe;
 import com.usavich.db.account.dao.def.AccountDAO;
 import com.usavich.service.account.def.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +23,21 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private AccountDAO accountDAO;
+
+    @Override
+    public void checkUserLoginStatus(Integer userId) {
+        if (userId > 0) {
+            UserInfo userInfo = accountDAO.getAccountInfoByID(userId);
+            if (userInfo == null || userInfo.getUserId() != Universe.current().getUserId()) {
+                throw new ServerRequestException(ErrorMessageMapper.LOGIN_CHECK_FAIL.toString());
+            }
+            if (!userInfo.getUuid().equalsIgnoreCase(Universe.current().getUuid())) {
+                throw new ServerRequestException(ErrorMessageMapper.LOGIN_CHECK_FAIL.toString());
+            }
+        } else {
+            throw new ServerRequestException(ErrorMessageMapper.LOGIN_CHECK_FAIL.toString());
+        }
+    }
 
     private UserInfo checkUserExisting(Integer userId) {
         UserInfo userInfo = accountDAO.getAccountInfoByID(userId);
@@ -59,7 +74,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<UserFriend> getUserFriends(Integer userId, Date lastUpdateTime) {
         checkUserExisting(userId);
-        return accountDAO.getUserFriends(userId,lastUpdateTime);
+        return accountDAO.getUserFriends(userId, lastUpdateTime);
     }
 
     @Override

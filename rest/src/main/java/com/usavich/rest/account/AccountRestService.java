@@ -3,7 +3,6 @@ package com.usavich.rest.account;
 import com.usavich.common.lib.CommonUtils;
 import com.usavich.common.lib.Universe;
 import com.usavich.entity.account.*;
-import com.usavich.rest.common.RestUtils;
 import com.usavich.service.account.def.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,7 +34,10 @@ public class AccountRestService implements AccountRestDef {
     }
 
     @Override
-    public UserInfo getAccountInfoByID(String userId) {
+    public UserInfo getAccountInfoByID(String userId, String checkUuid) {
+        if (checkUuid != null && checkUuid.equalsIgnoreCase("true")) {
+            accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
+        }
         return accountService.getAccountInfoByID(CommonUtils.parseIntegerToNull(userId));
     }
 
@@ -49,7 +51,7 @@ public class AccountRestService implements AccountRestDef {
 
     @Override
     public void updateAccountBase(String userId, UserBase userBase) {
-        RestUtils.checkUserId(userId);
+        accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
         userBase.setUserId(CommonUtils.parseIntegerToNull(userId));
         accountService.updateAccountBase(userBase);
     }
@@ -61,14 +63,14 @@ public class AccountRestService implements AccountRestDef {
 
     @Override
     public void createUserFriendInvite(String userId, UserFriend userFriend) {
-        RestUtils.checkUserId(userId);
+        accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
         userFriend.setUserId(CommonUtils.parseIntegerToNull(userId));
         accountService.createUserFriendInvite(userFriend);
     }
 
     @Override
     public void updateUserFriendStatus(String userId, UserFriend userFriend) {
-        RestUtils.checkUserId(userId);
+        accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
         userFriend.setUserId(CommonUtils.parseIntegerToNull(userId));
         accountService.updateUserFriendStatus(userFriend);
     }
@@ -80,7 +82,7 @@ public class AccountRestService implements AccountRestDef {
 
     @Override
     public void updateUserLocation(String userId, UserLocation userLocation) {
-        RestUtils.checkUserId(userId);
+        accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
         userLocation.setUserId(CommonUtils.parseIntegerToNull(userId));
         accountService.updateUserLocation(userLocation);
     }

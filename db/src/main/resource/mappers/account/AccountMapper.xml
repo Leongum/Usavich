@@ -65,10 +65,6 @@
         UD.SPIRIT,
         UD.RAPIDLY,
         UD.RECOVER_SPEED
-        -- UD.BASE_ACC,
-        -- UD.INERTIA_ACC,
-        -- UD.CRIT,
-        -- UD.LUCK
     </sql>
 
     <sql id="userFriendInfoTable">
@@ -157,10 +153,6 @@
           SPIRIT,
           RAPIDLY,
           RECOVER_SPEED
-          -- BASE_ACC,
-          -- CRIT,
-          -- INERTIA_ACC,
-          -- LUCK
         )
         VALUES
         (
@@ -174,10 +166,6 @@
           #{detailEntity.spirit},
           #{detailEntity.rapidly},
           #{detailEntity.recoverSpeed}
-          -- #{detailEntity.baseAcc},
-          -- #{detailEntity.crit},
-          -- #{detailEntity.inertiaAcc},
-          -- #{detailEntity.luck}
         );
     </insert>
 
@@ -249,10 +237,6 @@
             SPIRIT = #{detailEntity.spirit},
             RAPIDLY = #{detailEntity.rapidly},
             RECOVER_SPEED = #{detailEntity.recoverSpeed},
-            -- BASE_ACC = #{entity.baseAcc},
-            -- CRIT = #{entity.crit},
-            -- INERTIA_ACC = #{entity.inertiaAcc},
-            -- LUCK = #{entity.luck}
         WHERE USER_ID = #{entity.userId}
     </update>
 

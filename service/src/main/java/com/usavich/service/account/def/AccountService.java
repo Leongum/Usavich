@@ -18,6 +18,8 @@ public interface AccountService {
 
     UserInfo createAccountInfo(UserBase userBase);
 
+    void checkUserLoginStatus(Integer userId);
+
     UserInfo getAccountInfoByID(Integer userId);
 
     List<UserFriend> getUserFriends(Integer userId, Date lastUpdateTime);

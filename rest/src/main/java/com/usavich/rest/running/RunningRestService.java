@@ -3,7 +3,7 @@ package com.usavich.rest.running;
 import com.usavich.common.lib.CommonUtils;
 import com.usavich.entity.running.OnGoingRunning;
 import com.usavich.entity.running.RunningHistory;
-import com.usavich.rest.common.RestUtils;
+import com.usavich.service.account.def.AccountService;
 import com.usavich.service.running.def.RunningService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,6 +20,9 @@ public class RunningRestService implements RunningRestDef {
 
     @Autowired
     private RunningService runningService;
+
+    @Autowired
+    private AccountService accountService;
 
     @Override
     public List<RunningHistory> getRunningHistories(String userId, String lastUpdateTime, int pageNo, int pageSize) {
@@ -40,7 +43,7 @@ public class RunningRestService implements RunningRestDef {
 
     @Override
     public void createRunningHistory(String userId, List<RunningHistory> runningHistoryList) {
-        RestUtils.checkUserId(userId);
+        accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
         for (RunningHistory runningHistory : runningHistoryList) {
             runningHistory.setUserId(CommonUtils.parseIntegerToNull(userId));
         }
@@ -49,7 +52,7 @@ public class RunningRestService implements RunningRestDef {
 
     @Override
     public void createOnGoingRunning(String userId, List<OnGoingRunning> onGoingRunningList) {
-        RestUtils.checkUserId(userId);
+        accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
         for (OnGoingRunning onGoingRunning : onGoingRunningList) {
             onGoingRunning.setUserId(CommonUtils.parseIntegerToNull(userId));
         }
