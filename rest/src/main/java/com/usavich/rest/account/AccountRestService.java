@@ -38,7 +38,9 @@ public class AccountRestService implements AccountRestDef {
         if (checkUuid != null && checkUuid.equalsIgnoreCase("true")) {
             accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
         }
-        return accountService.getAccountInfoByID(CommonUtils.parseIntegerToNull(userId));
+        UserInfo userInfo =  accountService.getAccountInfoByID(CommonUtils.parseIntegerToNull(userId));
+        userInfo.setSystemTime(Universe.current().getSystemTime());
+        return  userInfo;
     }
 
     @Override
