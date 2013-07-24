@@ -4,6 +4,7 @@
 <mapper namespace="com.usavich.db.running.dao.impl.RunningMapper">
     <resultMap id="runningHistoryInfo" type="com.usavich.entity.running.RunningHistory">
         <id column="USER_ID" property="userId"/>
+        <result column="RUN_UUID" property="runUuid"/>
         <result column="MISSION_ID" property="missionId"/>
         <result column="MISSION_TYPE_ID" property="missionTypeId"/>
         <result column="MISSION_ROUTE" property="missionRoute"/>
@@ -25,6 +26,7 @@
 
     <resultMap id="runningOnGoingInfo" type="com.usavich.entity.running.OnGoingRunning">
         <id column="USER_ID" property="userId"/>
+        <result column="RUN_UUID" property="runUuid"/>
         <result column="MISSION_PACKAGE_ID" property="missionPackageId" />
         <result column="MISSION_ID" property="missionId"/>
         <result column="MISSION_TYPE_ID" property="missionTypeId"/>
@@ -36,6 +38,7 @@
 
     <sql id="runningHistoryTable">
         USER_ID,
+        RUN_UUID,
         MISSION_ID,
         MISSION_TYPE_ID,
         MISSION_ROUTE,
@@ -57,6 +60,7 @@
 
     <sql id="runningOnGoingTable">
         USER_ID,
+        RUN_UUID,
         MISSION_PACKAGE_ID,
         MISSION_ID,
         MISSION_TYPE_ID,
@@ -90,6 +94,7 @@
         INSERT INTO USER_RUNNING_HISTORY
         (
             USER_ID,
+            RUN_UUID,
             MISSION_ID,
             MISSION_TYPE_ID,
             MISSION_ROUTE,
@@ -111,6 +116,7 @@
         VALUES
         (
             #{entity.userId},
+            #{entity.runUuid},
             #{entity.missionId},
             #{entity.missionTypeId},
             #{entity.missionRoute},
@@ -143,6 +149,7 @@
         INSERT INTO USER_RUNNING
         (
             USER_ID,
+            RUN_UUID,
             MISSION_PACKAGE_ID,
             MISSION_ID,
             MISSION_TYPE_ID,
@@ -154,6 +161,7 @@
         VALUES
         (
             #{entity.userId},
+            #{entity.runUuid},
             #{entity.missionPackageId},
             #{entity.missionId},
             #{entity.missionTypeId},

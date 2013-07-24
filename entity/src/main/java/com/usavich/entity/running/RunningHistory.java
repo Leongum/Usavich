@@ -17,6 +17,7 @@ import java.util.Date;
  */
 public class RunningHistory {
     private Integer userId;
+    private String runUuid;
     private Integer missionId;
     private Integer missionTypeId;
     private String missionRoute;
@@ -41,6 +42,14 @@ public class RunningHistory {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getRunUuid() {
+        return runUuid;
+    }
+
+    public void setRunUuid(String runUuid) {
+        this.runUuid = runUuid;
     }
 
     public Integer getMissionId() {

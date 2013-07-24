@@ -16,6 +16,7 @@ import java.util.Date;
  */
 public class OnGoingRunning {
     private Integer userId;
+    private String runUuid;
     private Integer missionPackageId;
     private Integer missionId;
     private Integer missionTypeId;
@@ -30,6 +31,14 @@ public class OnGoingRunning {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getRunUuid() {
+        return runUuid;
+    }
+
+    public void setRunUuid(String runUuid) {
+        this.runUuid = runUuid;
     }
 
     public Integer getMissionPackageId() {
