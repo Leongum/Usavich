@@ -16,8 +16,6 @@ public interface ProductDAO {
 
     public List<Product> getProductById(Integer productId);
 
-    public List<Product> getProductListByMinId(Integer minProductId);
-
     public List<Product> getProductListByTime(Date lastUpdateTime);
 
     public List<ProductHistory> getProductHistoryList(Integer userId);

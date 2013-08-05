@@ -1,7 +1,6 @@
 package com.usavich.rest.mission;
 
 import com.usavich.entity.mission.*;
-import com.usavich.entity.mission.rest.*;
 import com.usavich.rest.common.RestDef;
 
 import javax.ws.rs.*;
@@ -24,19 +23,6 @@ public interface MissionRestDef extends RestDef {
     @Path("/mission")
     List<Mission> getMissions(
             @QueryParam(PARAM_MISSION_ID) String missionId,
-            @QueryParam(PARAM_MIN_ID) String minId,
-            @QueryParam(PARAM_LAST_UPDATE_TIME) String lastUpdateTime);
-
-    @GET
-    @Path("/package")
-    List<MissionPackageRest> getMissionPackages(
-            @QueryParam(PARAM_PACKAGE_ID) String packageId,
-            @QueryParam(PARAM_MIN_ID) String minId,
-            @QueryParam(PARAM_LAST_UPDATE_TIME) String lastUpdateTime);
-
-    @GET
-    @Path("/place")
-    List<MissionPlacePackage> getMissionPlacePackages(
-            @QueryParam(PARAM_PACKAGE_ID) String packageId);
-
+            @QueryParam(PARAM_LAST_UPDATE_TIME) String lastUpdateTime,
+            @HeaderParam(HEADER_PARAM_MISSION_TYPE) String missionType);
 }

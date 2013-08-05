@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface ProductService {
 
-    List<Product> getProducts(Integer productId, Integer minId, Date lastUpdateTime);
+    List<Product> getProducts(Integer productId,Date lastUpdateTime);
 
     void createProductHistory(ProductHistory productHistory);
 

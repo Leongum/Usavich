@@ -14,17 +14,11 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface MissionMapper {
-    public List<Mission> getMissionById(@Param("missionId") Integer missionId);
-
-    public List<Mission> getMissionListByMinId(@Param("minMissionId") Integer minMissionId);
-
-    public List<Mission> getMissionListByTime(@Param("lastUpdateTime") Date lastUpdateTime);
-
-    public List<MissionPackage> getMissionPackageListById(@Param("missionPackageId") Integer missionPackageId);
-
-    public List<MissionPackage> getMissionPackageListByMinId(@Param("minMissionPackageId") Integer minMissionPackageId);
-
-    public List<MissionPackage> getMissionPackageListByTime(@Param("lastUpdateTime") Date lastUpdateTime);
 
     public List<MissionPlacePackage> getMissionPlacePackage(@Param("missionPlacePackageId") Integer missionPlacePackageId);
+
+    public List<Mission> getMissions(@Param("missionId") Integer missionId, @Param("lastUpdateTime") Date lastUpdateTime, @Param("missionTypeId") Integer missionTypeId);
+
+    public List<MissionChallenge> getMissionChallenges(@Param("challengeId") Integer challengeId);
+
 }

@@ -39,16 +39,12 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public List<Product> getProducts(Integer productId, Integer minId, Date lastUpdateTime) {
+    public List<Product> getProducts(Integer productId, Date lastUpdateTime) {
         List<Product> productList = new ArrayList<Product>();
         if (productId != null) {
             productList = productDAO.getProductById(productId);
-        } else if (minId != null) {
-            productList = productDAO.getProductListByMinId(minId);
         } else if (lastUpdateTime != null) {
             productList = productDAO.getProductListByTime(lastUpdateTime);
-        }else{
-            productList = productDAO.getProductListByMinId(-1);
         }
 
         return productList;

@@ -9,7 +9,11 @@ package com.usavich.entity.enums;
  */
 public enum  MissionType {
 
+    Challenge,
+
+    Recommand,
+
     Cycle,
 
-    Recommand
+    SubCycle,
 }

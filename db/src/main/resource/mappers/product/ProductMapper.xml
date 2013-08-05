@@ -65,13 +65,6 @@
         WHERE PRODUCT_ID = #{productId}
     </select>
 
-    <select id="getProductListByMinId" resultMap="productInfo">
-        SELECT
-        <include refid="productTable"/>
-        FROM PRODUCTS
-        WHERE PRODUCT_ID > #{minProductId}
-    </select>
-
     <select id="getProductListByTime" resultMap="productInfo">
         SELECT
         <include refid="productTable"/>

@@ -17,8 +17,6 @@ import java.util.List;
 public interface ProductMapper {
     public List<Product> getProductById(@Param("productId") Integer productId);
 
-    public List<Product> getProductListByMinId(@Param("minProductId") Integer minProductId);
-
     public List<Product> getProductListByTime(@Param("lastUpdateTime") Date lastUpdateTime);
 
     public List<ProductHistory> getProductHistoryList(@Param("userId") Integer userId);

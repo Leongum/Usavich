@@ -26,11 +26,6 @@ public class ProductADOImpl implements ProductDAO{
     }
 
     @Override
-    public List<Product> getProductListByMinId(Integer minProductId) {
-        return productMapper.getProductListByMinId(minProductId);
-    }
-
-    @Override
     public List<Product> getProductListByTime(Date lastUpdateTime) {
         return productMapper.getProductListByTime(lastUpdateTime);
     }

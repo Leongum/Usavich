@@ -19,9 +19,8 @@ public class ProductRestService implements ProductRestDef {
     private ProductService productService;
 
     @Override
-    public List<Product> getProducts(String productId, String minId, String lastUpdateTime) {
+    public List<Product> getProducts(String productId, String lastUpdateTime) {
         return productService.getProducts(CommonUtils.parseIntegerToNull(productId),
-                CommonUtils.parseIntegerToNull(minId),
                 CommonUtils.parseDateDefaultToNull(lastUpdateTime));
     }
 
@@ -32,7 +31,7 @@ public class ProductRestService implements ProductRestDef {
     }
 
     @Override
-    public void createAccountInfo(String userId,ProductHistory productHistory) {
+    public void createProductHistory(String userId,ProductHistory productHistory) {
         productHistory.setUserId(CommonUtils.parseIntegerToNull(userId));
         productService.createProductHistory(productHistory);
     }

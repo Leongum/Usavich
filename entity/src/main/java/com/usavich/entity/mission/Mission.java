@@ -33,9 +33,12 @@ public class Mission {
     private String missionTo;
     private Integer missionPlacePackageId;
     private List<MissionPlacePackage> missionPlacePackages;
+    private Integer challengeId;
+    private List<MissionChallenge> missionChallenges;
     private BigInteger missionSteps;
     private double missionSpeed;
     private Date lastUpdateTime;
+    private String subMissionList;
 
     public Integer getMissionId() {
         return missionId;
@@ -173,6 +176,22 @@ public class Mission {
         this.missionPlacePackages = missionPlacePackages;
     }
 
+    public Integer getChallengeId() {
+        return challengeId;
+    }
+
+    public void setChallengeId(Integer challengeId) {
+        this.challengeId = challengeId;
+    }
+
+    public List<MissionChallenge> getMissionChallenges() {
+        return missionChallenges;
+    }
+
+    public void setMissionChallenges(List<MissionChallenge> missionChallenges) {
+        this.missionChallenges = missionChallenges;
+    }
+
     @JsonSerialize(using = CustomDateSerializer.class)
     public Date getLastUpdateTime() {
         return lastUpdateTime;
@@ -181,5 +200,13 @@ public class Mission {
     @JsonDeserialize(using = CustomDateDeserializer.class)
     public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
+    }
+
+    public String getSubMissionList() {
+        return subMissionList;
+    }
+
+    public void setSubMissionList(String subMissionList) {
+        this.subMissionList = subMissionList;
     }
 }

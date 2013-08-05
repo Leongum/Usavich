@@ -14,9 +14,9 @@ import java.util.List;
  */
 public interface MissionService {
 
-    List<Mission> getMissions(Integer missionId, Integer minId, Date lastUpdateTime);
-
-    List<MissionPackage> getMissionPackages(Integer packageId, Integer minId, Date lastUpdateTime);
+    List<Mission> getMissions(Integer missionId, Date lastUpdateTime, Integer missionTypeId);
 
     List<MissionPlacePackage> getMissionPlacePackage(Integer missionPlacePackageId);
+
+    List<MissionChallenge> getMissionChallenge(Integer challengeId);
 }

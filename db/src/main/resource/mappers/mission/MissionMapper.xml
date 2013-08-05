@@ -20,16 +20,8 @@
         <result column="MISSION_STEPS" property="missionSteps"/>
         <result column="MISSION_SPEED" property="missionSpeed"/>
         <result column="LAST_UPDATE_TIME" property="lastUpdateTime"/>
-    </resultMap>
-
-    <resultMap id="missionPackageInfo" type="com.usavich.entity.mission.MissionPackage">
-        <id column="MISSION_PACKAGE_ID" property="missionPackageId"/>
-        <result column="MISSION_PACKAGE_NAME" property="missionPackageName"/>
-        <result column="MISSION_PACKAGE_DESCRIPTION" property="missionPackageDescription"/>
-        <result column="MISSION_ID" property="missionId"/>
-        <result column="MISSION_TYPE_ID" property="missionTypeId"/>
-        <result column="SEQUENCE" property="sequence"/>
-        <result column="LAST_UPDATE_TIME" property="lastUpdateTime"/>
+        <result column="CHALLENGE_ID" property="challengeId"/>
+        <result column="SUB_MISSION_LIST" property="subMissionList"/>
     </resultMap>
 
     <resultMap id="missionPlacePackageInfo" type="com.usavich.entity.mission.MissionPlacePackage">
@@ -37,6 +29,14 @@
         <result column="PLACE_NAME" property="placeName"/>
         <result column="PLACE_POINT" property="placePoint"/>
         <result column="SEQUENCE" property="sequence"/>
+    </resultMap>
+
+    <resultMap id="missionChallengeInfo" type="com.usavich.entity.mission.MissionChallenge">
+        <id column="CHALLENGE_ID" property="challengeId"/>
+        <result column="GRADE" property="grade"/>
+        <result column="TIME" property="time"/>
+        <result column="DISTANCE" property="distance"/>
+        <result column="NOTE" property="note"/>
     </resultMap>
 
     <sql id="missionTable">
@@ -56,17 +56,9 @@
         MISSION_PLACE_PACKAGE,
         MISSION_STEPS,
         MISSION_SPEED,
-        LAST_UPDATE_TIME
-    </sql>
-
-    <sql id="missionPackageTable">
-        MISSION_PACKAGE_ID,
-        MISSION_PACKAGE_NAME,
-        MISSION_PACKAGE_DESCRIPTION,
-        MISSION_ID,
-        MISSION_TYPE_ID,
-        SEQUENCE,
-        LAST_UPDATE_TIME
+        LAST_UPDATE_TIME,
+        CHALLENGE_ID,
+        SUB_MISSION_LIST
     </sql>
 
     <sql id="missionPlacePackageTable">
@@ -76,49 +68,28 @@
         SEQUENCE
     </sql>
 
-    <select id="getMissionById" resultMap="missionInfo">
+    <sql id="missionChallengeTable">
+        CHALLENGE_ID,
+        GRADE,
+        TIME,
+        DISTANCE,
+        NOTE
+    </sql>
+
+    <select id="getMissions" resultMap="missionInfo">
         SELECT
         <include refid="missionTable"/>
         FROM MISSION
-        WHERE MISSION_ID = #{missionId}
-    </select>
-
-    <select id="getMissionListByMinId" resultMap="missionInfo">
-        SELECT
-        <include refid="missionTable"/>
-        FROM MISSION
-        WHERE MISSION_ID > #{minMissionId}
-    </select>
-
-    <select id="getMissionListByTime" resultMap="missionInfo">
-        SELECT
-        <include refid="missionTable"/>
-        FROM MISSION
-        WHERE LAST_UPDATE_TIME > #{lastUpdateTime}
-    </select>
-
-    <select id="getMissionPackageListById" resultMap="missionPackageInfo">
-        SELECT
-        <include refid="missionPackageTable"/>
-        FROM MISSION_PACKAGE
-        WHERE MISSION_PACKAGE_ID = #{missionPackageId}
-        ORDER BY SEQUENCE ASC
-    </select>
-
-    <select id="getMissionPackageListByMinId" resultMap="missionPackageInfo">
-        SELECT
-        <include refid="missionPackageTable"/>
-        FROM MISSION_PACKAGE
-        WHERE MISSION_PACKAGE_ID > #{minMissionPackageId}
-        ORDER BY MISSION_PACKAGE_ID ASC, SEQUENCE ASC
-    </select>
-
-    <select id="getMissionPackageListByTime" resultMap="missionPackageInfo">
-        SELECT
-        <include refid="missionPackageTable"/>
-        FROM MISSION_PACKAGE
-        WHERE LAST_UPDATE_TIME > #{lastUpdateTime}
-        ORDER BY MISSION_PACKAGE_ID ASC, SEQUENCE ASC
+        WHERE 1 = 1
+        <if test="missionId != null"><![CDATA[
+        AND MISSION_ID = #{missionId}
+        ]]></if>
+        <if test="lastUpdateTime != null"><![CDATA[
+        AND LAST_UPDATE_TIME > #{lastUpdateTime}
+        ]]></if>
+        <if test="missionTypeId != -1"><![CDATA[
+        AND MISSION_TYPE_ID = #{missionTypeId}
+        ]]></if>
     </select>
 
     <select id="getMissionPlacePackage" resultMap="missionPlacePackageInfo">
@@ -126,6 +97,14 @@
         <include refid="missionPlacePackageTable"/>
         FROM MISSION_PLACE_PACKAGE
         WHERE PACKAGE_ID = #{missionPlacePackageId}
+        ORDER BY SEQUENCE ASC
+    </select>
+
+    <select id="getMissionChallenge" resultMap="missionChallengeInfo">
+        SELECT
+        <include refid="missionChallengeTable"/>
+        FROM MISSION_CHALLENGE
+        WHERE CHALLENGE_ID = #{challengeId}
         ORDER BY SEQUENCE ASC
     </select>
 

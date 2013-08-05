@@ -23,7 +23,6 @@ public interface ProductRestDef extends RestDef{
     @Path("/product")
     List<Product> getProducts(
             @QueryParam(PARAM_PRODUCT_ID) String productId,
-            @QueryParam(PARAM_MIN_ID) String minId,
             @QueryParam(PARAM_LAST_UPDATE_TIME) String lastUpdateTime);
 
     @GET
@@ -34,6 +33,6 @@ public interface ProductRestDef extends RestDef{
 
     @POST
     @Path("/history/{" + PARAM_USER_ID + "}")
-    void createAccountInfo( @PathParam(PARAM_USER_ID) String userId,
+    void createProductHistory( @PathParam(PARAM_USER_ID) String userId,
                             ProductHistory productHistory);
 }

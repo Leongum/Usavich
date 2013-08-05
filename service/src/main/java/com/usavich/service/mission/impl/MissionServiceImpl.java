@@ -1,8 +1,7 @@
 package com.usavich.service.mission.impl;
 
-import com.usavich.common.exception.ErrorMessageMapper;
-import com.usavich.common.exception.ServerRequestException;
 import com.usavich.db.mission.dao.def.MissionDAO;
+import com.usavich.entity.enums.MissionType;
 import com.usavich.entity.mission.*;
 import com.usavich.service.mission.def.MissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,23 +22,19 @@ public class MissionServiceImpl implements MissionService {
     @Autowired
     private MissionDAO missionDAO;
 
-    @Override
-    public List<Mission> getMissions(Integer missionId, Integer minId, Date lastUpdateTime) {
+    public List<Mission> getMissions(Integer missionId, Date lastUpdateTime, Integer missionTypeId) {
         List<Mission> missionList = new ArrayList<Mission>();
-        if (missionId != null) {
-            missionList = missionDAO.getMissionById(missionId);
-        } else if (minId != null) {
-            missionList = missionDAO.getMissionListByMinId(minId);
-        } else if (lastUpdateTime != null) {
-            missionList = missionDAO.getMissionListByTime(lastUpdateTime);
-        }else{
-            missionList = missionDAO.getMissionListByMinId(-1);
-        }
+
+        missionList = missionDAO.getMissions(missionId, lastUpdateTime, missionTypeId);
 
         for (Mission mission : missionList) {
             if (mission.getMissionPlacePackageId() != null) {
                 List<MissionPlacePackage> missionPlacePackageList = missionDAO.getMissionPlacePackage(mission.getMissionPlacePackageId());
                 mission.setMissionPlacePackages(missionPlacePackageList);
+            }
+            if (mission.getChallengeId() != null) {
+                List<MissionChallenge> missionChallengeList = missionDAO.getMissionChallenges(mission.getChallengeId());
+                mission.setMissionChallenges(missionChallengeList);
             }
         }
 
@@ -47,22 +42,12 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
-    public List<MissionPackage> getMissionPackages(Integer packageId, Integer minId, Date lastUpdateTime) {
-        List<MissionPackage> missionPackagesList = new ArrayList<MissionPackage>();
-        if (packageId != null) {
-            missionPackagesList = missionDAO.getMissionPackageListById(packageId);
-        } else if (minId != null) {
-            missionPackagesList = missionDAO.getMissionPackageListByMinId(minId);
-        } else if (lastUpdateTime != null) {
-            missionPackagesList = missionDAO.getMissionPackageListByTime(lastUpdateTime);
-        }else{
-            missionPackagesList = missionDAO.getMissionPackageListByMinId(-1);
-        }
-        return missionPackagesList;
+    public List<MissionPlacePackage> getMissionPlacePackage(Integer missionPlacePackageId) {
+        return missionDAO.getMissionPlacePackage(missionPlacePackageId);
     }
 
     @Override
-    public List<MissionPlacePackage> getMissionPlacePackage(Integer missionPlacePackageId) {
-        return missionDAO.getMissionPlacePackage(missionPlacePackageId);
+    public List<MissionChallenge> getMissionChallenge(Integer challengeId) {
+        return missionDAO.getMissionChallenges(challengeId);
     }
 }
