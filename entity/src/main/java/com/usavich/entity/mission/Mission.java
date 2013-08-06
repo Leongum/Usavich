@@ -39,6 +39,8 @@ public class Mission {
     private double missionSpeed;
     private Date lastUpdateTime;
     private String subMissionList;
+    private Integer missionPackageId;
+    private Integer sequence;
 
     public Integer getMissionId() {
         return missionId;
@@ -208,5 +210,21 @@ public class Mission {
 
     public void setSubMissionList(String subMissionList) {
         this.subMissionList = subMissionList;
+    }
+
+    public Integer getMissionPackageId() {
+        return missionPackageId;
+    }
+
+    public void setMissionPackageId(Integer missionPackageId) {
+        this.missionPackageId = missionPackageId;
+    }
+
+    public Integer getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(Integer sequence) {
+        this.sequence = sequence;
     }
 }

@@ -35,6 +35,7 @@ public class RunningHistory {
     private String comment;
     private Date commitTime;
     private String uuid;
+    private String grade;
 
     public Integer getUserId() {
         return userId;
@@ -194,5 +195,13 @@ public class RunningHistory {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 }

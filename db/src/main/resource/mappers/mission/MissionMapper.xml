@@ -22,6 +22,8 @@
         <result column="LAST_UPDATE_TIME" property="lastUpdateTime"/>
         <result column="CHALLENGE_ID" property="challengeId"/>
         <result column="SUB_MISSION_LIST" property="subMissionList"/>
+        <result column="MISSION_PACKAGE_ID" property="missionPackageId"/>
+        <result column="SEQUENCE" property="sequence"/>
     </resultMap>
 
     <resultMap id="missionPlacePackageInfo" type="com.usavich.entity.mission.MissionPlacePackage">
@@ -58,7 +60,9 @@
         MISSION_SPEED,
         LAST_UPDATE_TIME,
         CHALLENGE_ID,
-        SUB_MISSION_LIST
+        SUB_MISSION_LIST,
+        MISSION_PACKAGE_ID,
+        SEQUENCE
     </sql>
 
     <sql id="missionPlacePackageTable">
