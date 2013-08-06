@@ -15,7 +15,6 @@ public interface RestDef {
     static final String PARAM_PLATFORM = "platform";
     static final String PARAM_LAST_UPDATE_TIME = "lastUpdateTime";
     static final String PARAM_MISSION_ID = "missionId";
-    static final String PARAM_PACKAGE_ID = "packageId";
     static final String PARAM_PRODUCT_ID = "productId";
 
     static final String PARAM_PAGE_NUMBER = "pageNo";

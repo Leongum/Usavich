@@ -16,7 +16,7 @@
         <result column="CYCLE_TIME" property="cycleTime"/>
         <result column="MISSION_FROM" property="missionFrom"/>
         <result column="MISSION_TO" property="missionTo"/>
-        <result column="MISSION_PLACE_PACKAGE" property="missionPlacePackageId"/>
+        <result column="MISSION_PLACE_PACKAGE_ID" property="missionPlacePackageId"/>
         <result column="MISSION_STEPS" property="missionSteps"/>
         <result column="MISSION_SPEED" property="missionSpeed"/>
         <result column="LAST_UPDATE_TIME" property="lastUpdateTime"/>
@@ -38,6 +38,7 @@
         <result column="GRADE" property="grade"/>
         <result column="TIME" property="time"/>
         <result column="DISTANCE" property="distance"/>
+        <result column="SEQUENCE" property="sequence"/>
         <result column="NOTE" property="note"/>
     </resultMap>
 
@@ -55,7 +56,7 @@
         CYCLE_TIME,
         MISSION_FROM,
         MISSION_TO,
-        MISSION_PLACE_PACKAGE,
+        MISSION_PLACE_PACKAGE_ID,
         MISSION_STEPS,
         MISSION_SPEED,
         LAST_UPDATE_TIME,
@@ -77,6 +78,7 @@
         GRADE,
         TIME,
         DISTANCE,
+        SEQUENCE,
         NOTE
     </sql>
 
@@ -104,7 +106,7 @@
         ORDER BY SEQUENCE ASC
     </select>
 
-    <select id="getMissionChallenge" resultMap="missionChallengeInfo">
+    <select id="getMissionChallenges" resultMap="missionChallengeInfo">
         SELECT
         <include refid="missionChallengeTable"/>
         FROM MISSION_CHALLENGE

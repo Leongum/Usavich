@@ -15,6 +15,7 @@ public class MissionChallenge {
     private String grade;
     private BigInteger time;
     private Double distance;
+    private Integer sequence;
     private String note;
 
     public Integer getChallengeId() {
@@ -55,5 +56,13 @@ public class MissionChallenge {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public Integer getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(Integer sequence) {
+        this.sequence = sequence;
     }
 }
