@@ -250,7 +250,9 @@
     <update id="updateAccountBase" parameterType="com.usavich.entity.account.UserBase">
         UPDATE USER
         SET
+            <if test="entity.password != null"><![CDATA[
             USER_PASSWORD = #{entity.password},
+            ]]></if>
             SEX = #{entity.sex},
             UUID = #{entity.uuid},
             NICK_NAME = #{entity.nickName}

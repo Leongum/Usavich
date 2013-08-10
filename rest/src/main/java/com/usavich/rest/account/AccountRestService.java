@@ -28,7 +28,7 @@ public class AccountRestService implements AccountRestDef {
         userInfo.setUuid(UUID.randomUUID().toString());
         //userInfo.setSystemTime(Universe.current().getSystemTime());
         UserBase userBase = new UserBase();
-        userBase.initUserBase(userInfo);
+        userBase = userBase.initUserBase(userInfo);
         accountService.updateAccountBase(userBase);
         return  userInfo;
     }

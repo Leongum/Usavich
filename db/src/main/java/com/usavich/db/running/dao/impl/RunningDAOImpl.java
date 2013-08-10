@@ -32,7 +32,10 @@ public class RunningDAOImpl implements RunningDAO {
 
     @Override
     public void createRunningHistory(RunningHistory runningHistory) {
-        runningMapper.createRunningHistory(runningHistory);
+        RunningHistory existingHistory = runningMapper.getRunningHistoryByUuid(runningHistory.getRunUuid());
+        if (existingHistory.getUserId() == null) {
+            runningMapper.createRunningHistory(runningHistory);
+        }
     }
 
     @Override
@@ -42,6 +45,9 @@ public class RunningDAOImpl implements RunningDAO {
 
     @Override
     public void createOnGoingRunning(OnGoingRunning goingRunning) {
-        runningMapper.createOnGoingRunning(goingRunning);
+        OnGoingRunning existingRunning = runningMapper.getOnGoingRunningByUuid(goingRunning.getRunUuid());
+        if (existingRunning.getUserId() == null) {
+            runningMapper.createOnGoingRunning(goingRunning);
+        }
     }
 }

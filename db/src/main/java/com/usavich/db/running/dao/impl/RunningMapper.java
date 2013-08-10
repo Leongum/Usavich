@@ -16,9 +16,13 @@ import java.util.List;
  */
 public interface RunningMapper {
 
+    public RunningHistory getRunningHistoryByUuid(@Param("runUuid") String runUuid);
+
     public List<RunningHistory> getRunningHistories(@Param("userId") Integer userId, @Param("missionId") Integer missionId);
 
     public void createRunningHistory(@Param("entity") RunningHistory runningHistory);
+
+    public OnGoingRunning getOnGoingRunningByUuid(@Param("runUuid") String runUuid);
 
     public List<OnGoingRunning> getOnGoingRunning(@Param("userId") Integer userId, @Param("lastUpdateTime") Date lastUpdateTime);
 

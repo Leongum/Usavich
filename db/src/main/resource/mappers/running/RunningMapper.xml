@@ -82,6 +82,13 @@
         ]]></if>
     </select>
 
+    <select id="getRunningHistoryByUuid" resultMap="runningHistoryInfo">
+        SELECT
+        <include refid="runningHistoryTable"/>
+        FROM USER_RUNNING_HISTORY
+        WHERE RUN_UUID = #{runUuid}
+    </select>
+
     <select id="getRunningHistoriesByDate" resultMap="runningHistoryInfo">
         SELECT
         <include refid="runningHistoryTable"/>
@@ -147,6 +154,13 @@
         FROM USER_RUNNING
         WHERE USER_ID = #{userId}
         AND COMMIT_TIME > #{lastUpdateTime}
+    </select>
+
+    <select id="getOnGoingRunningByUuid" resultMap="runningOnGoingInfo">
+        SELECT
+        <include refid="runningOnGoingTable"/>
+        FROM USER_RUNNING
+        WHERE RUN_UUID = #{runUuid}
     </select>
 
     <insert id="createOnGoingRunning" parameterType="com.usavich.entity.running.OnGoingRunning">
