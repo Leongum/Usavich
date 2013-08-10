@@ -7,12 +7,14 @@
         <id column="PLATFORM" property="platform"/>
         <result column="VERSION" property="version"/>
         <result column="SUB_VERSION" property="subVersion"/>
+        <result column="DESCRIPTION" property="description"/>
     </resultMap>
 
     <sql id="versionControlTable">
         VC.PLATFORM,
         VC.VERSION,
-        VC.SUB_VERSION
+        VC.SUB_VERSION,
+        VC.DESCRIPTION
     </sql>
 
     <select id="getVersionControl" resultMap="versionControl">
@@ -27,6 +29,7 @@
         SET
             VERSION = #{entity.version},
             SUB_VERSION = #{entity.subVersion}
+            DESCRIPTION = #{entity.description}
         WHERE PLATFORM = #{entity.platform}
     </insert>
 

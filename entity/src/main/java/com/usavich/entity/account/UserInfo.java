@@ -1,12 +1,5 @@
 package com.usavich.entity.account;
 
-import com.usavich.common.lib.CustomDateDeserializer;
-import com.usavich.common.lib.CustomDateSerializer;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
-import java.util.Date;
-
 /**
  * Created with IntelliJ IDEA.
  * User: LeonLu
@@ -34,7 +27,7 @@ public class UserInfo extends UserBase {
 
     private double recoverSpeed;
 
-    private Date systemTime;
+    //private Date systemTime;
 
     //private double baseAcc;
 
@@ -64,7 +57,7 @@ public class UserInfo extends UserBase {
         this.spirit = 0;
         this.rapidly = 0;
         this.recoverSpeed = 0;
-        this.systemTime = new Date();
+        //this.systemTime = new Date();
         //this.baseAcc = 1;
         //this.inertiaAcc = 1;
         //this.crit = 1;
@@ -141,15 +134,5 @@ public class UserInfo extends UserBase {
 
     public void setRecoverSpeed(double recoverSpeed) {
         this.recoverSpeed = recoverSpeed;
-    }
-
-    @JsonSerialize(using = CustomDateSerializer.class)
-    public Date getSystemTime() {
-        return systemTime;
-    }
-
-    @JsonDeserialize(using = CustomDateDeserializer.class)
-    public void setSystemTime(Date systemTime) {
-        this.systemTime = systemTime;
     }
 }

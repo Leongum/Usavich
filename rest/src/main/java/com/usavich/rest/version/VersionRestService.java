@@ -1,5 +1,6 @@
 package com.usavich.rest.version;
 
+import com.usavich.common.lib.Universe;
 import com.usavich.entity.common.VersionControl;
 import com.usavich.service.version.def.VersionControlService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class VersionRestService implements VersionRestDef{
     @Override
     public VersionControl getVersionControl(String platform) {
         VersionControl versionControl = versionControlService.getVersionControl(platform);
+        versionControl.setSystemTime(Universe.current().getSystemTime());
         return versionControl;
     }
 }
