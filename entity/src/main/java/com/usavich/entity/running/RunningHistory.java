@@ -21,12 +21,14 @@ public class RunningHistory {
     private Integer missionId;
     private Integer missionTypeId;
     private String missionRoute;
+    private String waveForm;
     private Date missionStartTime;
     private Date missionEndTime;
     private Date missionDate;
     private double spendCarlorie;
     private BigInteger duration;
     private double avgSpeed;
+    private Integer steps;
     private double distance;
     private String offerUsers;
     private Integer missionGrade;
@@ -203,5 +205,21 @@ public class RunningHistory {
 
     public void setGrade(String grade) {
         this.grade = grade;
+    }
+
+    public Integer getSteps() {
+        return steps;
+    }
+
+    public void setSteps(Integer steps) {
+        this.steps = steps;
+    }
+
+    public String getWaveForm() {
+        return waveForm;
+    }
+
+    public void setWaveForm(String waveForm) {
+        this.waveForm = waveForm;
     }
 }

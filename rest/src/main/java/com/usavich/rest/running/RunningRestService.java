@@ -47,7 +47,7 @@ public class RunningRestService implements RunningRestDef {
         for (RunningHistory runningHistory : runningHistoryList) {
             runningHistory.setUserId(CommonUtils.parseIntegerToNull(userId));
         }
-        runningService.createRunningHistory(runningHistoryList);
+        runningService.createRunningHistory(CommonUtils.parseIntegerToNull(userId), runningHistoryList);
     }
 
     @Override
@@ -56,6 +56,6 @@ public class RunningRestService implements RunningRestDef {
         for (OnGoingRunning onGoingRunning : onGoingRunningList) {
             onGoingRunning.setUserId(CommonUtils.parseIntegerToNull(userId));
         }
-        runningService.createOnGoingRunning(onGoingRunningList);
+        runningService.createOnGoingRunning(CommonUtils.parseIntegerToNull(userId), onGoingRunningList);
     }
 }

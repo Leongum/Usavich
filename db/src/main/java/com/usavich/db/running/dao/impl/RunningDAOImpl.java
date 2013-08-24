@@ -1,6 +1,7 @@
 package com.usavich.db.running.dao.impl;
 
 import com.usavich.db.running.dao.def.RunningDAO;
+import com.usavich.entity.common.Experience;
 import com.usavich.entity.running.OnGoingRunning;
 import com.usavich.entity.running.RunningHistory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,10 @@ public class RunningDAOImpl implements RunningDAO {
         if (existingRunning.getUserId() == null) {
             runningMapper.createOnGoingRunning(goingRunning);
         }
+    }
+
+    @Override
+    public Experience getExperienceLevel(double experience) {
+        return runningMapper.getExperienceLevel(experience);
     }
 }

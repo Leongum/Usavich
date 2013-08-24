@@ -1,8 +1,11 @@
 package com.usavich.service.running.impl;
 
 import com.usavich.db.running.dao.def.RunningDAO;
+import com.usavich.entity.account.UserInfo;
+import com.usavich.entity.common.Experience;
 import com.usavich.entity.running.OnGoingRunning;
 import com.usavich.entity.running.RunningHistory;
+import com.usavich.service.account.def.AccountService;
 import com.usavich.service.running.def.RunningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +25,9 @@ public class RunningServiceImpl implements RunningService {
     @Autowired
     private RunningDAO runningDAO;
 
+    @Autowired
+    private AccountService accountService;
+
     @Override
     public List<RunningHistory> getRunningHistories(Integer userId, Integer missionId) {
         return runningDAO.getRunningHistories(userId, missionId);
@@ -34,11 +40,29 @@ public class RunningServiceImpl implements RunningService {
 
     @Override
     @Transactional
-    public void createRunningHistory(List<RunningHistory> runningHistoryList) {
+    public void createRunningHistory(Integer userId, List<RunningHistory> runningHistoryList) {
+        UserInfo userInfo = accountService.getAccountInfoByID(userId);
         for (RunningHistory runningHistory : runningHistoryList) {
             runningDAO.createRunningHistory(runningHistory);
             //need add user info
+            userInfo = updateUserInfo(userInfo, runningHistory);
         }
+        accountService.updateAccountInfo(userInfo);
+    }
+
+    private UserInfo updateUserInfo(UserInfo userInfo, RunningHistory runningHistory) {
+        //1000 meter sync as 200 experience
+        double experience = userInfo.getExperience() + runningHistory.getExperience() + runningHistory.getDistance()/1000*200;
+        userInfo.setExperience(experience);
+        int minutes=(int) (((runningHistory.getMissionEndTime().getTime() - runningHistory.getMissionStartTime().getTime())/(1000*60)));
+        if(minutes>0){
+           double scores = userInfo.getScores() + runningHistory.getScores() + runningHistory.getDistance()/minutes*runningHistory.getDistance()/1000;
+           userInfo.setScores(scores);
+        }
+        Experience experienceInfo = runningDAO.getExperienceLevel(experience);
+        double level = experienceInfo.getLevel() +  (experience - (experienceInfo.getExperienceTotal()-experienceInfo.getExperience()))/experienceInfo.getExperience();
+        userInfo.setLevel(level);
+        return userInfo;
     }
 
     @Override
@@ -48,7 +72,7 @@ public class RunningServiceImpl implements RunningService {
 
     @Override
     @Transactional
-    public void createOnGoingRunning(List<OnGoingRunning> goingRunningList) {
+    public void createOnGoingRunning(Integer userId, List<OnGoingRunning> goingRunningList) {
         for (OnGoingRunning onGoingRunning : goingRunningList) {
             runningDAO.createOnGoingRunning(onGoingRunning);
         }

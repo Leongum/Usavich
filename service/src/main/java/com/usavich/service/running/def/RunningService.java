@@ -19,9 +19,9 @@ public interface RunningService {
 
     List<RunningHistory> getRunningHistoriesByDate(Integer userId, Date lastUpdateTime, int startSize, int pageSize);
 
-    void createRunningHistory(List<RunningHistory> runningHistoryList);
+    void createRunningHistory(Integer userId, List<RunningHistory> runningHistoryList);
 
     List<OnGoingRunning> getOnGoingRunning(Integer userId, Date lastUpdateTime);
 
-    void createOnGoingRunning(List<OnGoingRunning> goingRunningList);
+    void createOnGoingRunning(Integer userId, List<OnGoingRunning> goingRunningList);
 }

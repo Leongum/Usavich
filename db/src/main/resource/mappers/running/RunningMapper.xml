@@ -8,12 +8,14 @@
         <result column="MISSION_ID" property="missionId"/>
         <result column="MISSION_TYPE_ID" property="missionTypeId"/>
         <result column="MISSION_ROUTE" property="missionRoute"/>
+        <result column="WAVE_FORM" property="waveForm"/>
         <result column="MISSION_START_TIME" property="missionStartTime"/>
         <result column="MISSION_END_TIME" property="missionEndTime"/>
         <result column="MISSION_DATE" property="missionDate"/>
         <result column="SPEND_CARLORIE" property="spendCarlorie"/>
         <result column="DURATION" property="duration"/>
         <result column="AVG_SPEED" property="avgSpeed"/>
+        <result column="STEPS" property="steps"/>
         <result column="DISTANCE" property="distance"/>
         <result column="OFFER_USERS" property="offerUsers"/>
         <result column="MISSION_GRADE" property="missionGrade"/>
@@ -37,18 +39,26 @@
         <result column="COMMIT_TIME" property="commitTime"/>
     </resultMap>
 
+    <resultMap id="experienceInfo" type="com.usavich.entity.common.Experience">
+        <id column="LEVEL" property="level"/>
+        <result column="EXPERIENCE" property="experience"/>
+        <result column="EXPERIENCE_TOTAL" property="experienceTotal" />
+    </resultMap>
+
     <sql id="runningHistoryTable">
         USER_ID,
         RUN_UUID,
         MISSION_ID,
         MISSION_TYPE_ID,
         MISSION_ROUTE,
+        WAVE_FORM,
         MISSION_START_TIME,
         MISSION_END_TIME,
         MISSION_DATE,
         SPEND_CARLORIE,
         DURATION,
         AVG_SPEED,
+        STEPS,
         DISTANCE,
         OFFER_USERS,
         MISSION_GRADE,
@@ -70,6 +80,12 @@
         START_TIME,
         END_TIME,
         COMMIT_TIME
+    </sql>
+
+    <sql id="experienceTable">
+        LEVEL,
+        EXPERIENCE,
+        EXPERIENCE_TOTAL
     </sql>
 
     <select id="getRunningHistories" resultMap="runningHistoryInfo">
@@ -107,12 +123,14 @@
             MISSION_ID,
             MISSION_TYPE_ID,
             MISSION_ROUTE,
+            WAVE_FORM,
             MISSION_START_TIME,
             MISSION_END_TIME,
             MISSION_DATE,
             SPEND_CARLORIE,
             DURATION,
             AVG_SPEED,
+            STEPS,
             DISTANCE,
             OFFER_USERS,
             MISSION_GRADE,
@@ -130,12 +148,14 @@
             #{entity.missionId},
             #{entity.missionTypeId},
             #{entity.missionRoute},
+            #{entity.waveForm},
             #{entity.missionStartTime},
             #{entity.missionEndTime},
             #{entity.missionDate},
             #{entity.spendCarlorie},
             #{entity.duration},
             #{entity.avgSpeed},
+            #{entity.steps},
             #{entity.distance},
             #{entity.offerUsers},
             #{entity.missionGrade},
@@ -190,5 +210,14 @@
         );
 
     </insert>
+
+    <select id="getExperienceLevel" resultMap="experienceInfo">
+        SELECT
+        <include refid="experienceTable"/>
+        FROM EXPERIENCE_COMPARISON
+        WHERE EXPERIENCE_TOTAL > #{experience}
+        ORDER BY LEVEL ASC
+        LIMIT 1
+    </select>
 
 </mapper>

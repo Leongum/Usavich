@@ -1,5 +1,6 @@
 package com.usavich.db.running.dao.impl;
 
+import com.usavich.entity.common.Experience;
 import com.usavich.entity.running.OnGoingRunning;
 import com.usavich.entity.running.RunningHistory;
 import org.apache.ibatis.annotations.Param;
@@ -30,4 +31,5 @@ public interface RunningMapper {
 
     public List<RunningHistory> getRunningHistoriesByDate(@Param("userId") Integer userId, @Param("lastUpdateTime") Date lastUpdateTime, @Param("startSize") int startSize, @Param("pageSize") int pageSize);
 
+    public Experience getExperienceLevel(@Param("experience") double experience);
 }
