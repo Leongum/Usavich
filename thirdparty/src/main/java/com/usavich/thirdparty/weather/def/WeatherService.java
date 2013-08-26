@@ -1,6 +1,9 @@
 package com.usavich.thirdparty.weather.def;
 
-import java.io.IOException;
+import com.usavich.entity.common.PM25DetailInfo;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,5 +14,9 @@ import java.io.IOException;
  */
 public interface WeatherService {
 
-    String getPM25Object(String city) throws IOException, Exception;
+    Map<String, PM25DetailInfo> getPM25Object();
+
+    List<String> getPMCityObject();
+
+    PM25DetailInfo getPM25ByCityName(String cityName, String provinceName);
 }

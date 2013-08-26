@@ -1,20 +1,20 @@
 package com.usavich.thirdparty.httpService.impl;
 
-import com.usavich.thirdparty.httpService.*;
+import com.usavich.thirdparty.httpService.AbstractURIParameter;
 import org.apache.http.HttpEntity;
 
 import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
- * User: LeonLu
- * Date: 6/5/13
- * Time: 3:36 PM
+ * User: p
+ * Date: 13-8-26
+ * Time: 下午12:56
  * To change this template use File | Settings | File Templates.
  */
-public class PM25GetRequest extends AbstractURIParameter {
+public class PMCityGetRequest extends AbstractURIParameter {
 
-    private String pm25GetUrl;
+    private String pmCityGetUrl;
 
     @Override
     protected HttpEntity getHttpEntity() {
@@ -38,14 +38,14 @@ public class PM25GetRequest extends AbstractURIParameter {
 
     @Override
     public String getUri() {
-        return pm25GetUrl;
+        return pmCityGetUrl;
     }
 
-    public String getPm25GetUrl() {
-        return pm25GetUrl;
+    public String getPmCityGetUrl() {
+        return pmCityGetUrl;
     }
 
-    public void setPm25GetUrl(String pm25GetUrl) {
-        this.pm25GetUrl = pm25GetUrl;
+    public void setPmCityGetUrl(String pmCityGetUrl) {
+        this.pmCityGetUrl = pmCityGetUrl;
     }
 }
