@@ -41,6 +41,11 @@ public interface AccountRestDef extends RestDef {
     void updateAccountBase(@PathParam(PARAM_USER_ID) String userId,
                            UserBase userBase);
 
+    @PUT
+    @Path("/additional/{" + PARAM_USER_ID + "}")
+    UserInfo updateAccountAdditional(@PathParam(PARAM_USER_ID) String userId,
+                                     UserInfo userInfo);
+
     @GET
     @Path("/friends/{" + PARAM_USER_ID + "}")
     List<UserFriend> getUserFriends(

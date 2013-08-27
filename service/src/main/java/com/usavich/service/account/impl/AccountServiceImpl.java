@@ -79,9 +79,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional
-    public UserInfo updateAccountInfo(UserInfo userInfo) {
+    public void updateAccountInfo(UserInfo userInfo) {
         checkUserExisting(userInfo.getUserId());
-        return accountDAO.updateAccountInfo(userInfo);
+        accountDAO.updateAccountInfo(userInfo);
     }
 
     @Override

@@ -18,6 +18,9 @@
         <result column="SPIRIT" property="spirit"/>
         <result column="RAPIDLY" property="rapidly"/>
         <result column="RECOVER_SPEED" property="recoverSpeed"/>
+        <result column="WEIGHT" property="weight"/>
+        <result column="HEIGHT" property="height"/>
+        <result column="AGE" property="age"/>
         <!-- <result column="BASE_ACC" property="baseAcc"/>
         <result column="INERTIA_ACC" property="inertiaAcc"/>
         <result column="CRIT" property="crit"/>
@@ -64,7 +67,10 @@
         UD.ENDURANCE,
         UD.SPIRIT,
         UD.RAPIDLY,
-        UD.RECOVER_SPEED
+        UD.RECOVER_SPEED,
+        UD.WEIGHT,
+        UD.HEIGHT,
+        UD.AGE
     </sql>
 
     <sql id="userFriendInfoTable">
@@ -231,12 +237,15 @@
             LEVEL = #{entity.level},
             SCORES = #{entity.scores},
             EXPERIENCE = #{entity.experience},
-            MAX_POWER = #{detailEntity.maxPower},
-            REMAINING_POWER = #{detailEntity.remainingPower},
-            ENDURANCE = #{detailEntity.endurance},
-            SPIRIT = #{detailEntity.spirit},
-            RAPIDLY = #{detailEntity.rapidly},
-            RECOVER_SPEED = #{detailEntity.recoverSpeed},
+            MAX_POWER = #{entity.maxPower},
+            REMAINING_POWER = #{entity.remainingPower},
+            ENDURANCE = #{entity.endurance},
+            SPIRIT = #{entity.spirit},
+            RAPIDLY = #{entity.rapidly},
+            RECOVER_SPEED = #{entity.recoverSpeed},
+            WEIGHT = #{entity.weight},
+            HEIGHT = #{entity.height},
+            AGE = #{entity.age}
         WHERE USER_ID = #{entity.userId}
     </update>
 
@@ -302,4 +311,5 @@
             LAST_ACTIVE_TIME = #{entity.lastActiveTime}
          WHERE USER_ID = #{entity.userId}
     </update>
+
 </mapper>

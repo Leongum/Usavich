@@ -30,7 +30,7 @@ public interface AccountMapper {
 
     public void updateUserFriend(@Param("entity") UserFriend userFriend);
 
-    public UserInfo updateAccountInfo(@Param("entity") UserInfo userInfo);
+    public void updateAccountInfo(@Param("entity") UserInfo userInfo);
 
     public void updateAccountBase(@Param("entity") UserBase userBase);
 

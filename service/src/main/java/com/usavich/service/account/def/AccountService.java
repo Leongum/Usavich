@@ -24,7 +24,7 @@ public interface AccountService {
 
     List<UserFriend> getUserFriends(Integer userId, Date lastUpdateTime);
 
-    UserInfo updateAccountInfo(UserInfo userInfo);
+    void updateAccountInfo(UserInfo userInfo);
 
     void updateAccountBase(UserBase userBase);
 

@@ -1,7 +1,6 @@
 package com.usavich.rest.account;
 
 import com.usavich.common.lib.CommonUtils;
-import com.usavich.common.lib.Universe;
 import com.usavich.entity.account.*;
 import com.usavich.service.account.def.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,6 @@ public class AccountRestService implements AccountRestDef {
     public UserInfo getAccountInfo(String userEmail, String password) {
         UserInfo userInfo = accountService.getAccountInfo(userEmail, password);
         userInfo.setUuid(UUID.randomUUID().toString());
-        //userInfo.setSystemTime(Universe.current().getSystemTime());
         UserBase userBase = new UserBase();
         userBase = userBase.initUserBase(userInfo);
         accountService.updateAccountBase(userBase);
@@ -39,7 +37,6 @@ public class AccountRestService implements AccountRestDef {
             accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
         }
         UserInfo userInfo =  accountService.getAccountInfoByID(CommonUtils.parseIntegerToNull(userId));
-        //userInfo.setSystemTime(Universe.current().getSystemTime());
         return  userInfo;
     }
 
@@ -47,7 +44,6 @@ public class AccountRestService implements AccountRestDef {
     public UserInfo createAccountInfo(UserBase userBase) {
         userBase.setUuid(UUID.randomUUID().toString());
         UserInfo userInfo = accountService.createAccountInfo(userBase);
-        //userInfo.setSystemTime(Universe.current().getSystemTime());
         return  userInfo;
     }
 
@@ -56,6 +52,18 @@ public class AccountRestService implements AccountRestDef {
         accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
         userBase.setUserId(CommonUtils.parseIntegerToNull(userId));
         accountService.updateAccountBase(userBase);
+    }
+
+    @Override
+    public UserInfo updateAccountAdditional(String userId, UserInfo userInfo) {
+        Integer userIdInt = CommonUtils.parseIntegerToNull(userId);
+        //accountService.checkUserLoginStatus(userIdInt);
+        UserInfo userInfoBase = accountService.getAccountInfoByID(userIdInt);
+        userInfoBase.setWeight(userInfo.getWeight());
+        userInfoBase.setHeight(userInfo.getHeight());
+        userInfoBase.setAge(userInfo.getAge());
+        accountService.updateAccountInfo(userInfoBase);
+        return  userInfoBase;
     }
 
     @Override

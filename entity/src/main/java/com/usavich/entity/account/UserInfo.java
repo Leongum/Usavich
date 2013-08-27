@@ -27,6 +27,12 @@ public class UserInfo extends UserBase {
 
     private double recoverSpeed;
 
+    private double weight;
+
+    private double height;
+
+    private Integer age;
+
     //private Date systemTime;
 
     //private double baseAcc;
@@ -134,5 +140,29 @@ public class UserInfo extends UserBase {
 
     public void setRecoverSpeed(double recoverSpeed) {
         this.recoverSpeed = recoverSpeed;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }

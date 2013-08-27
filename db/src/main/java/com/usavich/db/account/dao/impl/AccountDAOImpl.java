@@ -37,8 +37,8 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public UserInfo updateAccountInfo(UserInfo userInfo) {
-        return accountMapper.updateAccountInfo(userInfo);
+    public void updateAccountInfo(UserInfo userInfo) {
+        accountMapper.updateAccountInfo(userInfo);
     }
 
     @Override

@@ -55,6 +55,13 @@ public class CommonUtils {
         return Integer.valueOf(value);
     }
 
+    public static Double parseDoubleToNull(String value){
+        if (StringUtils.isEmpty(value))
+            return null;
+
+        return Double.valueOf(value);
+    }
+
     public static Date parseDate(String date) {
         Assert.hasText(date, "date");
 

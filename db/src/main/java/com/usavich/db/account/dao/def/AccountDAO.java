@@ -21,7 +21,7 @@ public interface AccountDAO {
 
     public UserInfo getAccountInfoByID(Integer userId);
 
-    public UserInfo updateAccountInfo(UserInfo userInfo);
+    public void updateAccountInfo(UserInfo userInfo);
 
     public void updateAccountBase(UserBase userBase);
 
