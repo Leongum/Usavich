@@ -57,11 +57,17 @@ public class AccountRestService implements AccountRestDef {
     @Override
     public UserInfo updateAccountAdditional(String userId, UserInfo userInfo) {
         Integer userIdInt = CommonUtils.parseIntegerToNull(userId);
-        accountService.checkUserLoginStatus(userIdInt);
+        //accountService.checkUserLoginStatus(userIdInt);
         UserInfo userInfoBase = accountService.getAccountInfoByID(userIdInt);
         userInfoBase.setWeight(userInfo.getWeight());
         userInfoBase.setHeight(userInfo.getHeight());
         userInfoBase.setAge(userInfo.getAge());
+        if (!userInfoBase.getSex().equalsIgnoreCase(userInfo.getSex())) {
+            userInfoBase.setSex(userInfo.getSex());
+            UserBase userBase = new UserBase();
+            userBase = userBase.initUserBase(userInfoBase);
+            accountService.updateAccountBase(userBase);
+        }
         accountService.updateAccountInfo(userInfoBase);
         return  userInfoBase;
     }
