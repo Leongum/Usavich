@@ -57,7 +57,7 @@ public class AccountRestService implements AccountRestDef {
     @Override
     public UserInfo updateAccountAdditional(String userId, UserInfo userInfo) {
         Integer userIdInt = CommonUtils.parseIntegerToNull(userId);
-        //accountService.checkUserLoginStatus(userIdInt);
+        accountService.checkUserLoginStatus(userIdInt);
         UserInfo userInfoBase = accountService.getAccountInfoByID(userIdInt);
         userInfoBase.setWeight(userInfo.getWeight());
         userInfoBase.setHeight(userInfo.getHeight());
