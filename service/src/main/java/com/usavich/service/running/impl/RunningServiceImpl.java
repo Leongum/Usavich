@@ -51,17 +51,19 @@ public class RunningServiceImpl implements RunningService {
     }
 
     private UserInfo updateUserInfo(UserInfo userInfo, RunningHistory runningHistory) {
-        //1000 meter sync as 200 experience
-        double experience = userInfo.getExperience() + runningHistory.getExperience() + runningHistory.getDistance()/1000*200;
-        userInfo.setExperience(experience);
-        int minutes=(int) (((runningHistory.getMissionEndTime().getTime() - runningHistory.getMissionStartTime().getTime())/(1000*60)));
-        if(minutes>0){
-           double scores = userInfo.getScores() + runningHistory.getScores() + runningHistory.getDistance()/minutes*runningHistory.getDistance()/1000;
-           userInfo.setScores(scores);
+        if (runningHistory.getValid() == 1) {
+            //1000 meter sync as 200 experience
+            double experience = userInfo.getExperience() + runningHistory.getExperience() + runningHistory.getDistance() / 1000 * 200;
+            userInfo.setExperience(experience);
+            int minutes = (int) (((runningHistory.getMissionEndTime().getTime() - runningHistory.getMissionStartTime().getTime()) / (1000 * 60)));
+            if (minutes > 0) {
+                double scores = userInfo.getScores() + runningHistory.getScores() + runningHistory.getDistance() / minutes * runningHistory.getDistance() / 1000;
+                userInfo.setScores(scores);
+            }
+            Experience experienceInfo = runningDAO.getExperienceLevel(experience);
+            double level = experienceInfo.getLevel() + (experience - (experienceInfo.getExperienceTotal() - experienceInfo.getExperience())) / experienceInfo.getExperience();
+            userInfo.setLevel(level);
         }
-        Experience experienceInfo = runningDAO.getExperienceLevel(experience);
-        double level = experienceInfo.getLevel() +  (experience - (experienceInfo.getExperienceTotal()-experienceInfo.getExperience()))/experienceInfo.getExperience();
-        userInfo.setLevel(level);
         return userInfo;
     }
 

@@ -38,6 +38,7 @@ public class RunningHistory {
     private Date commitTime;
     private String uuid;
     private Integer grade;
+    private Integer valid;
 
     public Integer getUserId() {
         return userId;
@@ -221,5 +222,13 @@ public class RunningHistory {
 
     public void setWaveForm(String waveForm) {
         this.waveForm = waveForm;
+    }
+
+    public Integer getValid() {
+        return valid;
+    }
+
+    public void setValid(Integer valid) {
+        this.valid = valid;
     }
 }

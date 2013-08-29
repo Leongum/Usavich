@@ -25,6 +25,7 @@
         <result column="COMMIT_TIME" property="commitTime"/>
         <result column="UUID" property="uuid"/>
         <result column="GRADE" property="grade"/>
+        <result column="VALID" property="valid"/>
     </resultMap>
 
     <resultMap id="runningOnGoingInfo" type="com.usavich.entity.running.OnGoingRunning">
@@ -67,7 +68,8 @@
         COMMENT,
         COMMIT_TIME,
         UUID,
-        GRADE
+        GRADE,
+        VALID
     </sql>
 
     <sql id="runningOnGoingTable">
@@ -139,7 +141,8 @@
             COMMENT,
             COMMIT_TIME,
             UUID,
-            GRADE
+            GRADE,
+            VALID
         )
         VALUES
         (
@@ -164,7 +167,8 @@
             #{entity.comment},
             #{entity.commitTime},
             #{entity.uuid},
-            #{entity.grade}
+            #{entity.grade},
+            #{entity.valid}
         )
     </insert>
 
