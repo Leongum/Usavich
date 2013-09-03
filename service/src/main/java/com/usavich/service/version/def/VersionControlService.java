@@ -12,4 +12,6 @@ import com.usavich.entity.common.VersionControl;
 public interface VersionControlService {
 
     VersionControl getVersionControl(String platform);
+
+    VersionControl getVersionForRest(String platform);
 }

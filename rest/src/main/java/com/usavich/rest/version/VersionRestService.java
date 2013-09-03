@@ -23,7 +23,7 @@ public class VersionRestService implements VersionRestDef{
 
     @Override
     public VersionControl getVersionControl(String platform) {
-        VersionControl versionControl = versionControlService.getVersionControl(platform);
+        VersionControl versionControl = versionControlService.getVersionForRest(platform);
         versionControl.setSystemTime(Universe.current().getSystemTime());
         return versionControl;
     }

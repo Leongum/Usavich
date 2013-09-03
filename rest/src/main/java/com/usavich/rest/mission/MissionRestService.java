@@ -26,7 +26,7 @@ public class MissionRestService implements MissionRestDef {
         if (missionType != null) {
             missionTypeId = MissionType.valueOf(missionType).ordinal();
         }
-        return missionService.getMissions(CommonUtils.parseIntegerToNull(missionId),
+        return missionService.getMissionsForRest(CommonUtils.parseIntegerToNull(missionId),
                 CommonUtils.parseDateDefaultToNull(lastUpdateTime), missionTypeId);
     }
 }

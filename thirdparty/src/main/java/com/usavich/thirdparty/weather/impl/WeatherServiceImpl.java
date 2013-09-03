@@ -1,6 +1,7 @@
 package com.usavich.thirdparty.weather.impl;
 
 import com.usavich.entity.common.PM25DetailInfo;
+import com.usavich.thirdparty.backend.TaskJobs;
 import com.usavich.thirdparty.httpService.impl.PM25GetRequest;
 import com.usavich.thirdparty.httpService.impl.PMCityGetRequest;
 import com.usavich.thirdparty.weather.def.WeatherService;
@@ -24,10 +25,6 @@ public class WeatherServiceImpl implements WeatherService {
 
     @Autowired
     private PMCityGetRequest pmCityGetRequest;
-
-    public static Map<String,PM25DetailInfo> pmInfos = null;
-
-    public static List<String> cityList = null;
 
     @Override
     public Map<String, PM25DetailInfo> getPM25Object() {
@@ -78,10 +75,10 @@ public class WeatherServiceImpl implements WeatherService {
 
     @Override
     public PM25DetailInfo getPM25ByCityName(String cityName, String provinceName) {
-        if (cityList != null && pmInfos != null) {
-            for (String city : cityList) {
+        if (TaskJobs.cityList != null && TaskJobs.pmInfos != null) {
+            for (String city : TaskJobs.cityList) {
                 if (cityName.indexOf(city) >= 0 || provinceName.indexOf(city) >= 0) {
-                    return pmInfos.get(city);
+                    return TaskJobs.pmInfos.get(city);
                 }
             }
         }

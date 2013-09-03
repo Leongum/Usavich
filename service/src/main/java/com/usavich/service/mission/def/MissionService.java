@@ -14,6 +14,8 @@ import java.util.List;
  */
 public interface MissionService {
 
+    List<Mission> getMissionsForRest(Integer missionId, Date lastUpdateTime, Integer missionTypeId);
+
     List<Mission> getMissions(Integer missionId, Date lastUpdateTime, Integer missionTypeId);
 
     List<MissionPlacePackage> getMissionPlacePackage(Integer missionPlacePackageId);

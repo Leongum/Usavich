@@ -3,6 +3,7 @@ package com.usavich.service.mission.impl;
 import com.usavich.db.mission.dao.def.MissionDAO;
 import com.usavich.entity.enums.MissionType;
 import com.usavich.entity.mission.*;
+import com.usavich.service.backend.BackendJobCache;
 import com.usavich.service.mission.def.MissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,6 +23,20 @@ public class MissionServiceImpl implements MissionService {
     @Autowired
     private MissionDAO missionDAO;
 
+    @Override
+    public List<Mission> getMissionsForRest(Integer missionId, Date lastUpdateTime, Integer missionTypeId) {
+        if (missionId == null && missionTypeId == -1) {
+            if (lastUpdateTime.before(BackendJobCache.missionFirstTime)) {
+                return BackendJobCache.allMissions;
+            }
+            if (lastUpdateTime.after(BackendJobCache.missionLastTime)) {
+                return new ArrayList<Mission>();
+            }
+        }
+        return getMissions(missionId, lastUpdateTime, missionTypeId);
+    }
+
+    @Override
     public List<Mission> getMissions(Integer missionId, Date lastUpdateTime, Integer missionTypeId) {
         List<Mission> missionList = new ArrayList<Mission>();
 

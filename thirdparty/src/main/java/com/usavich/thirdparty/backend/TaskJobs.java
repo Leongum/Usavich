@@ -1,9 +1,14 @@
 package com.usavich.thirdparty.backend;
 
+import com.usavich.entity.common.PM25DetailInfo;
 import com.usavich.thirdparty.weather.def.WeatherService;
-import com.usavich.thirdparty.weather.impl.WeatherServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,8 +23,12 @@ public class TaskJobs {
     @Autowired
     private WeatherService weatherService;
 
+    public static Map<String,PM25DetailInfo> pmInfos = new HashMap<String, PM25DetailInfo>();
+
+    public static List<String> cityList = new ArrayList<String>();
+
     public void pm25SyncJob() {
-        WeatherServiceImpl.pmInfos = weatherService.getPM25Object();
-        WeatherServiceImpl.cityList = weatherService.getPMCityObject();
+        pmInfos = weatherService.getPM25Object();
+        cityList = weatherService.getPMCityObject();
     }
 }
