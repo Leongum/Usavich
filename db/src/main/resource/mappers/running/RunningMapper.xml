@@ -40,12 +40,6 @@
         <result column="COMMIT_TIME" property="commitTime"/>
     </resultMap>
 
-    <resultMap id="experienceInfo" type="com.usavich.entity.common.Experience">
-        <id column="LEVEL" property="level"/>
-        <result column="EXPERIENCE" property="experience"/>
-        <result column="EXPERIENCE_TOTAL" property="experienceTotal" />
-    </resultMap>
-
     <sql id="runningHistoryTable">
         USER_ID,
         RUN_UUID,
@@ -82,12 +76,6 @@
         START_TIME,
         END_TIME,
         COMMIT_TIME
-    </sql>
-
-    <sql id="experienceTable">
-        LEVEL,
-        EXPERIENCE,
-        EXPERIENCE_TOTAL
     </sql>
 
     <select id="getRunningHistories" resultMap="runningHistoryInfo">
@@ -214,14 +202,5 @@
         );
 
     </insert>
-
-    <select id="getExperienceLevel" resultMap="experienceInfo">
-        SELECT
-        <include refid="experienceTable"/>
-        FROM EXPERIENCE_COMPARISON
-        WHERE EXPERIENCE_TOTAL > #{experience}
-        ORDER BY LEVEL ASC
-        LIMIT 1
-    </select>
 
 </mapper>

@@ -1,10 +1,11 @@
 package com.usavich.service.backend;
 
 import com.usavich.common.lib.CommonUtils;
+import com.usavich.entity.common.SystemMessage;
 import com.usavich.entity.common.VersionControl;
 import com.usavich.entity.mission.Mission;
+import com.usavich.service.common.def.CommonService;
 import com.usavich.service.mission.def.MissionService;
-import com.usavich.service.version.def.VersionControlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,15 +27,21 @@ public class BackendJobCache {
     private MissionService missionService;
 
     @Autowired
-    private VersionControlService versionControlService;
+    private CommonService commonService;
 
     public static VersionControl versionControlIOS = new VersionControl();
 
     public static List<Mission> allMissions = new ArrayList<Mission>();
 
+    public static List<SystemMessage> allMessages = new ArrayList<SystemMessage>();
+
     public static Date missionLastTime = CommonUtils.parseDateDefaultToNull("2001-01-01 00:00:00");
 
     public static Date missionFirstTime = CommonUtils.parseDateDefaultToNull("3001-01-01 00:00:00");
+
+    public static Date messageLastTime = CommonUtils.parseDateDefaultToNull("2001-01-01 00:00:00");
+
+    public static Date messageFirstTime = CommonUtils.parseDateDefaultToNull("3001-01-01 00:00:00");
 
     public void missionServiceJob() {
         allMissions = missionService.getMissions(null, CommonUtils.parseDateDefaultToNull("2001-01-01 00:00:00"), -1);
@@ -49,7 +56,19 @@ public class BackendJobCache {
     }
 
 
+    public void systemMessageServiceJob() {
+        allMessages = commonService.getSystemMessage(CommonUtils.parseDateDefaultToNull("2001-01-01 00:00:00"));
+        for (SystemMessage systemMessage : allMessages) {
+            if (systemMessage.getLastUpdateTime().after(messageLastTime)) {
+                messageLastTime = systemMessage.getLastUpdateTime();
+            }
+            if (systemMessage.getLastUpdateTime().before(messageFirstTime)) {
+                messageFirstTime = systemMessage.getLastUpdateTime();
+            }
+        }
+    }
+
     public void versionServiceJob() {
-        versionControlIOS = versionControlService.getVersionControl("ios");
+        versionControlIOS = commonService.getVersionControl("ios");
     }
 }

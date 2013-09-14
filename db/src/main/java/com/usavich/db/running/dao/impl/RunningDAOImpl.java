@@ -51,9 +51,4 @@ public class RunningDAOImpl implements RunningDAO {
             runningMapper.createOnGoingRunning(goingRunning);
         }
     }
-
-    @Override
-    public Experience getExperienceLevel(double experience) {
-        return runningMapper.getExperienceLevel(experience);
-    }
 }

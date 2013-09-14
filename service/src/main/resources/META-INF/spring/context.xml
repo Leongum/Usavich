@@ -13,15 +13,16 @@
     <context:component-scan base-package="com.usavich"/>
 
     <bean id="accountService" class="com.usavich.service.account.impl.AccountServiceImpl"/>
-    <bean id="versionControlService" class="com.usavich.service.version.impl.VersionControlServiceImpl"/>
     <bean id="missionService" class="com.usavich.service.mission.impl.MissionServiceImpl"/>
     <bean id="productService" class="com.usavich.service.product.impl.ProductServiceImpl"/>
     <bean id="runningService" class="com.usavich.service.running.impl.RunningServiceImpl"/>
+    <bean id="commonService" class="com.usavich.service.common.impl.CommonServiceImpl"/>
 
     <bean id="backendJobCache" class="com.usavich.service.backend.BackendJobCache"/>
 
     <task:scheduled-tasks>
         <task:scheduled ref="backendJobCache" method="missionServiceJob" fixed-rate="21600000"/>
         <task:scheduled ref="backendJobCache" method="versionServiceJob" fixed-rate="21600000"/>
+        <task:scheduled ref="backendJobCache" method="systemMessageServiceJob" fixed-rate="21600000"/>
     </task:scheduled-tasks>
 </beans>

@@ -1,5 +1,6 @@
 package com.usavich.service.running.impl;
 
+import com.usavich.db.common.dao.def.CommonDAO;
 import com.usavich.db.running.dao.def.RunningDAO;
 import com.usavich.entity.account.UserInfo;
 import com.usavich.entity.common.Experience;
@@ -24,6 +25,9 @@ public class RunningServiceImpl implements RunningService {
 
     @Autowired
     private RunningDAO runningDAO;
+
+    @Autowired
+    private CommonDAO commonDAO;
 
     @Autowired
     private AccountService accountService;
@@ -52,15 +56,11 @@ public class RunningServiceImpl implements RunningService {
 
     private UserInfo updateUserInfo(UserInfo userInfo, RunningHistory runningHistory) {
         if (runningHistory.getValid() == 1) {
-            //1000 meter sync as 200 experience
-            double experience = userInfo.getExperience() + runningHistory.getExperience() + runningHistory.getDistance() / 1000 * 200;
+            double experience = userInfo.getExperience() + runningHistory.getExperience();
             userInfo.setExperience(experience);
-            int minutes = (int) (((runningHistory.getMissionEndTime().getTime() - runningHistory.getMissionStartTime().getTime()) / (1000 * 60)));
-            if (minutes > 0) {
-                double scores = userInfo.getScores() + runningHistory.getScores() + runningHistory.getDistance() / minutes * runningHistory.getDistance() / 1000;
-                userInfo.setScores(scores);
-            }
-            Experience experienceInfo = runningDAO.getExperienceLevel(experience);
+            double scores = userInfo.getScores() + runningHistory.getScores();
+            userInfo.setScores(scores);
+            Experience experienceInfo = commonDAO.getExperienceLevel(experience);
             double level = experienceInfo.getLevel() + (experience - (experienceInfo.getExperienceTotal() - experienceInfo.getExperience())) / experienceInfo.getExperience();
             userInfo.setLevel(level);
         }

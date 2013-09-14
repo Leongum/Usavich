@@ -6,6 +6,7 @@ import com.usavich.entity.mission.*;
 import com.usavich.service.backend.BackendJobCache;
 import com.usavich.service.mission.def.MissionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +25,7 @@ public class MissionServiceImpl implements MissionService {
     private MissionDAO missionDAO;
 
     @Override
+    @Transactional
     public List<Mission> getMissionsForRest(Integer missionId, Date lastUpdateTime, Integer missionTypeId) {
         if (missionId == null && missionTypeId == -1) {
             if (lastUpdateTime.before(BackendJobCache.missionFirstTime)) {

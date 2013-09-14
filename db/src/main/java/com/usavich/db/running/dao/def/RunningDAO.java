@@ -1,6 +1,5 @@
 package com.usavich.db.running.dao.def;
 
-import com.usavich.entity.common.Experience;
 import com.usavich.entity.running.*;
 
 import java.util.Date;
@@ -24,6 +23,4 @@ public interface RunningDAO {
     public List<OnGoingRunning> getOnGoingRunning(Integer userId, Date lastUpdateTime);
 
     public void createOnGoingRunning(OnGoingRunning goingRunning);
-
-    public Experience getExperienceLevel(double experience);
 }

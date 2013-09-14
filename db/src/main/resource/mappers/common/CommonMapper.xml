@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.usavich.db.common.dao.impl.CommonMapper">
+
+    <!-- Experience -->
+    <resultMap id="experienceInfo" type="com.usavich.entity.common.Experience">
+        <id column="LEVEL" property="level"/>
+        <result column="EXPERIENCE" property="experience"/>
+        <result column="EXPERIENCE_TOTAL" property="experienceTotal" />
+    </resultMap>
+
+    <sql id="experienceTable">
+        LEVEL,
+        EXPERIENCE,
+        EXPERIENCE_TOTAL
+    </sql>
+
+    <select id="getExperienceLevel" resultMap="experienceInfo">
+        SELECT
+        <include refid="experienceTable"/>
+        FROM EXPERIENCE_COMPARISON
+        WHERE EXPERIENCE_TOTAL > #{experience}
+        ORDER BY LEVEL ASC
+        LIMIT 1
+    </select>
+
+    <!-- VersionControl -->
+    <resultMap id="versionControl" type="com.usavich.entity.common.VersionControl">
+        <id column="PLATFORM" property="platform"/>
+        <result column="VERSION" property="version"/>
+        <result column="SUB_VERSION" property="subVersion"/>
+        <result column="DESCRIPTION" property="description"/>
+    </resultMap>
+
+    <sql id="versionControlTable">
+        VC.PLATFORM,
+        VC.VERSION,
+        VC.SUB_VERSION,
+        VC.DESCRIPTION
+    </sql>
+
+    <select id="getVersionControl" resultMap="versionControl">
+        SELECT
+        <include refid="versionControlTable"/>
+        FROM VERSION_CONTROL AS VC
+        WHERE VC.PLATFORM = #{platform}
+    </select>
+
+    <insert id="updateVersionControl" parameterType="com.usavich.entity.common.VersionControl">
+        UPDATE version_control
+        SET
+            VERSION = #{entity.version},
+            SUB_VERSION = #{entity.subVersion}
+            DESCRIPTION = #{entity.description}
+        WHERE PLATFORM = #{entity.platform}
+    </insert>
+
+    <!-- system message -->
+    <resultMap id="systemMessageInfo" type="com.usavich.entity.common.SystemMessage">
+        <id column="MESSAGE_ID" property="messageId"/>
+        <result column="MESSAGE" property="message"/>
+        <result column="RULE" property="rule" />
+        <result column="LAST_UPDATE_TIME" property="lastUpdateTime"/>
+    </resultMap>
+
+    <sql id="systemMessageTable">
+        MESSAGE_ID,
+        MESSAGE,
+        RULE,
+        LAST_UPDATE_TIME
+    </sql>
+
+    <select id="getSystemMessageInfo" resultMap="systemMessageInfo">
+        SELECT
+        <include refid="systemMessageTable"/>
+        FROM SYSTEM_MESSAGE
+        WHERE LAST_UPDATE_TIME > #{lastUpdateTime}
+    </select>
+
+</mapper>

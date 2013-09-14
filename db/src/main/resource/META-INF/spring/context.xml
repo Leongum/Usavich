@@ -46,7 +46,7 @@
 
     <bean id="accountDAO" class="com.usavich.db.account.dao.impl.AccountDAOImpl"/>
 
-    <bean id="versionControlDAO" class="com.usavich.db.version.dao.impl.VersionControlDAOImpl"/>
+    <bean id="commonDAO" class="com.usavich.db.common.dao.impl.CommonDAOImpl" />
 
     <bean id="missionDAO" class="com.usavich.db.mission.dao.impl.MissionDAOImpl"/>
 
@@ -63,8 +63,8 @@
         <property name="mapperInterface" value="com.usavich.db.account.dao.impl.AccountMapper"/>
     </bean>
 
-    <bean id="versionMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" parent="baseMapper">
-        <property name="mapperInterface" value="com.usavich.db.version.dao.impl.VersionMapper"/>
+    <bean id="commonMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" parent="baseMapper">
+        <property name="mapperInterface" value="com.usavich.db.common.dao.impl.CommonMapper"/>
     </bean>
 
     <bean id="missionMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" parent="baseMapper">

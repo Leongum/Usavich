@@ -68,7 +68,7 @@
     <jaxrs:server id="rootHandler" address="/api">
         <jaxrs:serviceBeans>
             <ref bean="accountRestService"/>
-            <ref bean="versionRestService"/>
+            <ref bean="systemRestService"/>
             <ref bean="missionRestService"/>
             <ref bean="productRestService"/>
             <ref bean="runningRestService"/>
