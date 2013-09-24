@@ -26,6 +26,10 @@ public class VersionControl {
 
     private Date systemTime;
 
+    private Date missionLastUpdateTime;
+
+    private Date messageLastUpdateTime;
+
     public String getPlatform() {
         return platform;
     }
@@ -66,5 +70,25 @@ public class VersionControl {
     @JsonDeserialize(using = CustomDateDeserializer.class)
     public void setSystemTime(Date systemTime) {
         this.systemTime = systemTime;
+    }
+
+    @JsonSerialize(using = CustomDateSerializer.class)
+    public Date getMissionLastUpdateTime() {
+        return missionLastUpdateTime;
+    }
+
+    @JsonDeserialize(using = CustomDateDeserializer.class)
+    public void setMissionLastUpdateTime(Date missionLastUpdateTime) {
+        this.missionLastUpdateTime = missionLastUpdateTime;
+    }
+
+    @JsonSerialize(using = CustomDateSerializer.class)
+    public Date getMessageLastUpdateTime() {
+        return messageLastUpdateTime;
+    }
+
+    @JsonDeserialize(using = CustomDateDeserializer.class)
+    public void setMessageLastUpdateTime(Date messageLastUpdateTime) {
+        this.messageLastUpdateTime = messageLastUpdateTime;
     }
 }

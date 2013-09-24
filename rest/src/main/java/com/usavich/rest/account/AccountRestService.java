@@ -62,7 +62,7 @@ public class AccountRestService implements AccountRestDef {
         userInfoBase.setWeight(userInfo.getWeight());
         userInfoBase.setHeight(userInfo.getHeight());
         userInfoBase.setAge(userInfo.getAge());
-        if (!userInfoBase.getSex().equalsIgnoreCase(userInfo.getSex())) {
+        if (userInfo.getSex() != null && !userInfo.getSex().equalsIgnoreCase(userInfoBase.getSex())) {
             userInfoBase.setSex(userInfo.getSex());
             UserBase userBase = new UserBase();
             userBase = userBase.initUserBase(userInfoBase);

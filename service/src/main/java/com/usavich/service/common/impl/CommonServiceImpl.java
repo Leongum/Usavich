@@ -32,11 +32,15 @@ public class CommonServiceImpl implements CommonService{
 
     @Override
     public VersionControl getVersionForRest(String platform) {
+        VersionControl versionControl = new VersionControl();
         if (platform.equalsIgnoreCase("ios")) {
-            return BackendJobCache.versionControlIOS;
+            versionControl = BackendJobCache.versionControlIOS;
         } else {
-            return getVersionControl(platform);
+            versionControl = getVersionControl(platform);
         }
+        versionControl.setMessageLastUpdateTime(BackendJobCache.messageLastTime);
+        versionControl.setMissionLastUpdateTime(BackendJobCache.missionLastTime);
+        return versionControl;
     }
 
     @Override
