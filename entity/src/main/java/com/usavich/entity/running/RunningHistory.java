@@ -31,9 +31,10 @@ public class RunningHistory {
     private Integer steps;
     private double distance;
     private String offerUsers;
-    private String missionGrade;
+    private Integer missionGrade;
     private double scores;
     private double experience;
+    private double extraExperience;
     private String comment;
     private Date commitTime;
     private String uuid;
@@ -166,6 +167,14 @@ public class RunningHistory {
         this.experience = experience;
     }
 
+    public double getExtraExperience() {
+        return extraExperience;
+    }
+
+    public void setExtraExperience(double extraExperience) {
+        this.extraExperience = extraExperience;
+    }
+
     public String getComment() {
         return comment;
     }
@@ -192,11 +201,11 @@ public class RunningHistory {
         this.uuid = uuid;
     }
 
-    public String getMissionGrade() {
+    public Integer getMissionGrade() {
         return missionGrade;
     }
 
-    public void setMissionGrade(String missionGrade) {
+    public void setMissionGrade(Integer missionGrade) {
         this.missionGrade = missionGrade;
     }
 

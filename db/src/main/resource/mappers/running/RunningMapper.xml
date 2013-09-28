@@ -21,6 +21,7 @@
         <result column="MISSION_GRADE" property="missionGrade"/>
         <result column="SCORES" property="scores"/>
         <result column="EXPERIENCE" property="experience"/>
+        <result column="EXTRA_EXPERIENCE" property="extraExperience"/>
         <result column="COMMENT" property="comment"/>
         <result column="COMMIT_TIME" property="commitTime"/>
         <result column="UUID" property="uuid"/>
@@ -59,6 +60,7 @@
         MISSION_GRADE,
         SCORES,
         EXPERIENCE,
+        EXTRA_EXPERIENCE,
         COMMENT,
         COMMIT_TIME,
         UUID,
@@ -126,6 +128,7 @@
             MISSION_GRADE,
             SCORES,
             EXPERIENCE,
+            EXTRA_EXPERIENCE,
             COMMENT,
             COMMIT_TIME,
             UUID,
@@ -152,6 +155,7 @@
             #{entity.missionGrade},
             #{entity.scores},
             #{entity.experience},
+            #{entity.extraExperience},
             #{entity.comment},
             #{entity.commitTime},
             #{entity.uuid},

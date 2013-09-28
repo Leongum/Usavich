@@ -36,10 +36,12 @@
     <resultMap id="missionChallengeInfo" type="com.usavich.entity.mission.MissionChallenge">
         <id column="CHALLENGE_ID" property="challengeId"/>
         <result column="GRADE" property="grade"/>
+        <result column="SEX" property="sex"/>
         <result column="TIME" property="time"/>
         <result column="DISTANCE" property="distance"/>
         <result column="SEQUENCE" property="sequence"/>
         <result column="NOTE" property="note"/>
+        <result column="RULE" property="rule"/>
     </resultMap>
 
     <sql id="missionTable">
@@ -76,10 +78,12 @@
     <sql id="missionChallengeTable">
         CHALLENGE_ID,
         GRADE,
+        SEX,
         TIME,
         DISTANCE,
         SEQUENCE,
-        NOTE
+        NOTE,
+        RULE
     </sql>
 
     <select id="getMissions" resultMap="missionInfo">
@@ -111,7 +115,7 @@
         <include refid="missionChallengeTable"/>
         FROM MISSION_CHALLENGE
         WHERE CHALLENGE_ID = #{challengeId}
-        ORDER BY SEQUENCE ASC
+        ORDER BY SEX ASC,SEQUENCE ASC
     </select>
 
 </mapper>

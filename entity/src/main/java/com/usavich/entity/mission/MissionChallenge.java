@@ -17,6 +17,8 @@ public class MissionChallenge {
     private Double distance;
     private Integer sequence;
     private String note;
+    private String sex;
+    private String rule;
 
     public Integer getChallengeId() {
         return challengeId;
@@ -64,5 +66,21 @@ public class MissionChallenge {
 
     public void setSequence(Integer sequence) {
         this.sequence = sequence;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getRule() {
+        return rule;
+    }
+
+    public void setRule(String rule) {
+        this.rule = rule;
     }
 }
