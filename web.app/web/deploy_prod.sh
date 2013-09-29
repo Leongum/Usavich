@@ -83,17 +83,17 @@ function deploy(){
     #chmod u+rx ${_app_root_path}/WEB-INF/upload/ > /dev/null 2>&1
     #chmod u+rx *.sh > /dev/null 2>&1
     echo Copying files to remote 1box ...
-    run_scp_cmd_r "${_app_root_path}/WEB-INF/upload/*.jar" "/usr/share/tomcat6/WEB-INF/lib/"
+    run_scp_cmd_r "${_app_root_path}/WEB-INF/upload/*.jar" "/usr/local/tomcat/webapps/ROOT/WEB-INF/lib/"
     check_task_status $?
-    run_scp_cmd_r "${_app_root_path}/WEB-INF/*.xml" "/usr/share/tomcat6/WEB-INF/"
+    run_scp_cmd_r "${_app_root_path}/WEB-INF/*.xml" "/usr/local/tomcat/webapps/ROOT/WEB-INF/"
     check_task_status $?
 
     echo Waiting for remote 1box to finish deploying ...
     echo Shutdown Old service ...
-    run_ssh_remote_cmd "/usr/share/tomcat6/bin/shutdown.sh"
+    run_ssh_remote_cmd "/usr/local/tomcat/bin/shutdown.sh"
     check_task_status $?
     echo Start up New service ...
-    run_ssh_remote_cmd "/usr/share/tomcat6/bin/startup.sh"
+    run_ssh_remote_cmd "/usr/local/tomcat/bin/startup.sh"
     check_task_status $?
     _remote_default_ssh_username=${_remote_username}@${_remote_ip}
 }

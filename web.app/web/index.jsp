@@ -11,6 +11,6 @@
     <title></title>
   </head>
   <body>
-Cyberace 网站建设中.敬请期待。
+Cyberace 网站建设中。敬请期待。
   </body>
 </html>
