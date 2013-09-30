@@ -1,9 +1,7 @@
 package com.usavich.db.common.dao.impl;
 
 import com.usavich.db.common.dao.def.CommonDAO;
-import com.usavich.entity.common.Experience;
-import com.usavich.entity.common.SystemMessage;
-import com.usavich.entity.common.VersionControl;
+import com.usavich.entity.common.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
@@ -29,6 +27,11 @@ public class CommonDAOImpl implements CommonDAO{
     @Override
     public List<SystemMessage> getSystemMessage(Date lastUpdateTime) {
         return commonMapper.getSystemMessageInfo(lastUpdateTime);
+    }
+
+    @Override
+    public void createFeedback(Feedback feedback) {
+        commonMapper.createFeedback(feedback);
     }
 
     @Override

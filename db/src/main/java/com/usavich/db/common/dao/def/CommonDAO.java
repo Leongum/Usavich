@@ -1,8 +1,6 @@
 package com.usavich.db.common.dao.def;
 
-import com.usavich.entity.common.Experience;
-import com.usavich.entity.common.SystemMessage;
-import com.usavich.entity.common.VersionControl;
+import com.usavich.entity.common.*;
 
 import java.util.Date;
 import java.util.List;
@@ -23,4 +21,6 @@ public interface CommonDAO {
     public Experience getExperienceLevel(double experience);
 
     public List<SystemMessage> getSystemMessage(Date lastUpdateTime);
+
+    public void createFeedback(Feedback feedback);
 }

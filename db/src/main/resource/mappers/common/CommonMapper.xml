@@ -78,4 +78,33 @@
         WHERE LAST_UPDATE_TIME > #{lastUpdateTime}
     </select>
 
+
+    <!-- Experience -->
+    <resultMap id="feedbackInfo" type="com.usavich.entity.common.Feedback">
+        <id column="CONTACT" property="contact"/>
+        <result column="SUGGESTION" property="suggestion"/>
+        <result column="COMMIT_TIME" property="commitTime"/>
+    </resultMap>
+
+    <sql id="feedbackTable">
+        CONTACT,
+        SUGGESTION,
+        COMMIT_TIME
+    </sql>
+
+    <insert id="createFeedback" parameterType="com.usavich.entity.common.Feedback">
+        INSERT INTO FEEDBACK
+        (
+            CONTACT,
+            SUGGESTION,
+            COMMIT_TIME
+        )
+        VALUES
+        (
+            #{entity.contact},
+            #{entity.suggestion},
+            #{entity.commitTime}
+        )
+    </insert>
+
 </mapper>

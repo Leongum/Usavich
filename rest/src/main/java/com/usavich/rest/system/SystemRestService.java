@@ -2,11 +2,11 @@ package com.usavich.rest.system;
 
 import com.usavich.common.lib.CommonUtils;
 import com.usavich.common.lib.Universe;
-import com.usavich.entity.common.SystemMessage;
-import com.usavich.entity.common.VersionControl;
+import com.usavich.entity.common.*;
 import com.usavich.service.common.def.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,5 +31,11 @@ public class SystemRestService implements SystemRestDef{
     @Override
     public List<SystemMessage> getSystemMessage(String lastUpdateTime) {
         return commonService.getSystemMessageForRest(CommonUtils.parseDateDefaultToNull(lastUpdateTime));
+    }
+
+    @Override
+    public void createAccountInfo(Feedback feedback) {
+        feedback.setCommitTime(new Date());
+        commonService.createFeedback(feedback);
     }
 }

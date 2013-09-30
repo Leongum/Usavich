@@ -1,8 +1,7 @@
 package com.usavich.service.common.impl;
 
 import com.usavich.db.common.dao.def.CommonDAO;
-import com.usavich.entity.common.SystemMessage;
-import com.usavich.entity.common.VersionControl;
+import com.usavich.entity.common.*;
 import com.usavich.service.backend.BackendJobCache;
 import com.usavich.service.common.def.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,5 +56,10 @@ public class CommonServiceImpl implements CommonService{
             return new ArrayList<SystemMessage>();
         }
         return getSystemMessage(lastUpdateTime);
+    }
+
+    @Override
+    public void createFeedback(Feedback feedback) {
+        commonDAO.createFeedback(feedback);
     }
 }

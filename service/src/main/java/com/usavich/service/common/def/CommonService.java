@@ -1,7 +1,6 @@
 package com.usavich.service.common.def;
 
-import com.usavich.entity.common.SystemMessage;
-import com.usavich.entity.common.VersionControl;
+import com.usavich.entity.common.*;
 
 import java.util.Date;
 import java.util.List;
@@ -21,4 +20,6 @@ public interface CommonService {
     List<SystemMessage> getSystemMessage(Date lastUpdateTime);
 
     List<SystemMessage> getSystemMessageForRest(Date lastUpdateTime);
+
+    void createFeedback(Feedback feedback);
 }

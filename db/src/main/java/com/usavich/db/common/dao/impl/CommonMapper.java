@@ -1,8 +1,6 @@
 package com.usavich.db.common.dao.impl;
 
-import com.usavich.entity.common.Experience;
-import com.usavich.entity.common.SystemMessage;
-import com.usavich.entity.common.VersionControl;
+import com.usavich.entity.common.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -24,4 +22,6 @@ public interface CommonMapper {
     public void updateVersionControl(@Param("entity") VersionControl versionControl);
 
     public List<SystemMessage> getSystemMessageInfo( @Param("lastUpdateTime") Date lastUpdateTime);
+
+    public void createFeedback(@Param("entity")Feedback feedback);
 }

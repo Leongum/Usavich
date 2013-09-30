@@ -1,7 +1,6 @@
 package com.usavich.rest.system;
 
-import com.usavich.entity.common.SystemMessage;
-import com.usavich.entity.common.VersionControl;
+import com.usavich.entity.common.*;
 import com.usavich.rest.common.RestDef;
 
 import javax.ws.rs.*;
@@ -29,4 +28,8 @@ public interface SystemRestDef extends RestDef {
     @Path("/message/{" + PARAM_LAST_UPDATE_TIME + "}")
     List<SystemMessage> getSystemMessage(
             @PathParam(PARAM_LAST_UPDATE_TIME) String lastUpdateTime);
+
+    @POST
+    @Path("/feedback")
+    void createAccountInfo(Feedback feedback);
 }

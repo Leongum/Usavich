@@ -211,7 +211,7 @@
             FRIEND_ID,
             FRIEND_STATUS,
             ADD_TIME,
-            UPDATE_TIME,
+            UPDATE_TIME
         )
         VALUES
         (
