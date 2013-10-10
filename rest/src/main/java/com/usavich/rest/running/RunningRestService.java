@@ -7,6 +7,7 @@ import com.usavich.service.account.def.AccountService;
 import com.usavich.service.running.def.RunningService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,6 +47,14 @@ public class RunningRestService implements RunningRestDef {
         accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
         for (RunningHistory runningHistory : runningHistoryList) {
             runningHistory.setUserId(CommonUtils.parseIntegerToNull(userId));
+            if(runningHistory.getCommitTime() == null){
+                runningHistory.setCommitTime(new Date());
+            }
+            if (runningHistory.getValid() != 1) {
+                runningHistory.setExperience(0);
+                runningHistory.setScores(0);
+                runningHistory.setExtraExperience(0);
+            }
         }
         runningService.createRunningHistory(CommonUtils.parseIntegerToNull(userId), runningHistoryList);
     }
