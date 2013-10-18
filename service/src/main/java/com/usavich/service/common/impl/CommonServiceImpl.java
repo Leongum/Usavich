@@ -62,4 +62,9 @@ public class CommonServiceImpl implements CommonService{
     public void createFeedback(Feedback feedback) {
         commonDAO.createFeedback(feedback);
     }
+
+    @Override
+    public void createDownLoadInfo(Statistics statistics) {
+        commonDAO.createDownLoadInfo(statistics);
+    }
 }

@@ -31,5 +31,9 @@ public interface SystemRestDef extends RestDef {
 
     @POST
     @Path("/feedback")
-    void createAccountInfo(Feedback feedback);
+    void createFeedbackInfo(Feedback feedback);
+
+    @POST
+    @Path("/download")
+    void createDownLoadInfo(Statistics statistics);
 }

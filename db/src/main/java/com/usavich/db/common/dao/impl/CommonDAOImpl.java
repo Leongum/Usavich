@@ -35,6 +35,11 @@ public class CommonDAOImpl implements CommonDAO{
     }
 
     @Override
+    public void createDownLoadInfo(Statistics statistics) {
+        commonMapper.createDownLoadInfo(statistics);
+    }
+
+    @Override
     public VersionControl getVersionControl(String platform) {
         return commonMapper.getVersionControl(platform);
     }

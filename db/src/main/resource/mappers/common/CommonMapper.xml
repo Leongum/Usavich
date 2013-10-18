@@ -79,17 +79,19 @@
     </select>
 
 
-    <!-- Experience -->
+    <!-- Feedback -->
     <resultMap id="feedbackInfo" type="com.usavich.entity.common.Feedback">
         <id column="CONTACT" property="contact"/>
         <result column="SUGGESTION" property="suggestion"/>
         <result column="COMMIT_TIME" property="commitTime"/>
+        <result column="USER_ID" property="userId"/>
     </resultMap>
 
     <sql id="feedbackTable">
         CONTACT,
         SUGGESTION,
-        COMMIT_TIME
+        COMMIT_TIME,
+        USER_ID
     </sql>
 
     <insert id="createFeedback" parameterType="com.usavich.entity.common.Feedback">
@@ -97,13 +99,43 @@
         (
             CONTACT,
             SUGGESTION,
-            COMMIT_TIME
+            COMMIT_TIME,
+            USER_ID
         )
         VALUES
         (
             #{entity.contact},
             #{entity.suggestion},
-            #{entity.commitTime}
+            #{entity.commitTime},
+            #{entity.userId}
+        )
+    </insert>
+
+    <!-- down Load info -->
+    <resultMap id="statisticsInfo" type="com.usavich.entity.common.Statistics">
+        <id column="PLATFORM" property="platform"/>
+        <result column="DOWNLOAD_TIME" property="downloadTime"/>
+        <result column="VERSION" property="version"/>
+    </resultMap>
+
+    <sql id="statisticsTable">
+        PLATFORM,
+        DOWNLOAD_TIME,
+        VERSION
+    </sql>
+
+    <insert id="createDownLoadInfo" parameterType="com.usavich.entity.common.Statistics">
+        INSERT INTO STATISTICS
+        (
+            PLATFORM,
+            DOWNLOAD_TIME,
+            VERSION
+        )
+        VALUES
+        (
+            #{entity.platform},
+            #{entity.downloadTime},
+            #{entity.version}
         )
     </insert>
 

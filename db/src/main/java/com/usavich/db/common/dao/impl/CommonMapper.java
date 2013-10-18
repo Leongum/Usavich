@@ -24,4 +24,6 @@ public interface CommonMapper {
     public List<SystemMessage> getSystemMessageInfo( @Param("lastUpdateTime") Date lastUpdateTime);
 
     public void createFeedback(@Param("entity")Feedback feedback);
+
+    public void createDownLoadInfo(@Param("entity")Statistics statistics);
 }

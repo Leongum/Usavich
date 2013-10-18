@@ -22,4 +22,6 @@ public interface CommonService {
     List<SystemMessage> getSystemMessageForRest(Date lastUpdateTime);
 
     void createFeedback(Feedback feedback);
+
+    void createDownLoadInfo(Statistics statistics);
 }

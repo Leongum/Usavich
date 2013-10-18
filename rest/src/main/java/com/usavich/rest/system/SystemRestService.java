@@ -34,8 +34,16 @@ public class SystemRestService implements SystemRestDef{
     }
 
     @Override
-    public void createAccountInfo(Feedback feedback) {
+    public void createFeedbackInfo(Feedback feedback) {
         feedback.setCommitTime(new Date());
         commonService.createFeedback(feedback);
     }
+
+    @Override
+    public void createDownLoadInfo(Statistics statistics) {
+        statistics.setDownloadTime(new Date());
+        commonService.createDownLoadInfo(statistics);
+    }
+
+
 }

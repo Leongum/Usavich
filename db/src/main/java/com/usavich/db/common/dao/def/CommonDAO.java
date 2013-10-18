@@ -23,4 +23,6 @@ public interface CommonDAO {
     public List<SystemMessage> getSystemMessage(Date lastUpdateTime);
 
     public void createFeedback(Feedback feedback);
+
+    public void createDownLoadInfo(Statistics statistics);
 }

@@ -19,6 +19,8 @@ public class Feedback {
 
     private String answer;
 
+    private Integer userId;
+
     public String getContact() {
         return contact;
     }
@@ -49,5 +51,13 @@ public class Feedback {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }
