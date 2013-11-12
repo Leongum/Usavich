@@ -139,4 +139,30 @@
         )
     </insert>
 
+
+    <!--id generation -->
+    <resultMap id="idGenerationInfo" type="com.usavich.entity.common.IDGeneration">
+        <id column="MISSION_ID" property="missionId"/>
+        <result column="PLAN_ID" property="planId"/>
+    </resultMap>
+
+    <sql id="idGenerationTable">
+        MISSION_ID,
+        PLAN_ID
+    </sql>
+
+    <select id="getIDGenerationInfo" resultMap="idGenerationInfo">
+        SELECT
+        <include refid="idGenerationTable"/>
+        FROM ID_GENERATION
+        LIMIT 1
+    </select>
+
+    <update id="updateIDGenerationFriend" parameterType="com.usavich.entity.common.IDGeneration">
+         UPDATE ID_GENERATION
+         SET
+             MISSION_ID = #{entity.missionId},
+             PLAN_ID = #{entity.planId}
+    </update>
+
 </mapper>

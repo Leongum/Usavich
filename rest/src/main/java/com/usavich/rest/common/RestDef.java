@@ -18,6 +18,7 @@ public interface RestDef {
     static final String PARAM_PRODUCT_ID = "productId";
     static final String PARAM_CITY_NAME = "cityName";
     static final String PARAM_PROVINCE_NAME = "provinceName";
+    static final String PARAM_PLAN_ID = "planId";
 
     static final String PARAM_PAGE_NUMBER = "pageNo";
     static final String PARAM_PAGE_SIZE = "pageSize";

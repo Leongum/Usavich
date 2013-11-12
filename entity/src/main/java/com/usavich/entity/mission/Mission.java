@@ -41,6 +41,7 @@ public class Mission {
     private String subMissionList;
     private Integer missionPackageId;
     private Integer sequence;
+    private Integer planId;
 
     public Integer getMissionId() {
         return missionId;
@@ -226,5 +227,13 @@ public class Mission {
 
     public void setSequence(Integer sequence) {
         this.sequence = sequence;
+    }
+
+    public Integer getPlanId() {
+        return planId;
+    }
+
+    public void setPlanId(Integer planId) {
+        this.planId = planId;
     }
 }

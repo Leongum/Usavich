@@ -73,6 +73,7 @@
             <ref bean="productRestService"/>
             <ref bean="runningRestService"/>
             <ref bean="weatherRestService"/>
+            <ref bean="planRestService"/>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <ref bean="jsonProvider"/>

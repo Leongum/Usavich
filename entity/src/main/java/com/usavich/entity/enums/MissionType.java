@@ -16,4 +16,8 @@ public enum  MissionType {
     Cycle,
 
     SubCycle,
+
+    NormalRun,
+
+    Plan,
 }

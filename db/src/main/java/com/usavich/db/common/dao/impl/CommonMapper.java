@@ -26,4 +26,8 @@ public interface CommonMapper {
     public void createFeedback(@Param("entity")Feedback feedback);
 
     public void createDownLoadInfo(@Param("entity")Statistics statistics);
+
+    public IDGeneration getIDGenerationInfo();
+
+    public void updateIDGenerationFriend(@Param("entity")IDGeneration idGeneration);
 }

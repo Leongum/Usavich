@@ -1,0 +1,39 @@
+package com.usavich.service.plan.def;
+
+import com.usavich.entity.plan.Plan;
+import com.usavich.entity.plan.PlanCollect;
+import com.usavich.entity.plan.PlanRunHistory;
+import com.usavich.entity.plan.PlanUserFollow;
+
+import java.util.Date;
+import java.util.List;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: p
+ * Date: 13-11-12
+ * Time: 上午9:41
+ * To change this template use File | Settings | File Templates.
+ */
+public interface PlanService {
+
+    List<Plan> getPlanByPageNo(Integer pageNo);
+
+    Plan getPlan(Integer planId, Date lastUpdateTime, Integer needMissions);
+
+    List<PlanCollect> getPlanCollection(Integer userId, Date lastUpdateTime);
+
+    void updateUserCollects(Integer userId, List<PlanCollect> planCollects);
+
+    List<PlanRunHistory> getPlanRunHistory(Integer userId, Date lastUpdateTime);
+
+    PlanRunHistory checkRunningHistoryStatus(Integer userId, PlanRunHistory planHistory);
+
+    List<PlanRunHistory> getPlanRunningByPlanId(Integer planId);
+
+    List<PlanRunHistory> getPlanRunningByUserId(Integer userId);
+
+    List<PlanUserFollow> getPlanFollower(Integer userId, Date lastUpdateTime);
+
+    void updatePlanFollower(Integer userId, List<PlanUserFollow> planFollow);
+}

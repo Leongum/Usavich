@@ -40,6 +40,16 @@ public class CommonDAOImpl implements CommonDAO{
     }
 
     @Override
+    public IDGeneration getIDGenerationInfo() {
+        return commonMapper.getIDGenerationInfo();
+    }
+
+    @Override
+    public void updateIDGenerationFriend(IDGeneration idGeneration) {
+        commonMapper.updateIDGenerationFriend(idGeneration);
+    }
+
+    @Override
     public VersionControl getVersionControl(String platform) {
         return commonMapper.getVersionControl(platform);
     }

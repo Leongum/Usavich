@@ -25,4 +25,8 @@ public interface CommonDAO {
     public void createFeedback(Feedback feedback);
 
     public void createDownLoadInfo(Statistics statistics);
+
+    public IDGeneration getIDGenerationInfo();
+
+    public void updateIDGenerationFriend(IDGeneration idGeneration);
 }

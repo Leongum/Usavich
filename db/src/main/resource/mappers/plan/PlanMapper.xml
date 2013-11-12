@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.usavich.db.plan.dao.impl.PlanMapper">
+    <resultMap id="planInfo" type="com.usavich.entity.plan.Plan">
+        <id column="PLAN_ID" property="missionId"/>
+        <result column="PLAN_NAME" property="missionTypeId"/>
+        <result column="PLAN_DESCRIPTION" property="missionName"/>
+        <result column="PLAN_TYPE" property="missionContent"/>
+        <result column="MISSION_IDS" property="scores"/>
+        <result column="TOTAL_MISSIONS" property="experience"/>
+        <result column="PLAN_SHARE_USER" property="missionFlag"/>
+        <result column="PLAN_SHARE_USER_NAME" property="levelLimited"/>
+        <result column="SHARED_PLAN" property="missionTime"/>
+        <result column="CYCLE_TIME" property="missionDistance"/>
+        <result column="DURATION" property="cycleTime"/>
+        <result column="DURATION_TYPE" property="missionFrom"/>
+        <result column="PLAN_STATUS" property="missionTo"/>
+        <result column="LAST_UPDATE_TIME" property="lastUpdateTime"/>
+    </resultMap>
+
+    <resultMap id="planCollectInfo" type="com.usavich.entity.plan.PlanCollect">
+        <id column="USER_ID" property="userId"/>
+        <result column="PLAN_ID" property="planId"/>
+        <result column="COLLECT_TIME" property="collectTime"/>
+        <result column="COLLECT_STATUS" property="collectStatus"/>
+    </resultMap>
+
+    <resultMap id="planUserFollowInfo" type="com.usavich.entity.plan.PlanUserFollow">
+        <id column="USER_ID" property="userId"/>
+        <result column="FOLLOWER_USER_ID" property="followUserId"/>
+        <result column="STATUS" property="status"/>
+        <result column="ADD_TIME" property="addTime"/>
+    </resultMap>
+
+    <resultMap id="planNextMissionInfo" type="com.usavich.entity.plan.PlanNextMission">
+        <id column="USER_ID" property="userId"/>
+        <result column="PLAN_RUN_UUID" property="planRunUuid"/>
+        <result column="NEXT_MISSION_ID" property="nextMissionId"/>
+        <result column="START_TIME" property="startTime"/>
+        <result column="END_TIME" property="endTime"/>
+        <result column="COMMIT_TIME" property="commitTime"/>
+        <result column="PLAN_ID" property="planId"/>
+    </resultMap>
+
+    <resultMap id="planRunHistoryInfo" type="com.usavich.entity.plan.PlanRunHistory">
+        <id column="PLAN_ID" property="planId"/>
+        <result column="PLAN_RUN_UUID" property="planRunUuid"/>
+        <result column="NEXT_MISSION_ID" property="nextMissionId"/>
+        <result column="USER_ID" property="userId"/>
+        <result column="START_TIME" property="startTime"/>
+        <result column="END_TIME" property="endTime"/>
+        <result column="RATE" property="rate"/>
+        <result column="RATE_COMMENT" property="rateComment"/>
+        <result column="REMAINING_MISSIONS" property="remainingMissions"/>
+        <result column="TOTAL_MISSIONS" property="totalMissions"/>
+        <result column="HISTORY_STATUS" property="historyStatus"/>
+    </resultMap>
+
+    <sql id="planTable">
+        PLAN_ID,
+        PLAN_NAME,
+        PLAN_DESCRIPTION,
+        PLAN_TYPE,
+        MISSION_IDS,
+        TOTAL_MISSIONS,
+        PLAN_SHARE_USER,
+        PLAN_SHARE_USER_NAME,
+        SHARED_PLAN,
+        CYCLE_TIME,
+        DURATION,
+        DURATION_TYPE,
+        PLAN_STATUS,
+        LAST_UPDATE_TIME
+    </sql>
+
+    <sql id="planCollectTable">
+        USER_ID,
+        PLAN_ID,
+        COLLECT_TIME,
+        COLLECT_STATUS
+    </sql>
+
+    <sql id="planUserFollowTable">
+        USER_ID,
+        FOLLOWER_USER_ID,
+        STATUS,
+        ADD_TIME
+    </sql>
+
+    <sql id="planNextMissionTable">
+        PLAN_ID,
+        PLAN_RUN_UUID,
+        NEXT_MISSION_ID,
+        START_TIME,
+        END_TIME,
+        COMMIT_TIME,
+        USER_ID
+    </sql>
+
+    <sql id="planRunHistoryTable">
+        PLAN_ID,
+        PLAN_RUN_UUID,
+        NEXT_MISSION_ID,
+        USER_ID,
+        START_TIME,
+        END_TIME,
+        RATE,
+        RATE_COMMENT,
+        REMAINING_MISSIONS,
+        TOTAL_MISSIONS,
+        HISTORY_STATUS
+    </sql>
+
+    <select id="getPlans" resultMap="planInfo">
+        SELECT
+        <include refid="planTable"/>
+        FROM PLAN
+        WHERE PLAN_ID = #{planId}
+        <if test="lastUpdateTime != null"><![CDATA[
+        AND LAST_UPDATE_TIME > #{lastUpdateTime}
+        ]]></if>
+    </select>
+
+    <select id="getNextPlan" resultMap="planNextMissionInfo">
+        SELECT
+        <include refid="planNextMissionTable"/>
+        FROM PLAN_NEXT_MISSION
+        WHERE USER_ID = #{entity.userId}
+        <if test="lastUpdateTime != null"><![CDATA[
+        AND LAST_UPDATE_TIME > #{lastUpdateTime}
+        ]]></if>
+    </select>
+
+    <update id="updateNextPlan" parameterType="com.usavich.entity.plan.PlanNextMission">
+         UPDATE PLAN_NEXT_MISSION
+         SET
+            PLAN_RUN_UUID = #{entity.planRunUuid},
+            PLAN_ID = #{entity.planId},
+            NEXT_MISSION_ID = #{entity.nextMissionId},
+            START_TIME = #{entity.startTime},
+            END_TIME = #{entity.endTime},
+            COMMIT_TIME = #{entity.commitTime}
+         WHERE USER_ID = #{entity.userId}
+    </update>
+
+    <select id="getPlanCollect" resultMap="planCollectInfo">
+        SELECT
+        <include refid="planCollectTable"/>
+        FROM PLAN_COLLECT
+        WHERE USER_ID = #{userId} AND COMMIT_TIME > #{collectTime}
+    </select>
+
+    <insert id="createPlanCollect" parameterType="com.usavich.entity.plan.PlanCollect">
+        INSERT INTO PLAN_COLLECT
+        (
+            USER_ID,
+            PLAN_ID,
+            COLLECT_TIME,
+            COLLECT_STATUS
+        )
+        VALUES
+        (
+            #{entity.userId},
+            #{entity.planId},
+            #{entity.collectTime},
+            0
+        )
+    </insert>
+
+    <update id="deletePlanCollect" parameterType="com.usavich.entity.plan.PlanCollect">
+         UPDATE PLAN_COLLECT
+         SET
+            COLLECT_STATUS = 0,
+            COLLECT_TIME = #{entity.collectTime}
+         WHERE USER_ID = #{entity.userId} AND PLAN_ID = #{entity.planId}
+    </update>
+
+</mapper>

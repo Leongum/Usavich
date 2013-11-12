@@ -24,6 +24,7 @@
         <result column="SUB_MISSION_LIST" property="subMissionList"/>
         <result column="MISSION_PACKAGE_ID" property="missionPackageId"/>
         <result column="SEQUENCE" property="sequence"/>
+        <result column="PLAN_ID" property="planId"/>
     </resultMap>
 
     <resultMap id="missionPlacePackageInfo" type="com.usavich.entity.mission.MissionPlacePackage">
@@ -65,7 +66,8 @@
         CHALLENGE_ID,
         SUB_MISSION_LIST,
         MISSION_PACKAGE_ID,
-        SEQUENCE
+        SEQUENCE,
+        PLAN_ID
     </sql>
 
     <sql id="missionPlacePackageTable">
@@ -93,6 +95,9 @@
         WHERE 1 = 1
         <if test="missionId != null"><![CDATA[
         AND MISSION_ID = #{missionId}
+        ]]></if>
+        <if test="missionId == null"><![CDATA[
+        AND MISSION_ID < 10000
         ]]></if>
         <if test="lastUpdateTime != null"><![CDATA[
         AND LAST_UPDATE_TIME > #{lastUpdateTime}

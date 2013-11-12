@@ -17,6 +17,7 @@
     <bean id="productService" class="com.usavich.service.product.impl.ProductServiceImpl"/>
     <bean id="runningService" class="com.usavich.service.running.impl.RunningServiceImpl"/>
     <bean id="commonService" class="com.usavich.service.common.impl.CommonServiceImpl"/>
+    <bean id="planService" class="com.usavich.service.plan.impl.PlanServiceImpl"/>
 
     <bean id="backendJobCache" class="com.usavich.service.backend.BackendJobCache"/>
 

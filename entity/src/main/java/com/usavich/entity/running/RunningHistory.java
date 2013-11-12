@@ -40,6 +40,8 @@ public class RunningHistory {
     private String uuid;
     private Integer grade;
     private Integer valid;
+    private String planRunUuid;
+    private Integer sequence;
 
     public Integer getUserId() {
         return userId;
@@ -239,5 +241,21 @@ public class RunningHistory {
 
     public void setValid(Integer valid) {
         this.valid = valid;
+    }
+
+    public String getPlanRunUuid() {
+        return planRunUuid;
+    }
+
+    public void setPlanRunUuid(String planRunUuid) {
+        this.planRunUuid = planRunUuid;
+    }
+
+    public Integer getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(Integer sequence) {
+        this.sequence = sequence;
     }
 }
