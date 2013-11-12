@@ -42,6 +42,7 @@ public class RunningHistory {
     private Integer valid;
     private String planRunUuid;
     private Integer sequence;
+    private String speedList;
 
     public Integer getUserId() {
         return userId;
@@ -257,5 +258,13 @@ public class RunningHistory {
 
     public void setSequence(Integer sequence) {
         this.sequence = sequence;
+    }
+
+    public String getSpeedList() {
+        return speedList;
+    }
+
+    public void setSpeedList(String speedList) {
+        this.speedList = speedList;
     }
 }

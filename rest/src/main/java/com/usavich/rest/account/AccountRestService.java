@@ -5,6 +5,8 @@ import com.usavich.entity.account.*;
 import com.usavich.service.account.def.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import java.util.List;
 import java.util.UUID;
 
@@ -111,5 +113,11 @@ public class AccountRestService implements AccountRestDef {
         accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
         userLocation.setUserId(CommonUtils.parseIntegerToNull(userId));
         accountService.updateUserLocation(userLocation);
+    }
+
+    @Override
+    public List<UserInfo> getUserFollowerInformation(String userId, String pageNo) {
+        CommonUtils.newMethodCall("AccountRestService.getUserFollowerInformation");
+        return accountService.getUserFollowerInformation(CommonUtils.parseIntegerToNull(userId),CommonUtils.parseIntegerToNull(pageNo));
     }
 }

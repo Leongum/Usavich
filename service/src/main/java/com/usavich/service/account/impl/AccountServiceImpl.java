@@ -136,4 +136,11 @@ public class AccountServiceImpl implements AccountService {
     public List<UserLocation> getUserLocations() {
         return accountDAO.getUserLocations();
     }
+
+    @Override
+    public List<UserInfo> getUserFollowerInformation(Integer userId, Integer pageNo) {
+        Integer from = pageNo * 10;
+        Integer pageSize = 30;
+        return accountDAO.getUserFollowerInformation(userId, from, pageSize);
+    }
 }

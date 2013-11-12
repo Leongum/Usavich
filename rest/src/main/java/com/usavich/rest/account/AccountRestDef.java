@@ -75,4 +75,10 @@ public interface AccountRestDef extends RestDef {
     void updateUserLocation(@PathParam(PARAM_USER_ID) String userId,
                             UserLocation userLocation);
 
+    @GET
+    @Path("/follower/{" + PARAM_USER_ID + "}")
+    List<UserInfo> getUserFollowerInformation(
+            @PathParam(PARAM_USER_ID) String userId,
+            @QueryParam(PARAM_PAGE_NUMBER) String pageNo);
+
 }

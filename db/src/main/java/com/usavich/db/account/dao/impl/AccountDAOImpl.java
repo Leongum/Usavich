@@ -116,4 +116,9 @@ public class AccountDAOImpl implements AccountDAO {
     public List<UserLocation> getUserLocations() {
         return accountMapper.getUserLocations();
     }
+
+    @Override
+    public List<UserInfo> getUserFollowerInformation(Integer userId, Integer from, Integer pageSize) {
+        return accountMapper.getUserFollowerInformation(userId, from, pageSize);
+    }
 }

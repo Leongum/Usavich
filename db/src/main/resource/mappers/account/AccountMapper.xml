@@ -21,6 +21,10 @@
         <result column="WEIGHT" property="weight"/>
         <result column="HEIGHT" property="height"/>
         <result column="AGE" property="age"/>
+        <result column="TOTAL_DISTANCE" property="totalDistance"/>
+        <result column="AVG_SPEED" property="avgSpeed"/>
+        <result column="SPEND_CARLORIE" property="spendCarlorie"/>
+        <result column="TOTAL_RUN_TIMES" property="totalRunTimes"/>
         <!-- <result column="BASE_ACC" property="baseAcc"/>
         <result column="INERTIA_ACC" property="inertiaAcc"/>
         <result column="CRIT" property="crit"/>
@@ -70,7 +74,11 @@
         UD.RECOVER_SPEED,
         UD.WEIGHT,
         UD.HEIGHT,
-        UD.AGE
+        UD.AGE,
+        UD.TOTAL_DISTANCE,
+        UD.AVG_SPEED,
+        UD.SPEND_CARLORIE,
+        UD.TOTAL_RUN_TIMES,
     </sql>
 
     <sql id="userFriendInfoTable">
@@ -245,7 +253,11 @@
             RECOVER_SPEED = #{entity.recoverSpeed},
             WEIGHT = #{entity.weight},
             HEIGHT = #{entity.height},
-            AGE = #{entity.age}
+            AGE = #{entity.age},
+            TOTAL_DISTANCE = #{entity.totalDistance},
+            AVG_SPEED = #{entity.avgSpeed},
+            SPEND_CARLORIE = #{entity.spendCarlorie},
+            TOTAL_RUN_TIMES = #{entity.totalRunTimes},
         WHERE USER_ID = #{entity.userId}
     </update>
 
@@ -311,5 +323,17 @@
             LAST_ACTIVE_TIME = #{entity.lastActiveTime}
          WHERE USER_ID = #{entity.userId}
     </update>
+
+    <select id="getUserFollowerInformation" resultMap="accountInfo">
+        SELECT
+        <include refid="accountInfoTable"/>
+        FROM PLAN_USER_FOLLOW AS PUF
+        INNER JOIN USER AS U
+        ON PUF.FOLLOWER_USER_ID = U.USER_ID
+        INNER JOIN USER_DETAIL AS UD
+        ON U.USER_ID = UD.USER_ID
+        WHERE PUF.USER_ID = #{userId}
+        LIMIT #{from},#{pageSize}
+    </select>
 
 </mapper>

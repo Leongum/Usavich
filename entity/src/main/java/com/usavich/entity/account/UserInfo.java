@@ -33,6 +33,11 @@ public class UserInfo extends UserBase {
 
     private Integer age;
 
+    private double totalDistance;
+    private double avgSpeed;
+    private double spendCarlorie;
+    private Integer totalRunTimes;
+
     //private Date systemTime;
 
     //private double baseAcc;
@@ -63,6 +68,10 @@ public class UserInfo extends UserBase {
         this.spirit = 0;
         this.rapidly = 0;
         this.recoverSpeed = 0;
+        this.totalDistance = 0;
+        this.avgSpeed = 0;
+        this.spendCarlorie = 0;
+        this.totalRunTimes = 0;
         //this.systemTime = new Date();
         //this.baseAcc = 1;
         //this.inertiaAcc = 1;
@@ -164,5 +173,37 @@ public class UserInfo extends UserBase {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public double getTotalDistance() {
+        return totalDistance;
+    }
+
+    public void setTotalDistance(double totalDistance) {
+        this.totalDistance = totalDistance;
+    }
+
+    public double getAvgSpeed() {
+        return avgSpeed;
+    }
+
+    public void setAvgSpeed(double avgSpeed) {
+        this.avgSpeed = avgSpeed;
+    }
+
+    public double getSpendCarlorie() {
+        return spendCarlorie;
+    }
+
+    public void setSpendCarlorie(double spendCarlorie) {
+        this.spendCarlorie = spendCarlorie;
+    }
+
+    public Integer getTotalRunTimes() {
+        return totalRunTimes;
+    }
+
+    public void setTotalRunTimes(Integer totalRunTimes) {
+        this.totalRunTimes = totalRunTimes;
     }
 }

@@ -47,4 +47,6 @@ public interface AccountMapper {
     public UserFriend getUserFriend(@Param("userId") Integer userId, @Param("friendId") Integer friendId);
 
     public void updateAccountPowerInfo(@Param("userId") Integer userId, @Param("remainingPower") double remainingPower);
+
+    public List<UserInfo> getUserFollowerInformation(@Param("userId") Integer userId,@Param("from") Integer from, @Param("pageSize") Integer pageSize);
 }

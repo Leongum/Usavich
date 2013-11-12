@@ -44,4 +44,6 @@ public interface AccountDAO {
     public void updateUserLocation(UserLocation userLocation);
 
     public List<UserLocation> getUserLocations();
+
+    public List<UserInfo> getUserFollowerInformation(Integer userId, Integer from, Integer pageSize);
 }

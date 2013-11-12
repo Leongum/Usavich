@@ -63,6 +63,10 @@ public class RunningServiceImpl implements RunningService {
             Experience experienceInfo = commonDAO.getExperienceLevel(experience);
             double level = experienceInfo.getLevel() + (experience - (experienceInfo.getExperienceTotal() - experienceInfo.getExperience())) / experienceInfo.getExperience();
             userInfo.setLevel(level);
+            userInfo.setTotalRunTimes(userInfo.getTotalRunTimes() + 1);
+            userInfo.setAvgSpeed((userInfo.getAvgSpeed() + runningHistory.getAvgSpeed()) / 2);
+            userInfo.setTotalDistance(userInfo.getTotalDistance() + runningHistory.getDistance());
+            userInfo.setSpendCarlorie(userInfo.getSpendCarlorie() + runningHistory.getSpendCarlorie());
         }
         return userInfo;
     }

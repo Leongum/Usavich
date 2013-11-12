@@ -37,4 +37,6 @@ public interface AccountService {
     void updateUserLocation(UserLocation userLocation);
 
     List<UserLocation> getUserLocations();
+
+    List<UserInfo> getUserFollowerInformation(Integer userId, Integer pageNo);
 }
