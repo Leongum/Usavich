@@ -1,6 +1,7 @@
 package com.usavich.service.backend;
 
 import com.usavich.common.lib.CommonUtils;
+import com.usavich.common.lib.MethodCollector;
 import com.usavich.entity.common.SystemMessage;
 import com.usavich.entity.common.VersionControl;
 import com.usavich.entity.mission.Mission;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -70,5 +72,10 @@ public class BackendJobCache {
 
     public void versionServiceJob() {
         versionControlIOS = commonService.getVersionControl("ios");
+    }
+
+    public void methodCollectorJob() {
+        commonService.createMethodCollector(MethodCollector.methods);
+        MethodCollector.methods = new HashMap<String, Integer>();
     }
 }

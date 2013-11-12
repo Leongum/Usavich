@@ -21,4 +21,5 @@ public interface MissionMapper {
 
     public List<MissionChallenge> getMissionChallenges(@Param("challengeId") Integer challengeId);
 
+    public List<Mission> getMissionsByPlanId(@Param("planId")Integer planId);
 }

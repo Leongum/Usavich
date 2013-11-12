@@ -23,6 +23,7 @@ public class AccountRestService implements AccountRestDef {
 
     @Override
     public UserInfo getAccountInfo(String userEmail, String password) {
+        CommonUtils.newMethodCall("AccountRestService.getAccountInfo");
         UserInfo userInfo = accountService.getAccountInfo(userEmail, password);
         userInfo.setUuid(UUID.randomUUID().toString());
         UserBase userBase = new UserBase();
@@ -33,6 +34,7 @@ public class AccountRestService implements AccountRestDef {
 
     @Override
     public UserInfo getAccountInfoByID(String userId, String checkUuid) {
+        CommonUtils.newMethodCall("AccountRestService.getAccountInfoByID");
         if (checkUuid != null && checkUuid.equalsIgnoreCase("true")) {
             accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
         }
@@ -42,6 +44,7 @@ public class AccountRestService implements AccountRestDef {
 
     @Override
     public UserInfo createAccountInfo(UserBase userBase) {
+        CommonUtils.newMethodCall("AccountRestService.createAccountInfo");
         userBase.setUuid(UUID.randomUUID().toString());
         UserInfo userInfo = accountService.createAccountInfo(userBase);
         return  userInfo;
@@ -49,6 +52,7 @@ public class AccountRestService implements AccountRestDef {
 
     @Override
     public void updateAccountBase(String userId, UserBase userBase) {
+        CommonUtils.newMethodCall("AccountRestService.updateAccountBase");
         accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
         userBase.setUserId(CommonUtils.parseIntegerToNull(userId));
         accountService.updateAccountBase(userBase);
@@ -56,6 +60,7 @@ public class AccountRestService implements AccountRestDef {
 
     @Override
     public UserInfo updateAccountAdditional(String userId, UserInfo userInfo) {
+        CommonUtils.newMethodCall("AccountRestService.updateAccountAdditional");
         Integer userIdInt = CommonUtils.parseIntegerToNull(userId);
         accountService.checkUserLoginStatus(userIdInt);
         UserInfo userInfoBase = accountService.getAccountInfoByID(userIdInt);
@@ -74,11 +79,13 @@ public class AccountRestService implements AccountRestDef {
 
     @Override
     public List<UserFriend> getUserFriends(String userId,String lastUpdateTime) {
+        CommonUtils.newMethodCall("AccountRestService.getUserFriends");
         return accountService.getUserFriends(CommonUtils.parseIntegerToNull(userId),CommonUtils.parseDateDefaultToNull(lastUpdateTime));
     }
 
     @Override
     public void createUserFriendInvite(String userId, UserFriend userFriend) {
+        CommonUtils.newMethodCall("AccountRestService.createUserFriendInvite");
         accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
         userFriend.setUserId(CommonUtils.parseIntegerToNull(userId));
         accountService.createUserFriendInvite(userFriend);
@@ -86,6 +93,7 @@ public class AccountRestService implements AccountRestDef {
 
     @Override
     public void updateUserFriendStatus(String userId, UserFriend userFriend) {
+        CommonUtils.newMethodCall("AccountRestService.updateUserFriendStatus");
         accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
         userFriend.setUserId(CommonUtils.parseIntegerToNull(userId));
         accountService.updateUserFriendStatus(userFriend);
@@ -93,11 +101,13 @@ public class AccountRestService implements AccountRestDef {
 
     @Override
     public UserLocation getUserLocation(String userId) {
+        CommonUtils.newMethodCall("AccountRestService.getUserLocation");
         return accountService.getUserLocation(CommonUtils.parseIntegerToNull(userId));
     }
 
     @Override
     public void updateUserLocation(String userId, UserLocation userLocation) {
+        CommonUtils.newMethodCall("AccountRestService.updateUserLocation");
         accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
         userLocation.setUserId(CommonUtils.parseIntegerToNull(userId));
         accountService.updateUserLocation(userLocation);

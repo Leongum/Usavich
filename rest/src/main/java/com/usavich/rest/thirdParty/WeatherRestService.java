@@ -1,5 +1,6 @@
 package com.usavich.rest.thirdParty;
 
+import com.usavich.common.lib.CommonUtils;
 import com.usavich.entity.common.PM25DetailInfo;
 import com.usavich.thirdparty.weather.def.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class WeatherRestService implements WeatherRestDef{
 
     @Override
     public PM25DetailInfo getPM25Info(String cityName, String provinceName) {
+        CommonUtils.newMethodCall("WeatherRestService.getPM25Info");
         if(cityName == null || provinceName == null)return null;
         return weatherService.getPM25ByCityName(cityName,provinceName);
     }

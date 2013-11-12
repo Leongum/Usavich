@@ -50,6 +50,11 @@ public class CommonDAOImpl implements CommonDAO{
     }
 
     @Override
+    public void createMethodCollector(MethodCollector methodCollector) {
+        commonMapper.createMethodCollector(methodCollector);
+    }
+
+    @Override
     public VersionControl getVersionControl(String platform) {
         return commonMapper.getVersionControl(platform);
     }

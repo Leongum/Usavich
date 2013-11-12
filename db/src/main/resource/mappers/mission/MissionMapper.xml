@@ -123,4 +123,12 @@
         ORDER BY SEX ASC,SEQUENCE ASC
     </select>
 
+    <select id="getMissionsByPlanId" resultMap="missionInfo">
+        SELECT
+        <include refid="missionTable"/>
+        FROM MISSION
+        WHERE PLAN_ID = #{planId}
+        ORDER BY SEQUENCE ASC
+    </select>
+
 </mapper>

@@ -20,18 +20,21 @@ public class ProductRestService implements ProductRestDef {
 
     @Override
     public List<Product> getProducts(String productId, String lastUpdateTime) {
+        CommonUtils.newMethodCall("ProductRestService.getProducts");
         return productService.getProducts(CommonUtils.parseIntegerToNull(productId),
                 CommonUtils.parseDateDefaultToNull(lastUpdateTime));
     }
 
     @Override
     public List<ProductHistory> getProductHistoryList(String userId, String productId) {
+        CommonUtils.newMethodCall("ProductRestService.getProductHistoryList");
         return productService.getProductHistoryList(CommonUtils.parseIntegerToNull(userId),
                 CommonUtils.parseIntegerToNull(productId));
     }
 
     @Override
     public void createProductHistory(String userId,ProductHistory productHistory) {
+        CommonUtils.newMethodCall("ProductRestService.createProductHistory");
         productHistory.setUserId(CommonUtils.parseIntegerToNull(userId));
         productService.createProductHistory(productHistory);
     }

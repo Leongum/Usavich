@@ -165,4 +165,32 @@
              PLAN_ID = #{entity.planId}
     </update>
 
+    <!-- Method Collector -->
+    <resultMap id="methodCollectorInfo" type="com.usavich.entity.common.MethodCollector">
+        <id column="METHOD_NAME" property="methodName"/>
+        <result column="METHOD_TIMES" property="methodTimes"/>
+        <result column="USE_DATE" property="useDate"/>
+    </resultMap>
+
+    <sql id="methodCollectorTable">
+        METHOD_NAME,
+        METHOD_TIMES,
+        USE_DATE
+    </sql>
+
+    <insert id="createMethodCollector" parameterType="com.usavich.entity.common.MethodCollector">
+        INSERT INTO METHOD_COLLECTOR
+        (
+            METHOD_NAME,
+            METHOD_TIMES,
+            USE_DATE
+        )
+        VALUES
+        (
+            #{entity.methodName},
+            #{entity.methodTimes},
+            #{entity.useDate}
+        )
+    </insert>
+
 </mapper>

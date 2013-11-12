@@ -27,6 +27,7 @@ public class PlanRunHistory {
     private Integer remainingMissions;
     private Integer totalMissions;
     private Integer historyStatus; //0 execute 1 finished  -1 cancled
+    private Date  lastUpdateTime;
 
     public Integer getPlanId() {
         return planId;
@@ -118,5 +119,15 @@ public class PlanRunHistory {
 
     public void setHistoryStatus(Integer historyStatus) {
         this.historyStatus = historyStatus;
+    }
+
+    @JsonSerialize(using = CustomDateSerializer.class)
+    public Date getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    @JsonDeserialize(using = CustomDateDeserializer.class)
+    public void setLastUpdateTime(Date lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
     }
 }

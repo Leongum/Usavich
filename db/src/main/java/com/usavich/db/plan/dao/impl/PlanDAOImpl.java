@@ -17,73 +17,78 @@ import java.util.List;
  * Time: 下午5:43
  * To change this template use File | Settings | File Templates.
  */
-public class PlanDAOImpl implements PlanDAO{
+public class PlanDAOImpl implements PlanDAO {
 
     @Autowired
     private PlanMapper planMapper;
 
     @Override
-    public List<Plan> getPlansByPage(Integer from, Integer to) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public List<Plan> getPlansByPage(Integer from, Integer pageSize) {
+        return planMapper.getPlansByPage(from, pageSize);
     }
 
     @Override
     public Plan getPlan(Integer planId, Date lastUpdateTime) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return planMapper.getPlan(planId, lastUpdateTime);
     }
 
     @Override
     public List<PlanCollect> getPlanCollection(Integer userId, Date lastUpdateTime) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return planMapper.getPlanCollection(userId, lastUpdateTime);
     }
 
     @Override
     public void createUserCollect(Integer userId, PlanCollect planCollect) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        planMapper.createUserCollect(userId, planCollect);
     }
 
     @Override
     public void updateUserCollect(Integer userId, PlanCollect planCollect) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        planMapper.updateUserCollect(userId, planCollect);
     }
 
     @Override
     public List<PlanRunHistory> getPlanRunHistory(Integer userId, Date lastUpdateTime) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return planMapper.getPlanRunHistory(userId, lastUpdateTime);
     }
 
     @Override
     public PlanRunHistory getPlanRunning(Integer userId) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return planMapper.getPlanRunning(userId);
+    }
+
+    @Override
+    public void createPlanRunning(Integer userId, PlanRunHistory planHistory) {
+        planMapper.createPlanRunning(userId, planHistory);
     }
 
     @Override
     public void updatePlanRunning(Integer userId, PlanRunHistory planHistory) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        planMapper.updatePlanRunning(userId, planHistory);
     }
 
     @Override
-    public List<PlanRunHistory> getPlanRunningByPlanId(Integer planId) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public List<PlanRunHistory> getPlanRunningByPlanId(Integer planId, Integer from, Integer pageSize) {
+        return planMapper.getPlanRunningByPlanId(planId, from, pageSize);
     }
 
     @Override
-    public List<PlanRunHistory> getPlanRunningByUserId(Integer userId) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public List<PlanRunHistory> getPlanRunningByUserId(Integer userId, Integer from, Integer pageSize) {
+        return planMapper.getPlanRunningByUserId(userId, from, pageSize);
     }
 
     @Override
     public void createPlanFollower(Integer userId, PlanUserFollow planUserFollow) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        planMapper.createPlanFollower(userId, planUserFollow);
     }
 
     @Override
     public void updatePlanFollower(Integer userId, PlanUserFollow planUserFollow) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        planMapper.updatePlanFollower(userId, planUserFollow);
     }
 
     @Override
     public List<PlanUserFollow> getPlanFollower(Integer userId, Date lastUpdateTime) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return planMapper.getPlanFollower(userId, lastUpdateTime);
     }
 }

@@ -58,12 +58,14 @@ public interface PlanRestDef extends RestDef {
     @GET
     @Path("/history/running/plan/{" + PARAM_PLAN_ID + "}")
     List<PlanRunHistory> getPlanRunningByPlanId(
-            @PathParam(PARAM_PLAN_ID) String planId);
+            @PathParam(PARAM_PLAN_ID) String planId,
+            @QueryParam(PARAM_PAGE_NUMBER) String pageNo);
 
     @GET
     @Path("/history/running/user/{" + PARAM_USER_ID + "}")
     List<PlanRunHistory> getPlanRunningByUserId(
-            @PathParam(PARAM_USER_ID) String userId);
+            @PathParam(PARAM_USER_ID) String userId,
+            @QueryParam(PARAM_PAGE_NUMBER) String pageNo);
 
     @GET
     @Path("/follow/{" + PARAM_USER_ID + "}")

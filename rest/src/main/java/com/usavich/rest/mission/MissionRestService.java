@@ -22,6 +22,7 @@ public class MissionRestService implements MissionRestDef {
 
     @Override
     public List<Mission> getMissions(String missionId, String lastUpdateTime, String missionType) {
+        CommonUtils.newMethodCall("MissionRestService.getMissions");
         int missionTypeId = -1;
         if (missionType != null) {
             missionTypeId = MissionType.valueOf(missionType).ordinal();

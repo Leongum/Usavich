@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,7 +19,7 @@ import java.util.List;
  * Time: 下午1:52
  * To change this template use File | Settings | File Templates.
  */
-public class CommonServiceImpl implements CommonService{
+public class CommonServiceImpl implements CommonService {
 
     @Autowired
     private CommonDAO commonDAO;
@@ -66,5 +67,17 @@ public class CommonServiceImpl implements CommonService{
     @Override
     public void createDownLoadInfo(Statistics statistics) {
         commonDAO.createDownLoadInfo(statistics);
+    }
+
+    @Override
+    public void createMethodCollector(Map<String, Integer> methods) {
+        Date now = new Date();
+        for (String key : methods.keySet()) {
+            MethodCollector methodCollector = new MethodCollector();
+            methodCollector.setMethodName(key);
+            methodCollector.setMethodTimes(methods.get(key));
+            methodCollector.setUseDate(now);
+            commonDAO.createMethodCollector(methodCollector);
+        }
     }
 }

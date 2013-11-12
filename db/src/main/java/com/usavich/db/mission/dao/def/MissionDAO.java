@@ -20,4 +20,5 @@ public interface MissionDAO {
 
     public List<MissionChallenge> getMissionChallenges(Integer challengeId);
 
+    public List<Mission> getMissionsByPlanId(Integer planId);
 }

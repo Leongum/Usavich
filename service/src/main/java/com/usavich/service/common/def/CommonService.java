@@ -4,6 +4,7 @@ import com.usavich.entity.common.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,4 +25,6 @@ public interface CommonService {
     void createFeedback(Feedback feedback);
 
     void createDownLoadInfo(Statistics statistics);
+
+    void createMethodCollector(Map<String,Integer> methods);
 }

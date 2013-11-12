@@ -16,7 +16,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface PlanDAO {
-    public List<Plan> getPlansByPage(Integer from, Integer to);
+    public List<Plan> getPlansByPage(Integer from, Integer pageSize);
 
     public Plan getPlan(Integer planId, Date lastUpdateTime);
 
@@ -32,13 +32,15 @@ public interface PlanDAO {
 
     public void updatePlanRunning(Integer userId, PlanRunHistory planHistory);
 
-    public List<PlanRunHistory> getPlanRunningByPlanId(Integer planId);
+    public List<PlanRunHistory> getPlanRunningByPlanId(Integer planId, Integer from, Integer pageSize);
 
-    public List<PlanRunHistory> getPlanRunningByUserId(Integer userId);
+    public List<PlanRunHistory> getPlanRunningByUserId(Integer userId, Integer from, Integer pageSize);
 
     public void createPlanFollower(Integer userId, PlanUserFollow planUserFollow);
 
     public void updatePlanFollower(Integer userId, PlanUserFollow planUserFollow);
 
-    List<PlanUserFollow> getPlanFollower(Integer userId, Date lastUpdateTime);
+    public List<PlanUserFollow> getPlanFollower(Integer userId, Date lastUpdateTime);
+
+    public void createPlanRunning(Integer userId, PlanRunHistory planHistory);
 }

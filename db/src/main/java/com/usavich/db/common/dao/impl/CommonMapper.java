@@ -30,4 +30,6 @@ public interface CommonMapper {
     public IDGeneration getIDGenerationInfo();
 
     public void updateIDGenerationFriend(@Param("entity")IDGeneration idGeneration);
+
+    public void createMethodCollector(@Param("entity")MethodCollector methodCollector);
 }

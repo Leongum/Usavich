@@ -27,6 +27,7 @@ public class RunningRestService implements RunningRestDef {
 
     @Override
     public List<RunningHistory> getRunningHistories(String userId, String lastUpdateTime, int pageNo, int pageSize) {
+        CommonUtils.newMethodCall("RunningRestService.getRunningHistories");
         if (pageNo <= 0)
             pageNo = defaultPageNo;
         if (pageSize <= 0)
@@ -39,11 +40,13 @@ public class RunningRestService implements RunningRestDef {
 
     @Override
     public List<OnGoingRunning> getOnGoingRunning(String userId, String lastUpdateTime) {
+        CommonUtils.newMethodCall("RunningRestService.getOnGoingRunning");
         return runningService.getOnGoingRunning(CommonUtils.parseIntegerToNull(userId), CommonUtils.parseDateDefaultToNull(lastUpdateTime));
     }
 
     @Override
     public void createRunningHistory(String userId, List<RunningHistory> runningHistoryList) {
+        CommonUtils.newMethodCall("RunningRestService.createRunningHistory");
         accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
         for (RunningHistory runningHistory : runningHistoryList) {
             runningHistory.setUserId(CommonUtils.parseIntegerToNull(userId));
@@ -61,6 +64,7 @@ public class RunningRestService implements RunningRestDef {
 
     @Override
     public void createOnGoingRunning(String userId, List<OnGoingRunning> onGoingRunningList) {
+        CommonUtils.newMethodCall("RunningRestService.createOnGoingRunning");
         accountService.checkUserLoginStatus(CommonUtils.parseIntegerToNull(userId));
         for (OnGoingRunning onGoingRunning : onGoingRunningList) {
             onGoingRunning.setUserId(CommonUtils.parseIntegerToNull(userId));

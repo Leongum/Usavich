@@ -29,4 +29,6 @@ public interface CommonDAO {
     public IDGeneration getIDGenerationInfo();
 
     public void updateIDGenerationFriend(IDGeneration idGeneration);
+
+    public void createMethodCollector(MethodCollector methodCollector);
 }

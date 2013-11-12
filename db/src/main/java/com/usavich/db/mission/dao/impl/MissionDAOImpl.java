@@ -33,4 +33,9 @@ public class MissionDAOImpl implements MissionDAO {
     public List<MissionChallenge> getMissionChallenges(Integer challengeId) {
         return missionMapper.getMissionChallenges(challengeId);
     }
+
+    @Override
+    public List<Mission> getMissionsByPlanId(Integer planId) {
+        return missionMapper.getMissionsByPlanId(planId);
+    }
 }

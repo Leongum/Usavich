@@ -25,5 +25,6 @@
         <task:scheduled ref="backendJobCache" method="missionServiceJob" fixed-rate="21600000"/>
         <task:scheduled ref="backendJobCache" method="versionServiceJob" fixed-rate="21600000"/>
         <task:scheduled ref="backendJobCache" method="systemMessageServiceJob" fixed-rate="21600000"/>
+        <task:scheduled ref="backendJobCache" method="methodCollectorJob" fixed-rate="43200000"/>
     </task:scheduled-tasks>
 </beans>

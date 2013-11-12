@@ -21,6 +21,7 @@ public class PlanRestService implements PlanRestDef {
 
     @Override
     public Plan getPlan(String planId, String lastUpdateTime, String needDetails) {
+        CommonUtils.newMethodCall("PlanRestService.getPlan");
         Integer detailInformation = CommonUtils.parseIntegerToNull(needDetails);
         if (detailInformation == null) {
             detailInformation = 1;
@@ -31,49 +32,58 @@ public class PlanRestService implements PlanRestDef {
 
     @Override
     public List<Plan> getPlans(String pageNo) {
+        CommonUtils.newMethodCall("PlanRestService.getPlans");
         return planService.getPlanByPageNo(CommonUtils.parseIntegerToNull(pageNo));
     }
 
     @Override
     public List<PlanCollect> getPlanCollection(String userId, String lastUpdateTime) {
+        CommonUtils.newMethodCall("PlanRestService.getPlanCollection");
         return planService.getPlanCollection(CommonUtils.parseIntegerToNull(userId),
                 CommonUtils.parseDateDefaultToNull(lastUpdateTime));
     }
 
     @Override
     public void updateUserCollects(String userId, List<PlanCollect> planCollects) {
+        CommonUtils.newMethodCall("PlanRestService.updateUserCollects");
         planService.updateUserCollects(CommonUtils.parseIntegerToNull(userId), planCollects);
     }
 
     @Override
     public List<PlanRunHistory> getPlanRunHistory(String userId, String lastUpdateTime) {
+        CommonUtils.newMethodCall("PlanRestService.getPlanRunHistory");
         return planService.getPlanRunHistory(CommonUtils.parseIntegerToNull(userId),
                 CommonUtils.parseDateDefaultToNull(lastUpdateTime));
     }
 
     @Override
     public PlanRunHistory checkRunningHistoryStatus(String userId, PlanRunHistory planHistory) {
-        return planService.checkRunningHistoryStatus(CommonUtils.parseIntegerToNull(userId),planHistory);
+        CommonUtils.newMethodCall("PlanRestService.checkRunningHistoryStatus");
+        return planService.checkRunningHistoryStatus(CommonUtils.parseIntegerToNull(userId), planHistory);
     }
 
     @Override
-    public List<PlanRunHistory> getPlanRunningByPlanId(String planId) {
-        return planService.getPlanRunningByPlanId(CommonUtils.parseIntegerToNull(planId));
+    public List<PlanRunHistory> getPlanRunningByPlanId(String planId, String pageNo) {
+        CommonUtils.newMethodCall("PlanRestService.getPlanRunningByPlanId");
+        return planService.getPlanRunningByPlanId(CommonUtils.parseIntegerToNull(planId), CommonUtils.parseIntegerToNull(pageNo));
     }
 
     @Override
-    public List<PlanRunHistory> getPlanRunningByUserId(String userId) {
-        return planService.getPlanRunningByUserId(CommonUtils.parseIntegerToNull(userId));
+    public List<PlanRunHistory> getPlanRunningByUserId(String userId, String pageNo) {
+        CommonUtils.newMethodCall("PlanRestService.getPlanRunningByUserId");
+        return planService.getPlanRunningByUserId(CommonUtils.parseIntegerToNull(userId), CommonUtils.parseIntegerToNull(pageNo));
     }
 
     @Override
     public List<PlanUserFollow> getPlanFollower(String userId, String lastUpdateTime) {
+        CommonUtils.newMethodCall("PlanRestService.getPlanFollower");
         return planService.getPlanFollower(CommonUtils.parseIntegerToNull(userId),
                 CommonUtils.parseDateDefaultToNull(lastUpdateTime));
     }
 
     @Override
     public void updatePlanFollower(String userId, List<PlanUserFollow> planFollow) {
+        CommonUtils.newMethodCall("PlanRestService.updatePlanFollower");
         planService.updatePlanFollower(CommonUtils.parseIntegerToNull(userId), planFollow);
     }
 }

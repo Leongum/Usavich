@@ -67,4 +67,9 @@ public class MissionServiceImpl implements MissionService {
     public List<MissionChallenge> getMissionChallenge(Integer challengeId) {
         return missionDAO.getMissionChallenges(challengeId);
     }
+
+    @Override
+    public List<Mission> getMissionsByPlanId(Integer planId) {
+        return missionDAO.getMissionsByPlanId(planId);
+    }
 }

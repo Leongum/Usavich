@@ -29,9 +29,9 @@ public interface PlanService {
 
     PlanRunHistory checkRunningHistoryStatus(Integer userId, PlanRunHistory planHistory);
 
-    List<PlanRunHistory> getPlanRunningByPlanId(Integer planId);
+    List<PlanRunHistory> getPlanRunningByPlanId(Integer planId, Integer pageNo);
 
-    List<PlanRunHistory> getPlanRunningByUserId(Integer userId);
+    List<PlanRunHistory> getPlanRunningByUserId(Integer userId, Integer pageNo);
 
     List<PlanUserFollow> getPlanFollower(Integer userId, Date lastUpdateTime);
 

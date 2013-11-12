@@ -48,14 +48,14 @@ public class CommonUtils {
         return parseDate(date);
     }
 
-    public static Integer parseIntegerToNull(String value){
+    public static Integer parseIntegerToNull(String value) {
         if (StringUtils.isEmpty(value))
             return null;
 
         return Integer.valueOf(value);
     }
 
-    public static Double parseDoubleToNull(String value){
+    public static Double parseDoubleToNull(String value) {
         if (StringUtils.isEmpty(value))
             return null;
 
@@ -101,6 +101,16 @@ public class CommonUtils {
             }
         }
         return result;
+    }
+
+    public static void newMethodCall(String methodName) {
+        Integer times = MethodCollector.methods.get(methodName);
+        if (times == null) {
+            times = 1;
+        } else {
+            times = times + 1;
+        }
+        MethodCollector.methods.put(methodName, times);
     }
 
 }
