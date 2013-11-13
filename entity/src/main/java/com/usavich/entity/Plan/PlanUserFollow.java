@@ -20,7 +20,6 @@ public class PlanUserFollow {
     private Integer followUserId;
     private Integer status;
     private Date addTime;
-    private Integer operate; //1 add 2 update.
 
     public Integer getUserId() {
         return userId;
@@ -54,13 +53,5 @@ public class PlanUserFollow {
     @JsonDeserialize(using = CustomDateDeserializer.class)
     public void setAddTime(Date addTime) {
         this.addTime = addTime;
-    }
-
-    public Integer getOperate() {
-        return operate;
-    }
-
-    public void setOperate(Integer operate) {
-        this.operate = operate;
     }
 }

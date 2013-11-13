@@ -31,6 +31,7 @@ public class Plan {
     private Integer duration;
     private Integer durationType; // 1 week 2 day
     private Integer planStatus; //0 enabled 1 deleted
+    private Integer durationLast;
     private Date lastUpdateTime;
 
     private List<Mission> missions;
@@ -155,5 +156,13 @@ public class Plan {
 
     public void setMissions(List<Mission> missions) {
         this.missions = missions;
+    }
+
+    public Integer getDurationLast() {
+        return durationLast;
+    }
+
+    public void setDurationLast(Integer durationLast) {
+        this.durationLast = durationLast;
     }
 }

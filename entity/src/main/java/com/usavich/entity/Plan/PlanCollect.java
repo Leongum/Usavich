@@ -20,7 +20,6 @@ public class PlanCollect {
     private Integer planId;
     private Date collectTime;
     private Integer collectStatus; //0 collected 1 deleted.
-    private Integer operate; //1 add 2 update.
 
     public Integer getUserId() {
         return userId;
@@ -54,13 +53,5 @@ public class PlanCollect {
 
     public void setCollectStatus(Integer collectStatus) {
         this.collectStatus = collectStatus;
-    }
-
-    public Integer getOperate() {
-        return operate;
-    }
-
-    public void setOperate(Integer operate) {
-        this.operate = operate;
     }
 }
