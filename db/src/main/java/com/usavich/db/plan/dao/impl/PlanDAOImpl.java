@@ -43,11 +43,6 @@ public class PlanDAOImpl implements PlanDAO {
     }
 
     @Override
-    public void updateUserCollect(Integer userId, PlanCollect planCollect) {
-        planMapper.updateUserCollect(userId, planCollect);
-    }
-
-    @Override
     public List<PlanRunHistory> getPlanRunHistory(Integer userId, Date lastUpdateTime) {
         return planMapper.getPlanRunHistory(userId, lastUpdateTime);
     }
@@ -80,11 +75,6 @@ public class PlanDAOImpl implements PlanDAO {
     @Override
     public void createPlanFollower(Integer userId, PlanUserFollow planUserFollow) {
         planMapper.createPlanFollower(userId, planUserFollow);
-    }
-
-    @Override
-    public void updatePlanFollower(Integer userId, PlanUserFollow planUserFollow) {
-        planMapper.updatePlanFollower(userId, planUserFollow);
     }
 
     @Override

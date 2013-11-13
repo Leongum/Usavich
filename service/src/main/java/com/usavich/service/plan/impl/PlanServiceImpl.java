@@ -29,7 +29,7 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public List<Plan> getPlanByPageNo(Integer pageNo) {
-        Integer from = pageNo * 10;
+        Integer from = pageNo == null ? 0 : pageNo * 10;
         Integer pageSize = 10;
         return planDAO.getPlansByPage(from, pageSize);
     }
@@ -50,14 +50,10 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public void updateUserCollects(Integer userId, List<PlanCollect> planCollects) {
-        for (int i = 0; i <= planCollects.size(); i++) {
+        for (int i = 0; i < planCollects.size(); i++) {
             PlanCollect planCollect = planCollects.get(i);
             planCollect.setCollectTime(new Date());
-            if (planCollect.getOperate() == 1) {
-                planDAO.createUserCollect(userId, planCollects.get(i));
-            } else if (planCollect.getOperate() == 2) {
-                planDAO.updateUserCollect(userId, planCollects.get(i));
-            }
+            planDAO.createUserCollect(userId, planCollects.get(i));
         }
     }
 
@@ -69,9 +65,20 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public PlanRunHistory checkRunningHistoryStatus(Integer userId, PlanRunHistory planHistory) {
         PlanRunHistory currentHistory = planDAO.getPlanRunning(userId);
+        if (planHistory == null || planHistory.getPlanId() == null) {
+            return currentHistory;
+        }
+        if (planHistory.getRemainingMissions() == 0) {
+            planHistory.setHistoryStatus(1);
+            planHistory.setEndTime(new Date());
+            planHistory.setNextMissionId(null);
+        }
+        if(planHistory.getHistoryStatus() == -1){
+            planHistory.setEndTime(new Date());
+        }
         if (currentHistory == null || currentHistory.getPlanRunUuid() == null) {
             planDAO.createPlanRunning(userId, planHistory);
-        } else if (currentHistory.getRemainingMissions() <= planHistory.getRemainingMissions()) {
+        } else if (currentHistory.getRemainingMissions() >= planHistory.getRemainingMissions()) {
             planDAO.updatePlanRunning(userId, planHistory);
         } else {
             return currentHistory;
@@ -81,14 +88,14 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public List<PlanRunHistory> getPlanRunningByPlanId(Integer planId, Integer pageNo) {
-        Integer from = pageNo * 10;
+        Integer from = pageNo == null ? 0 : pageNo * 10;
         Integer pageSize = 30;
         return planDAO.getPlanRunningByPlanId(planId, from, pageSize);
     }
 
     @Override
     public List<PlanRunHistory> getPlanRunningByUserId(Integer userId, Integer pageNo) {
-        Integer from = pageNo * 10;
+        Integer from = pageNo == null ? 0 : pageNo * 10;
         Integer pageSize = 30;
         return planDAO.getPlanRunningByUserId(userId, from, pageSize);
     }
@@ -100,14 +107,10 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public void updatePlanFollower(Integer userId, List<PlanUserFollow> planFollow) {
-        for (int i = 0; i <= planFollow.size(); i++) {
+        for (int i = 0; i < planFollow.size(); i++) {
             PlanUserFollow planUserFollow = planFollow.get(i);
             planUserFollow.setAddTime(new Date());
-            if (planUserFollow.getOperate() == 1) {
-                planDAO.createPlanFollower(userId, planFollow.get(i));
-            } else if (planUserFollow.getOperate() == 2) {
-                planDAO.updatePlanFollower(userId, planFollow.get(i));
-            }
+            planDAO.createPlanFollower(userId, planFollow.get(i));
         }
     }
 }

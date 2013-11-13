@@ -139,7 +139,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<UserInfo> getUserFollowerInformation(Integer userId, Integer pageNo) {
-        Integer from = pageNo * 10;
+        Integer from = pageNo == null ? 0 : pageNo * 10;
         Integer pageSize = 30;
         return accountDAO.getUserFollowerInformation(userId, from, pageSize);
     }

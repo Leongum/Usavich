@@ -3,19 +3,20 @@
 
 <mapper namespace="com.usavich.db.plan.dao.impl.PlanMapper">
     <resultMap id="planInfo" type="com.usavich.entity.plan.Plan">
-        <id column="PLAN_ID" property="missionId"/>
-        <result column="PLAN_NAME" property="missionTypeId"/>
-        <result column="PLAN_DESCRIPTION" property="missionName"/>
-        <result column="PLAN_TYPE" property="missionContent"/>
-        <result column="MISSION_IDS" property="scores"/>
-        <result column="TOTAL_MISSIONS" property="experience"/>
-        <result column="PLAN_SHARE_USER" property="missionFlag"/>
-        <result column="PLAN_SHARE_USER_NAME" property="levelLimited"/>
-        <result column="SHARED_PLAN" property="missionTime"/>
-        <result column="CYCLE_TIME" property="missionDistance"/>
-        <result column="DURATION" property="cycleTime"/>
-        <result column="DURATION_TYPE" property="missionFrom"/>
-        <result column="PLAN_STATUS" property="missionTo"/>
+        <id column="PLAN_ID" property="planId"/>
+        <result column="PLAN_NAME" property="planName"/>
+        <result column="PLAN_DESCRIPTION" property="planDescription"/>
+        <result column="PLAN_TYPE" property="planType"/>
+        <result column="MISSION_IDS" property="missionIds"/>
+        <result column="TOTAL_MISSIONS" property="totalMissions"/>
+        <result column="PLAN_SHARE_USER" property="planShareUserId"/>
+        <result column="PLAN_SHARE_USER_NAME" property="planShareUserName"/>
+        <result column="SHARED_PLAN" property="sharedPlan"/>
+        <result column="CYCLE_TIME" property="cycleTime"/>
+        <result column="DURATION" property="duration"/>
+        <result column="DURATION_TYPE" property="durationType"/>
+        <result column="PLAN_STATUS" property="planStatus"/>
+        <result column="DURATION_LAST" property="durationLast"/>
         <result column="LAST_UPDATE_TIME" property="lastUpdateTime"/>
     </resultMap>
 
@@ -62,6 +63,7 @@
         P.DURATION,
         P.DURATION_TYPE,
         P.PLAN_STATUS,
+        P.DURATION_LAST,
         P.LAST_UPDATE_TIME
     </sql>
 
@@ -99,7 +101,7 @@
         <include refid="planTable"/>
         FROM PLAN_SORT AS PS INNER JOIN PLAN AS P
         ON P.PLAN_ID = PS.PLAN_ID
-        ORDER BY PS.SEQUENCE ASC
+        ORDER BY PS.SEQUENCE DESC
         LIMIT #{from},#{pageSize}
     </select>
 
@@ -136,17 +138,10 @@
             #{planCollect.userId},
             #{planCollect.planId},
             #{planCollect.collectTime},
-            0
+            #{planCollect.collectStatus}
         )
+        ON DUPLICATE KEY UPDATE COLLECT_TIME=#{planCollect.collectTime}, COLLECT_STATUS= #{planCollect.collectStatus};
     </insert>
-
-    <update id="updateUserCollect" parameterType="com.usavich.entity.plan.PlanCollect">
-         UPDATE PLAN_COLLECT
-         SET
-            COLLECT_STATUS = #{planCollect.collectStatus},
-            COLLECT_TIME = #{planCollect.collectTime}
-         WHERE USER_ID = #{planCollect.userId} AND PLAN_ID = #{planCollect.planId}
-    </update>
 
     <select id="getPlanRunHistory" resultMap="planRunHistoryInfo">
         SELECT
@@ -218,8 +213,8 @@
         <include refid="planRunHistoryTable"/>
         FROM PLAN_RUN_HISTORY AS PRH
         WHERE PRH.PLAN_ID = #{planId} AND PRH.HISTORY_STATUS = 0
-        -- ORDER BY PRH.LAST_UPDATE_TIME DESC
         LIMIT #{from},#{pageSize}
+        -- ORDER BY PRH.LAST_UPDATE_TIME DESC
     </select>
 
     <select id="getPlanRunningByUserId" resultMap="planRunHistoryInfo">
@@ -227,8 +222,8 @@
         <include refid="planRunHistoryTable"/>
         FROM PLAN_USER_FOLLOW AS PUF INNER JOIN PLAN_RUN_HISTORY AS PRH ON PRH.USER_ID = PUF.FOLLOWER_USER_ID
         WHERE PUF.USER_ID = #{userId} AND PRH.HISTORY_STATUS = 0
-        -- ORDER BY PRH.LAST_UPDATE_TIME DESC
         LIMIT #{from},#{pageSize}
+        -- ORDER BY PRH.LAST_UPDATE_TIME DESC
     </select>
 
     <select id="getPlanFollower" resultMap="planUserFollowInfo">
@@ -252,18 +247,11 @@
         VALUES
         (
                 #{planUserFollow.userId},
-                #{planUserFollow.followerUserId}
+                #{planUserFollow.followUserId},
                 #{planUserFollow.status},
                 #{planUserFollow.addTime}
         )
+        ON DUPLICATE KEY UPDATE STATUS= #{planUserFollow.status}, ADD_TIME=  #{planUserFollow.addTime};
     </insert>
-
-    <update id="updatePlanFollower" parameterType="com.usavich.entity.plan.PlanUserFollow">
-         UPDATE PLAN_USER_FOLLOW
-         SET
-            STATUS = #{planUserFollow.status},
-            ADD_TIME = #{planUserFollow.addTime}
-         WHERE USER_ID = #{planUserFollow.userId} AND FOLLOWER_USER_ID = #{planCollect.followerUserId}
-    </update>
 
 </mapper>

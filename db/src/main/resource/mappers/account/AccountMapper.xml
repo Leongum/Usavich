@@ -78,7 +78,7 @@
         UD.TOTAL_DISTANCE,
         UD.AVG_SPEED,
         UD.SPEND_CARLORIE,
-        UD.TOTAL_RUN_TIMES,
+        UD.TOTAL_RUN_TIMES
     </sql>
 
     <sql id="userFriendInfoTable">

@@ -26,8 +26,6 @@ public interface PlanMapper {
 
     public void createUserCollect(@Param("userId") Integer userId, @Param("planCollect") PlanCollect planCollect);
 
-    public void updateUserCollect(@Param("userId") Integer userId, @Param("planCollect") PlanCollect planCollect);
-
     public List<PlanRunHistory> getPlanRunHistory(@Param("userId") Integer userId, @Param("lastUpdateTime") Date lastUpdateTime);
 
     public PlanRunHistory getPlanRunning(@Param("userId") Integer userId);
@@ -41,8 +39,6 @@ public interface PlanMapper {
     public List<PlanRunHistory> getPlanRunningByUserId(@Param("userId") Integer userId, @Param("from") Integer from, @Param("pageSize") Integer pageSize);
 
     public void createPlanFollower(@Param("userId") Integer userId, @Param("planUserFollow") PlanUserFollow planUserFollow);
-
-    public void updatePlanFollower(@Param("userId") Integer userId, @Param("planUserFollow") PlanUserFollow planUserFollow);
 
     public List<PlanUserFollow> getPlanFollower(@Param("userId") Integer userId, @Param("lastUpdateTime") Date lastUpdateTime);
 }

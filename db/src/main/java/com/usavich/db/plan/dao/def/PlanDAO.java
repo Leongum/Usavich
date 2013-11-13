@@ -24,8 +24,6 @@ public interface PlanDAO {
 
     public void createUserCollect(Integer userId, PlanCollect planCollect);
 
-    public void updateUserCollect(Integer userId, PlanCollect planCollect);
-
     public List<PlanRunHistory> getPlanRunHistory(Integer userId, Date lastUpdateTime);
 
     public PlanRunHistory getPlanRunning(Integer userId);
@@ -37,8 +35,6 @@ public interface PlanDAO {
     public List<PlanRunHistory> getPlanRunningByUserId(Integer userId, Integer from, Integer pageSize);
 
     public void createPlanFollower(Integer userId, PlanUserFollow planUserFollow);
-
-    public void updatePlanFollower(Integer userId, PlanUserFollow planUserFollow);
 
     public List<PlanUserFollow> getPlanFollower(Integer userId, Date lastUpdateTime);
 
