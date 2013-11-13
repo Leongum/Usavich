@@ -33,7 +33,7 @@ public class PlanRestService implements PlanRestDef {
     @Override
     public List<Plan> getPlans(String pageNo) {
         CommonUtils.newMethodCall("PlanRestService.getPlans");
-        return planService.getPlanByPageNo(CommonUtils.parseIntegerToNull(pageNo));
+        return planService.getPlansForRest(CommonUtils.parseIntegerToNull(pageNo));
     }
 
     @Override

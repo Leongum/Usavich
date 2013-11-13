@@ -8,11 +8,13 @@ import com.usavich.entity.plan.Plan;
 import com.usavich.entity.plan.PlanCollect;
 import com.usavich.entity.plan.PlanRunHistory;
 import com.usavich.entity.plan.PlanUserFollow;
+import com.usavich.service.backend.BackendJobCache;
 import com.usavich.service.mission.def.MissionService;
 import com.usavich.service.plan.def.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,9 +37,25 @@ public class PlanServiceImpl implements PlanService {
     private MissionService missionService;
 
     @Override
-    public List<Plan> getPlanByPageNo(Integer pageNo) {
+    public List<Plan> getPlansForRest(Integer pageNo) {
+        if (BackendJobCache.first100Plan.size() == 0) {
+            getPlanByPageNo(0, 100);
+        }
+        List<Plan> returnedPlan = new ArrayList<Plan>();
         Integer from = pageNo == null ? 0 : pageNo * 10;
-        Integer pageSize = 10;
+        if (from < BackendJobCache.first100Plan.size()) {
+            for (int i = from; i < 10; i++) {
+                if (BackendJobCache.first100Plan.size() > i) {
+                    returnedPlan.add(BackendJobCache.first100Plan.get(i));
+                }
+            }
+        }
+        return returnedPlan;
+    }
+
+    @Override
+    public List<Plan> getPlanByPageNo(Integer pageNo, Integer pageSize) {
+        Integer from = pageNo == null ? 0 : pageNo * 10;
         return planDAO.getPlansByPage(from, pageSize);
     }
 

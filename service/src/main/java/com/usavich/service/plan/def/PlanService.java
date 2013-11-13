@@ -17,7 +17,9 @@ import java.util.List;
  */
 public interface PlanService {
 
-    List<Plan> getPlanByPageNo(Integer pageNo);
+    List<Plan>  getPlansForRest(Integer pageNo);
+
+    List<Plan> getPlanByPageNo(Integer pageNo,Integer pageSize);
 
     Plan getPlan(Integer planId, Date lastUpdateTime, Integer needMissions);
 

@@ -5,8 +5,10 @@ import com.usavich.common.lib.MethodCollector;
 import com.usavich.entity.common.SystemMessage;
 import com.usavich.entity.common.VersionControl;
 import com.usavich.entity.mission.Mission;
+import com.usavich.entity.plan.Plan;
 import com.usavich.service.common.def.CommonService;
 import com.usavich.service.mission.def.MissionService;
+import com.usavich.service.plan.def.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,11 +33,16 @@ public class BackendJobCache {
     @Autowired
     private CommonService commonService;
 
+    @Autowired
+    private PlanService planService;
+
     public static VersionControl versionControlIOS = new VersionControl();
 
     public static List<Mission> allMissions = new ArrayList<Mission>();
 
     public static List<SystemMessage> allMessages = new ArrayList<SystemMessage>();
+
+    public static List<Plan> first100Plan  = new ArrayList<Plan>();
 
     public static Date missionLastTime = CommonUtils.parseDateDefaultToNull("2001-01-01 00:00:00");
 
@@ -77,5 +84,9 @@ public class BackendJobCache {
     public void methodCollectorJob() {
         commonService.createMethodCollector(MethodCollector.methods);
         MethodCollector.methods = new HashMap<String, Integer>();
+    }
+
+    public void sortPlanJob(){
+        first100Plan = planService.getPlanByPageNo(0,100);
     }
 }
