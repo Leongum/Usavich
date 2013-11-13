@@ -41,4 +41,6 @@ public interface PlanMapper {
     public void createPlanFollower(@Param("userId") Integer userId, @Param("planUserFollow") PlanUserFollow planUserFollow);
 
     public List<PlanUserFollow> getPlanFollower(@Param("userId") Integer userId, @Param("lastUpdateTime") Date lastUpdateTime);
+
+    public void createPlan(@Param("entity")Plan newPlan);
 }

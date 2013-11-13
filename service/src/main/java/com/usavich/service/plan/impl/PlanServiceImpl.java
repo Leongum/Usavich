@@ -1,6 +1,9 @@
 package com.usavich.service.plan.impl;
 
+import com.usavich.db.common.dao.def.CommonDAO;
 import com.usavich.db.plan.dao.def.PlanDAO;
+import com.usavich.entity.common.IDGeneration;
+import com.usavich.entity.mission.Mission;
 import com.usavich.entity.plan.Plan;
 import com.usavich.entity.plan.PlanCollect;
 import com.usavich.entity.plan.PlanRunHistory;
@@ -8,6 +11,7 @@ import com.usavich.entity.plan.PlanUserFollow;
 import com.usavich.service.mission.def.MissionService;
 import com.usavich.service.plan.def.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -23,6 +27,9 @@ public class PlanServiceImpl implements PlanService {
 
     @Autowired
     private PlanDAO planDAO;
+
+    @Autowired
+    private CommonDAO commonDAODAO;
 
     @Autowired
     private MissionService missionService;
@@ -49,6 +56,7 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
+    @Transactional
     public void updateUserCollects(Integer userId, List<PlanCollect> planCollects) {
         for (int i = 0; i < planCollects.size(); i++) {
             PlanCollect planCollect = planCollects.get(i);
@@ -63,6 +71,7 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
+    @Transactional
     public PlanRunHistory checkRunningHistoryStatus(Integer userId, PlanRunHistory planHistory) {
         PlanRunHistory currentHistory = planDAO.getPlanRunning(userId);
         if (planHistory == null || planHistory.getPlanId() == null) {
@@ -73,7 +82,7 @@ public class PlanServiceImpl implements PlanService {
             planHistory.setEndTime(new Date());
             planHistory.setNextMissionId(null);
         }
-        if(planHistory.getHistoryStatus() == -1){
+        if (planHistory.getHistoryStatus() == -1) {
             planHistory.setEndTime(new Date());
         }
         if (currentHistory == null || currentHistory.getPlanRunUuid() == null) {
@@ -106,6 +115,7 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
+    @Transactional
     public void updatePlanFollower(Integer userId, List<PlanUserFollow> planFollow) {
         for (int i = 0; i < planFollow.size(); i++) {
             PlanUserFollow planUserFollow = planFollow.get(i);
@@ -113,4 +123,41 @@ public class PlanServiceImpl implements PlanService {
             planDAO.createPlanFollower(userId, planFollow.get(i));
         }
     }
+
+    @Override
+    @Transactional
+    public Plan createPlan(Integer userId, Plan newPlan) {
+        IDGeneration idGeneration = commonDAODAO.getIDGenerationInfo();
+        if (newPlan != null && newPlan.getTotalMissions() != null && newPlan.getTotalMissions() > 0) {
+            idGeneration.setPlanId(idGeneration.getPlanId() + 1);
+            newPlan.setPlanId(idGeneration.getPlanId());
+            newPlan.setLastUpdateTime(new Date());
+            String missionIds = "";
+            for (Mission mission : newPlan.getMissions()) {
+                if (mission.getSequence() != null) {
+                    mission.setPlanId(idGeneration.getPlanId());
+                    idGeneration.setMissionId(idGeneration.getMissionId() + 1);
+                    mission.setMissionId(idGeneration.getMissionId());
+                    //todo:: add experience and score calc
+                    missionIds = missionIds + idGeneration.getMissionId().toString() + ",";
+                    mission.setLastUpdateTime(new Date());
+                }
+            }
+            if (missionIds.length() > 0) {
+                missionIds.substring(0, missionIds.length() - 1);
+                newPlan.setMissionIds(missionIds);
+            }
+            planDAO.createPlan(newPlan);
+            for (Mission mission : newPlan.getMissions()) {
+                if (mission.getSequence() != null) {
+                    missionService.createMission(mission);
+                }
+            }
+            commonDAODAO.updateIDGenerationFriend(idGeneration);
+            return newPlan;
+        }
+        return null;
+    }
 }
+
+

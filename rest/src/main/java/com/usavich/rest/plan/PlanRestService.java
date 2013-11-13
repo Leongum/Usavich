@@ -37,6 +37,12 @@ public class PlanRestService implements PlanRestDef {
     }
 
     @Override
+    public Plan createPlan(String userId, Plan newPlan) {
+        CommonUtils.newMethodCall("PlanRestService.createPlan");
+        return planService.createPlan(CommonUtils.parseIntegerToNull(userId), newPlan);
+    }
+
+    @Override
     public List<PlanCollect> getPlanCollection(String userId, String lastUpdateTime) {
         CommonUtils.newMethodCall("PlanRestService.getPlanCollection");
         return planService.getPlanCollection(CommonUtils.parseIntegerToNull(userId),

@@ -36,4 +36,6 @@ public interface PlanService {
     List<PlanUserFollow> getPlanFollower(Integer userId, Date lastUpdateTime);
 
     void updatePlanFollower(Integer userId, List<PlanUserFollow> planFollow);
+
+    Plan createPlan(Integer userId, Plan newPlan);
 }

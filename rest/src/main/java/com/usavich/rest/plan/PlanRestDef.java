@@ -31,6 +31,13 @@ public interface PlanRestDef extends RestDef {
     List<Plan> getPlans(
             @QueryParam(PARAM_PAGE_NUMBER) String pageNo);//default page = 1
 
+    @POST
+    @Path("/plan/post/{" + PARAM_USER_ID + "}")
+    Plan createPlan(
+            @PathParam(PARAM_USER_ID) String userId,
+            Plan newPlan
+    );
+
     @GET
     @Path("/collect/{" + PARAM_USER_ID + "}")
     List<PlanCollect> getPlanCollection(

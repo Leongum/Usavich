@@ -38,4 +38,9 @@ public class MissionDAOImpl implements MissionDAO {
     public List<Mission> getMissionsByPlanId(Integer planId) {
         return missionMapper.getMissionsByPlanId(planId);
     }
+
+    @Override
+    public void createMission(Mission mission) {
+        missionMapper.createMission(mission);
+    }
 }

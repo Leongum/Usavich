@@ -58,6 +58,11 @@ public class PlanDAOImpl implements PlanDAO {
     }
 
     @Override
+    public void createPlan(Plan newPlan) {
+        planMapper.createPlan(newPlan);
+    }
+
+    @Override
     public void updatePlanRunning(Integer userId, PlanRunHistory planHistory) {
         planMapper.updatePlanRunning(userId, planHistory);
     }

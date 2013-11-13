@@ -72,4 +72,9 @@ public class MissionServiceImpl implements MissionService {
     public List<Mission> getMissionsByPlanId(Integer planId) {
         return missionDAO.getMissionsByPlanId(planId);
     }
+
+    @Override
+    public void createMission(Mission mission) {
+        missionDAO.createMission(mission);
+    }
 }

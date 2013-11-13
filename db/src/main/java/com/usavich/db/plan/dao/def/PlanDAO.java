@@ -39,4 +39,6 @@ public interface PlanDAO {
     public List<PlanUserFollow> getPlanFollower(Integer userId, Date lastUpdateTime);
 
     public void createPlanRunning(Integer userId, PlanRunHistory planHistory);
+
+    public void createPlan(Plan newPlan);
 }

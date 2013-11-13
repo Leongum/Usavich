@@ -115,6 +115,45 @@
         ]]></if>
     </select>
 
+    <insert id="createPlan" parameterType="com.usavich.entity.plan.Plan">
+        INSERT INTO PLAN
+        (
+                PLAN_ID,
+                PLAN_NAME,
+                PLAN_DESCRIPTION,
+                PLAN_TYPE,
+                MISSION_IDS,
+                TOTAL_MISSIONS,
+                PLAN_SHARE_USER,
+                PLAN_SHARE_USER_NAME,
+                SHARED_PLAN,
+                CYCLE_TIME,
+                DURATION,
+                DURATION_TYPE,
+                DURATION_LAST,
+                PLAN_STATUS,
+                LAST_UPDATE_TIME
+        )
+        VALUES
+        (
+                #{entity.planId},
+                #{entity.planName},
+                #{entity.planDescription},
+                #{entity.planType},
+                #{entity.missionIds},
+                #{entity.totalMissions},
+                #{entity.planShareUserId},
+                #{entity.planShareUserName},
+                #{entity.sharedPlan},
+                #{entity.cycleTime},
+                #{entity.duration},
+                #{entity.durationType},
+                #{entity.durationLast},
+                #{entity.planStatus},
+                #{entity.lastUpdateTime}
+        );
+    </insert>
+
     <select id="getPlanCollection" resultMap="planCollectInfo">
         SELECT
         <include refid="planCollectTable"/>

@@ -23,4 +23,6 @@ public interface MissionService {
     List<MissionChallenge> getMissionChallenge(Integer challengeId);
 
     List<Mission> getMissionsByPlanId(Integer planId);
+
+    void createMission(Mission mission);
 }

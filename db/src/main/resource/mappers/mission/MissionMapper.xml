@@ -107,6 +107,59 @@
         ]]></if>
     </select>
 
+    <insert id="createMission" parameterType="com.usavich.entity.mission.Mission">
+        INSERT INTO MISSION
+        (
+                MISSION_ID,
+                MISSION_TYPE_ID,
+                MISSION_NAME,
+                MISSION_CONTENT,
+                SCORES,
+                EXPERIENCE,
+                MISSION_FLAG,
+                LEVEL_LIMITED,
+                MISSION_TIME,
+                MISSION_DISTANCE,
+                CYCLE_TIME,
+                MISSION_FROM,
+                MISSION_TO,
+                MISSION_PLACE_PACKAGE_ID,
+                MISSION_STEPS,
+                MISSION_SPEED,
+                LAST_UPDATE_TIME,
+                CHALLENGE_ID,
+                SUB_MISSION_LIST,
+                MISSION_PACKAGE_ID,
+                SEQUENCE,
+                PLAN_ID
+        )
+        VALUES
+        (
+                #{entity.missionId},
+                #{entity.missionTypeId},
+                #{entity.missionName},
+                #{entity.missionContent},
+                #{entity.scores},
+                #{entity.experience},
+                #{entity.missionFlag},
+                #{entity.levelLimited},
+                #{entity.missionTime},
+                #{entity.missionDistance},
+                #{entity.cycleTime},
+                #{entity.missionFrom},
+                #{entity.missionTo},
+                #{entity.missionPlacePackageId},
+                #{entity.missionSteps},
+                #{entity.missionSpeed},
+                #{entity.lastUpdateTime},
+                #{entity.challengeId},
+                #{entity.subMissionList},
+                #{entity.missionPackageId},
+                #{entity.sequence},
+                #{entity.planId}
+        );
+    </insert>
+
     <select id="getMissionPlacePackage" resultMap="missionPlacePackageInfo">
         SELECT
         <include refid="missionPlacePackageTable"/>
