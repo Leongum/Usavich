@@ -2,6 +2,7 @@ package com.usavich.service.common.impl;
 
 import com.usavich.db.common.dao.def.CommonDAO;
 import com.usavich.entity.common.*;
+import com.usavich.service.Cache.CacheFacade;
 import com.usavich.service.backend.BackendJobCache;
 import com.usavich.service.common.def.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +79,16 @@ public class CommonServiceImpl implements CommonService {
             methodCollector.setMethodTimes(methods.get(key));
             methodCollector.setUseDate(now);
             commonDAO.createMethodCollector(methodCollector);
+        }
+    }
+
+    @Override
+    public void evictCache(String cacheId) {
+        if (cacheId.equalsIgnoreCase("all")) {
+            CacheFacade.PLAN.evictAll();
+        }
+        if (cacheId.startsWith("plan")) {
+            CacheFacade.PLAN.evict(cacheId);
         }
     }
 }

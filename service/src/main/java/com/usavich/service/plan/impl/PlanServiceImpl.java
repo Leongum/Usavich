@@ -1,5 +1,6 @@
 package com.usavich.service.plan.impl;
 
+import com.usavich.common.lib.Callable;
 import com.usavich.db.common.dao.def.CommonDAO;
 import com.usavich.db.plan.dao.def.PlanDAO;
 import com.usavich.entity.common.IDGeneration;
@@ -8,6 +9,7 @@ import com.usavich.entity.plan.Plan;
 import com.usavich.entity.plan.PlanCollect;
 import com.usavich.entity.plan.PlanRunHistory;
 import com.usavich.entity.plan.PlanUserFollow;
+import com.usavich.service.Cache.CacheFacade;
 import com.usavich.service.backend.BackendJobCache;
 import com.usavich.service.mission.def.MissionService;
 import com.usavich.service.plan.def.PlanService;
@@ -60,10 +62,22 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public Plan getPlan(Integer planId, Date lastUpdateTime, Integer needMissions) {
-        Plan plan = planDAO.getPlan(planId, lastUpdateTime);
-        if (needMissions == 1) {
-            plan.setMissions(missionService.getMissionsByPlanId(planId));
+    public Plan getPlan(final Integer planId, final Date lastUpdateTime) {
+        String key = "plan.id." + planId.toString();
+
+        Plan plan = CacheFacade.PLAN.get(key, new Callable<Plan>() {
+            @Override
+            public Plan execute() {
+                Plan plan = planDAO.getPlan(planId, null);
+                plan.setMissions(missionService.getMissionsByPlanId(planId));
+                return plan;
+            }
+        });
+
+        if (lastUpdateTime != null) {
+            if (plan.getLastUpdateTime().before(lastUpdateTime)) {
+                return null;
+            }
         }
         return plan;
     }

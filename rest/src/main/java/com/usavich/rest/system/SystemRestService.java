@@ -49,5 +49,10 @@ public class SystemRestService implements SystemRestDef{
         commonService.createDownLoadInfo(statistics);
     }
 
+    @Override
+    public void evictCache(String cacheId) {
+        commonService.evictCache(cacheId);
+    }
+
 
 }

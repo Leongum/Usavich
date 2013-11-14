@@ -27,4 +27,6 @@ public interface CommonService {
     void createDownLoadInfo(Statistics statistics);
 
     void createMethodCollector(Map<String,Integer> methods);
+
+    void evictCache(String cacheId);
 }

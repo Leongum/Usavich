@@ -29,7 +29,7 @@ public class PlanDAOImpl implements PlanDAO {
 
     @Override
     public Plan getPlan(Integer planId, Date lastUpdateTime) {
-        return planMapper.getPlan(planId, lastUpdateTime);
+        return planMapper.getPlan(planId, null);
     }
 
     @Override

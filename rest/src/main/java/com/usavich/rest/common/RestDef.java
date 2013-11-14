@@ -22,6 +22,7 @@ public interface RestDef {
 
     static final String PARAM_PAGE_NUMBER = "pageNo";
     static final String PARAM_PAGE_SIZE = "pageSize";
+    static final String PARAM_CACHE_ID = "cacheId";
 
     static final String HEADER_PARAM_MISSION_TYPE = "X-MISSION-TYPE";
     static final String HEADER_PARAM_KEY = "X-CLIENT-KEY";

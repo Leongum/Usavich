@@ -23,8 +23,7 @@ public interface PlanRestDef extends RestDef {
     @Path("/plan/{" + PARAM_PLAN_ID + "}")
     Plan getPlan(
             @PathParam(PARAM_PLAN_ID) String planId,
-            @QueryParam("PARAM_LAST_UPDATE_TIME") String lastUpdateTime,
-            @QueryParam("needDetails") String needDetails);//default need = 1
+            @QueryParam("PARAM_LAST_UPDATE_TIME") String lastUpdateTime);
 
     @GET
     @Path("/list")

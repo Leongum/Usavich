@@ -36,4 +36,9 @@ public interface SystemRestDef extends RestDef {
     @POST
     @Path("/download")
     void createDownLoadInfo(Statistics statistics);
+
+    @GET
+    @Path("/cache/evict/{" + PARAM_CACHE_ID + "}")
+    void evictCache(
+            @PathParam(PARAM_CACHE_ID) String cacheId);
 }

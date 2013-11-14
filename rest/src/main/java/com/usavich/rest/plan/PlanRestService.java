@@ -20,14 +20,10 @@ public class PlanRestService implements PlanRestDef {
     private PlanService planService;
 
     @Override
-    public Plan getPlan(String planId, String lastUpdateTime, String needDetails) {
+    public Plan getPlan(String planId, String lastUpdateTime) {
         CommonUtils.newMethodCall("PlanRestService.getPlan");
-        Integer detailInformation = CommonUtils.parseIntegerToNull(needDetails);
-        if (detailInformation == null) {
-            detailInformation = 1;
-        }
         return planService.getPlan(CommonUtils.parseIntegerToNull(planId),
-                CommonUtils.parseDateDefaultToNull(lastUpdateTime), detailInformation);
+                CommonUtils.parseDateDefaultToNull(lastUpdateTime));
     }
 
     @Override

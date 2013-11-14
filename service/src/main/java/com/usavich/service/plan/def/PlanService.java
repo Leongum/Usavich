@@ -21,7 +21,7 @@ public interface PlanService {
 
     List<Plan> getPlanByPageNo(Integer pageNo,Integer pageSize);
 
-    Plan getPlan(Integer planId, Date lastUpdateTime, Integer needMissions);
+    Plan getPlan(Integer planId, Date lastUpdateTime);
 
     List<PlanCollect> getPlanCollection(Integer userId, Date lastUpdateTime);
 
