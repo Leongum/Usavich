@@ -55,11 +55,16 @@ public interface PlanRestDef extends RestDef {
             @PathParam(PARAM_USER_ID) String userId,
             @QueryParam(PARAM_LAST_UPDATE_TIME) String lastUpdateTime);
 
+    @GET
+    @Path("/history/lastupdate/{" + PARAM_USER_ID + "}")
+    PlanRunHistory getUserLastUpdatePlan(
+            @PathParam(PARAM_USER_ID) String userId);
+
     @PUT
     @Path("/history/put/{" + PARAM_USER_ID + "}")
-    PlanRunHistory checkRunningHistoryStatus(
+    void updateRunningHistory(
             @PathParam(PARAM_USER_ID) String userId,
-            PlanRunHistory planHistory);
+            List<PlanRunHistory> planHistory);
 
     @GET
     @Path("/history/running/plan/{" + PARAM_PLAN_ID + "}")

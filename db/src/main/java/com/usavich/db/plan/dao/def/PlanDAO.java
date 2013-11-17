@@ -41,4 +41,6 @@ public interface PlanDAO {
     public void createPlanRunning(Integer userId, PlanRunHistory planHistory);
 
     public void createPlan(Plan newPlan);
+
+    public PlanRunHistory getUserLastUpdatePlan(Integer userId);
 }

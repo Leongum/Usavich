@@ -59,9 +59,15 @@ public class PlanRestService implements PlanRestDef {
     }
 
     @Override
-    public PlanRunHistory checkRunningHistoryStatus(String userId, PlanRunHistory planHistory) {
-        CommonUtils.newMethodCall("PlanRestService.checkRunningHistoryStatus");
-        return planService.checkRunningHistoryStatus(CommonUtils.parseIntegerToNull(userId), planHistory);
+    public PlanRunHistory getUserLastUpdatePlan(String userId) {
+        CommonUtils.newMethodCall("PlanRestService.getUserExecutingPlan");
+        return planService.getUserLastUpdatePlan(CommonUtils.parseIntegerToNull(userId));
+    }
+
+    @Override
+    public void updateRunningHistory(String userId, List<PlanRunHistory> planHistory) {
+        CommonUtils.newMethodCall("PlanRestService.updateRunningHistory");
+        planService.updateRunningHistory(CommonUtils.parseIntegerToNull(userId), planHistory);
     }
 
     @Override

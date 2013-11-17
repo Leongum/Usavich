@@ -29,7 +29,7 @@ public interface PlanService {
 
     List<PlanRunHistory> getPlanRunHistory(Integer userId, Date lastUpdateTime);
 
-    PlanRunHistory checkRunningHistoryStatus(Integer userId, PlanRunHistory planHistory);
+    void updateRunningHistory(Integer userId, List<PlanRunHistory> planHistory);
 
     List<PlanRunHistory> getPlanRunningByPlanId(Integer planId, Integer pageNo);
 
@@ -40,4 +40,6 @@ public interface PlanService {
     void updatePlanFollower(Integer userId, List<PlanUserFollow> planFollow);
 
     Plan createPlan(Integer userId, Plan newPlan);
+
+    PlanRunHistory getUserLastUpdatePlan(Integer userId);
 }

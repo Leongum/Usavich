@@ -4,11 +4,9 @@ import com.usavich.common.lib.Callable;
 import com.usavich.db.common.dao.def.CommonDAO;
 import com.usavich.db.plan.dao.def.PlanDAO;
 import com.usavich.entity.common.IDGeneration;
+import com.usavich.entity.enums.*;
 import com.usavich.entity.mission.Mission;
-import com.usavich.entity.plan.Plan;
-import com.usavich.entity.plan.PlanCollect;
-import com.usavich.entity.plan.PlanRunHistory;
-import com.usavich.entity.plan.PlanUserFollow;
+import com.usavich.entity.plan.*;
 import com.usavich.service.Cache.CacheFacade;
 import com.usavich.service.backend.BackendJobCache;
 import com.usavich.service.mission.def.MissionService;
@@ -33,7 +31,7 @@ public class PlanServiceImpl implements PlanService {
     private PlanDAO planDAO;
 
     @Autowired
-    private CommonDAO commonDAODAO;
+    private CommonDAO commonDAO;
 
     @Autowired
     private MissionService missionService;
@@ -104,40 +102,37 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     @Transactional
-    public PlanRunHistory checkRunningHistoryStatus(Integer userId, PlanRunHistory planHistory) {
-        PlanRunHistory currentHistory = planDAO.getPlanRunning(userId);
-        if (planHistory == null || planHistory.getPlanId() == null) {
-            return currentHistory;
+    public void updateRunningHistory(Integer userId, List<PlanRunHistory> planHistoryList) {
+        for (PlanRunHistory planHistory : planHistoryList) {
+            if (planHistory.getOperate() == OperateEnum.Insert.ordinal()) {
+                planHistory.setHistoryStatus(HistoryStatusEnum.Execute.ordinal());
+                planDAO.createPlanRunning(userId, planHistory);
+            } else if (planHistory.getOperate() == OperateEnum.Update.ordinal()) {
+                if (planHistory.getRemainingMissions() == 0) {
+                    planHistory.setHistoryStatus(HistoryStatusEnum.Finished.ordinal());
+                    planHistory.setNextMissionId(null);
+                }
+                planDAO.updatePlanRunning(userId, planHistory);
+            } else if (planHistory.getOperate() == OperateEnum.Delete.ordinal()) {
+                if (planHistory.getRemainingMissions() == 0) {
+                    planHistory.setHistoryStatus(HistoryStatusEnum.Cancled.ordinal());
+                }
+                planDAO.updatePlanRunning(userId, planHistory);
+            }
         }
-        if (planHistory.getRemainingMissions() == 0) {
-            planHistory.setHistoryStatus(1);
-            planHistory.setEndTime(new Date());
-            planHistory.setNextMissionId(null);
-        }
-        if (planHistory.getHistoryStatus() == -1) {
-            planHistory.setEndTime(new Date());
-        }
-        if (currentHistory == null || currentHistory.getPlanRunUuid() == null) {
-            planDAO.createPlanRunning(userId, planHistory);
-        } else if (currentHistory.getRemainingMissions() >= planHistory.getRemainingMissions()) {
-            planDAO.updatePlanRunning(userId, planHistory);
-        } else {
-            return currentHistory;
-        }
-        return planHistory;
     }
 
     @Override
     public List<PlanRunHistory> getPlanRunningByPlanId(Integer planId, Integer pageNo) {
         Integer from = pageNo == null ? 0 : pageNo * 10;
-        Integer pageSize = 30;
+        Integer pageSize = 10;
         return planDAO.getPlanRunningByPlanId(planId, from, pageSize);
     }
 
     @Override
     public List<PlanRunHistory> getPlanRunningByUserId(Integer userId, Integer pageNo) {
         Integer from = pageNo == null ? 0 : pageNo * 10;
-        Integer pageSize = 30;
+        Integer pageSize = 10;
         return planDAO.getPlanRunningByUserId(userId, from, pageSize);
     }
 
@@ -159,11 +154,12 @@ public class PlanServiceImpl implements PlanService {
     @Override
     @Transactional
     public Plan createPlan(Integer userId, Plan newPlan) {
-        IDGeneration idGeneration = commonDAODAO.getIDGenerationInfo();
+        IDGeneration idGeneration = commonDAO.getIDGenerationInfo();
         if (newPlan != null && newPlan.getTotalMissions() != null && newPlan.getTotalMissions() > 0) {
             idGeneration.setPlanId(idGeneration.getPlanId() + 1);
             newPlan.setPlanId(idGeneration.getPlanId());
-            newPlan.setLastUpdateTime(new Date());
+            newPlan.setSharedPlan(SharedPlanEnum.Shared.ordinal());
+            newPlan.setPlanFlag(PlanFlagEnum.New.ordinal());
             String missionIds = "";
             for (Mission mission : newPlan.getMissions()) {
                 if (mission.getSequence() != null) {
@@ -172,7 +168,6 @@ public class PlanServiceImpl implements PlanService {
                     mission.setMissionId(idGeneration.getMissionId());
                     //todo:: add experience and score calc
                     missionIds = missionIds + idGeneration.getMissionId().toString() + ",";
-                    mission.setLastUpdateTime(new Date());
                 }
             }
             if (missionIds.length() > 0) {
@@ -185,10 +180,15 @@ public class PlanServiceImpl implements PlanService {
                     missionService.createMission(mission);
                 }
             }
-            commonDAODAO.updateIDGenerationFriend(idGeneration);
+            commonDAO.updateIDGenerationFriend(idGeneration);
             return newPlan;
         }
         return null;
+    }
+
+    @Override
+    public PlanRunHistory getUserLastUpdatePlan(Integer userId) {
+        return planDAO.getUserLastUpdatePlan(userId);
     }
 }
 

@@ -332,7 +332,8 @@
         ON PUF.FOLLOWER_USER_ID = U.USER_ID
         INNER JOIN USER_DETAIL AS UD
         ON U.USER_ID = UD.USER_ID
-        WHERE PUF.USER_ID = #{userId}
+        WHERE PUF.USER_ID = #{userId} AND PUF.STATUS = 0
+        ORDER BY PUF.ADD_TIME DESC
         LIMIT #{from},#{pageSize}
     </select>
 

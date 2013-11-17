@@ -16,6 +16,7 @@
         <result column="DURATION" property="duration"/>
         <result column="DURATION_TYPE" property="durationType"/>
         <result column="PLAN_STATUS" property="planStatus"/>
+        <result column="PLAN_FLAG" property="planFlag"/>
         <result column="DURATION_LAST" property="durationLast"/>
         <result column="LAST_UPDATE_TIME" property="lastUpdateTime"/>
     </resultMap>
@@ -64,6 +65,7 @@
         P.DURATION_TYPE,
         P.PLAN_STATUS,
         P.DURATION_LAST,
+        P.PLAN_FLAG,
         P.LAST_UPDATE_TIME
     </sql>
 
@@ -132,6 +134,7 @@
                 DURATION_TYPE,
                 DURATION_LAST,
                 PLAN_STATUS,
+                PLAN_FLAG,
                 LAST_UPDATE_TIME
         )
         VALUES
@@ -150,6 +153,7 @@
                 #{entity.durationType},
                 #{entity.durationLast},
                 #{entity.planStatus},
+                #{entity.planFlag},
                 #{entity.lastUpdateTime}
         );
     </insert>
@@ -186,7 +190,7 @@
         SELECT
         <include refid="planRunHistoryTable"/>
         FROM PLAN_RUN_HISTORY AS PRH
-        WHERE PRH.USER_ID = #{userId} AND PRH.HISTORY_STATUS != 0
+        WHERE PRH.USER_ID = #{userId}
         <if test="lastUpdateTime != null"><![CDATA[
         AND PRH.LAST_UPDATE_TIME > #{lastUpdateTime}
         ]]></if>
@@ -243,7 +247,8 @@
         RATE_COMMENT = #{planHistory.rateComment},
         REMAINING_MISSIONS = #{planHistory.remainingMissions},
         TOTAL_MISSIONS = #{planHistory.totalMissions},
-        HISTORY_STATUS = #{planHistory.historyStatus}
+        HISTORY_STATUS = #{planHistory.historyStatus},
+        LAST_UPDATE_TIME =  #{planHistory.lastUpdateTime}
         WHERE USER_ID = #{planHistory.userId} AND PLAN_RUN_UUID = #{planHistory.planRunUuid}
     </update>
 
@@ -252,17 +257,26 @@
         <include refid="planRunHistoryTable"/>
         FROM PLAN_RUN_HISTORY AS PRH
         WHERE PRH.PLAN_ID = #{planId} AND PRH.HISTORY_STATUS = 0
+        ORDER BY PRH.LAST_UPDATE_TIME DESC
         LIMIT #{from},#{pageSize}
-        -- ORDER BY PRH.LAST_UPDATE_TIME DESC
     </select>
 
     <select id="getPlanRunningByUserId" resultMap="planRunHistoryInfo">
         SELECT
         <include refid="planRunHistoryTable"/>
         FROM PLAN_USER_FOLLOW AS PUF INNER JOIN PLAN_RUN_HISTORY AS PRH ON PRH.USER_ID = PUF.FOLLOWER_USER_ID
-        WHERE PUF.USER_ID = #{userId} AND PRH.HISTORY_STATUS = 0
+        WHERE PUF.USER_ID = #{userId} AND PRH.HISTORY_STATUS = 0 AND PUF.STATUS = 0
+        ORDER BY PRH.LAST_UPDATE_TIME DESC
         LIMIT #{from},#{pageSize}
-        -- ORDER BY PRH.LAST_UPDATE_TIME DESC
+    </select>
+
+    <select id="getUserLastUpdatePlan" resultMap="planRunHistoryInfo">
+        SELECT
+        <include refid="planRunHistoryTable"/>
+        FROM PLAN_RUN_HISTORY AS PRH
+        WHERE PRH.USER_ID = #{userId}
+        ORDER BY PRH.LAST_UPDATE_TIME DESC, PRH.HISTORY_STATUS ASC
+        LIMIT 0,1
     </select>
 
     <select id="getPlanFollower" resultMap="planUserFollowInfo">

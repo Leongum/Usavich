@@ -32,6 +32,7 @@ public class Plan {
     private Integer durationType; // 1 week 2 day
     private Integer planStatus; //0 enabled 1 deleted
     private Integer durationLast;
+    private Integer planFlag;
     private Date lastUpdateTime;
 
     private List<Mission> missions;
@@ -156,6 +157,14 @@ public class Plan {
 
     public void setMissions(List<Mission> missions) {
         this.missions = missions;
+    }
+
+    public Integer getPlanFlag() {
+        return planFlag;
+    }
+
+    public void setPlanFlag(Integer planFlag) {
+        this.planFlag = planFlag;
     }
 
     public Integer getDurationLast() {

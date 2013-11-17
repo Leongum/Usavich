@@ -63,6 +63,11 @@ public class PlanDAOImpl implements PlanDAO {
     }
 
     @Override
+    public PlanRunHistory getUserLastUpdatePlan(Integer userId) {
+        return planMapper.getUserLastUpdatePlan(userId);
+    }
+
+    @Override
     public void updatePlanRunning(Integer userId, PlanRunHistory planHistory) {
         planMapper.updatePlanRunning(userId, planHistory);
     }
