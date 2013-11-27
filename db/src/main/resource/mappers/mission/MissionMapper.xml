@@ -25,6 +25,8 @@
         <result column="MISSION_PACKAGE_ID" property="missionPackageId"/>
         <result column="SEQUENCE" property="sequence"/>
         <result column="PLAN_ID" property="planId"/>
+        <result column="SUGGESTION_MAX_SPEED" property="suggestionMaxSpeed"/>
+        <result column="SUGGESTION_MIN_SPEED" property="suggestionMinSpeed"/>
     </resultMap>
 
     <resultMap id="missionPlacePackageInfo" type="com.usavich.entity.mission.MissionPlacePackage">
@@ -67,7 +69,9 @@
         SUB_MISSION_LIST,
         MISSION_PACKAGE_ID,
         SEQUENCE,
-        PLAN_ID
+        PLAN_ID,
+        SUGGESTION_MAX_SPEED,
+        SUGGESTION_MIN_SPEED
     </sql>
 
     <sql id="missionPlacePackageTable">
@@ -131,7 +135,9 @@
                 SUB_MISSION_LIST,
                 MISSION_PACKAGE_ID,
                 SEQUENCE,
-                PLAN_ID
+                PLAN_ID,
+                SUGGESTION_MAX_SPEED,
+                SUGGESTION_MIN_SPEED
         )
         VALUES
         (
@@ -156,7 +162,9 @@
                 #{entity.subMissionList},
                 #{entity.missionPackageId},
                 #{entity.sequence},
-                #{entity.planId}
+                #{entity.planId},
+                #{entity.suggestionMaxSpeed},
+                #{entity.suggestionMinSpeed}
         );
     </insert>
 

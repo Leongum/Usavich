@@ -42,6 +42,8 @@ public class Mission {
     private Integer missionPackageId;
     private Integer sequence;
     private Integer planId;
+    private double suggestionMaxSpeed;
+    private double suggestionMinSpeed;
 
     public Integer getMissionId() {
         return missionId;
@@ -235,5 +237,21 @@ public class Mission {
 
     public void setPlanId(Integer planId) {
         this.planId = planId;
+    }
+
+    public double getSuggestionMaxSpeed() {
+        return suggestionMaxSpeed;
+    }
+
+    public void setSuggestionMaxSpeed(double suggestionMaxSpeed) {
+        this.suggestionMaxSpeed = suggestionMaxSpeed;
+    }
+
+    public double getSuggestionMinSpeed() {
+        return suggestionMinSpeed;
+    }
+
+    public void setSuggestionMinSpeed(double suggestionMinSpeed) {
+        this.suggestionMinSpeed = suggestionMinSpeed;
     }
 }

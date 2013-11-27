@@ -257,7 +257,7 @@
             TOTAL_DISTANCE = #{entity.totalDistance},
             AVG_SPEED = #{entity.avgSpeed},
             SPEND_CARLORIE = #{entity.spendCarlorie},
-            TOTAL_RUN_TIMES = #{entity.totalRunTimes},
+            TOTAL_RUN_TIMES = #{entity.totalRunTimes}
         WHERE USER_ID = #{entity.userId}
     </update>
 
