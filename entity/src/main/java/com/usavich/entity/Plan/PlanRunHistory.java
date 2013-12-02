@@ -17,9 +17,11 @@ import java.util.Date;
 public class PlanRunHistory {
 
     private Integer planId;
+    private String planName;
     private String planRunUuid;
     private Integer nextMissionId;
     private Integer userId;
+    private String nickName;
     private Date startTime;
     private Date endTime;
     private Integer rate;
@@ -36,6 +38,14 @@ public class PlanRunHistory {
 
     public void setPlanId(Integer planId) {
         this.planId = planId;
+    }
+
+    public String getPlanName() {
+        return planName;
+    }
+
+    public void setPlanName(String planName) {
+        this.planName = planName;
     }
 
     public String getPlanRunUuid() {
@@ -60,6 +70,14 @@ public class PlanRunHistory {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     @JsonSerialize(using = CustomDateSerializer.class)

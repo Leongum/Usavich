@@ -37,9 +37,11 @@
 
     <resultMap id="planRunHistoryInfo" type="com.usavich.entity.plan.PlanRunHistory">
         <id column="PLAN_ID" property="planId"/>
+        <result column="PLAN_NAME" property="planName"/>
         <result column="PLAN_RUN_UUID" property="planRunUuid"/>
         <result column="NEXT_MISSION_ID" property="nextMissionId"/>
         <result column="USER_ID" property="userId"/>
+        <result column="NICK_NAME" property="nickName"/>
         <result column="START_TIME" property="startTime"/>
         <result column="END_TIME" property="endTime"/>
         <result column="RATE" property="rate"/>
@@ -164,7 +166,7 @@
         FROM PLAN_COLLECT
         WHERE USER_ID = #{userId} AND COLLECT_STATUS = 0
         <if test="lastUpdateTime != null"><![CDATA[
-        AND COMMIT_TIME > #{lastUpdateTime}
+        AND COLLECT_TIME > #{lastUpdateTime}
         ]]></if>
     </select>
 
@@ -254,8 +256,14 @@
 
     <select id="getPlanRunningByPlanId" resultMap="planRunHistoryInfo">
         SELECT
+        U.NICK_NAME,
+        P.PLAN_NAME,
         <include refid="planRunHistoryTable"/>
         FROM PLAN_RUN_HISTORY AS PRH
+        INNER JOIN USER AS U
+        ON PRH.USER_ID = U.USER_ID
+        INNER JOIN PLAN AS P
+        ON P.PLAN_ID = PRH.PLAN_ID
         WHERE PRH.PLAN_ID = #{planId} AND PRH.HISTORY_STATUS = 0
         ORDER BY PRH.LAST_UPDATE_TIME DESC
         LIMIT #{from},#{pageSize}
@@ -263,8 +271,16 @@
 
     <select id="getPlanRunningByUserId" resultMap="planRunHistoryInfo">
         SELECT
+        U.NICK_NAME,
+        P.PLAN_NAME,
         <include refid="planRunHistoryTable"/>
-        FROM PLAN_USER_FOLLOW AS PUF INNER JOIN PLAN_RUN_HISTORY AS PRH ON PRH.USER_ID = PUF.FOLLOWER_USER_ID
+        FROM PLAN_USER_FOLLOW AS PUF
+        INNER JOIN PLAN_RUN_HISTORY AS PRH
+        ON PRH.USER_ID = PUF.FOLLOWER_USER_ID
+        INNER JOIN USER AS U
+        ON PRH.USER_ID = U.USER_ID
+        INNER JOIN PLAN AS P
+        ON P.PLAN_ID = PRH.PLAN_ID
         WHERE PUF.USER_ID = #{userId} AND PRH.HISTORY_STATUS = 0 AND PUF.STATUS = 0
         ORDER BY PRH.LAST_UPDATE_TIME DESC
         LIMIT #{from},#{pageSize}
@@ -272,8 +288,14 @@
 
     <select id="getUserLastUpdatePlan" resultMap="planRunHistoryInfo">
         SELECT
+        U.NICK_NAME,
+        P.PLAN_NAME,
         <include refid="planRunHistoryTable"/>
         FROM PLAN_RUN_HISTORY AS PRH
+        INNER JOIN USER AS U
+        ON PRH.USER_ID = U.USER_ID
+        INNER JOIN PLAN AS P
+        ON P.PLAN_ID = PRH.PLAN_ID
         WHERE PRH.USER_ID = #{userId}
         ORDER BY PRH.LAST_UPDATE_TIME DESC, PRH.HISTORY_STATUS ASC
         LIMIT 0,1

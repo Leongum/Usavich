@@ -60,7 +60,7 @@ public class PlanRestService implements PlanRestDef {
 
     @Override
     public PlanRunHistory getUserLastUpdatePlan(String userId) {
-        CommonUtils.newMethodCall("PlanRestService.getUserExecutingPlan");
+        CommonUtils.newMethodCall("PlanRestService.getUserLastUpdatePlan");
         return planService.getUserLastUpdatePlan(CommonUtils.parseIntegerToNull(userId));
     }
 
