@@ -1,5 +1,7 @@
 package com.usavich.service.plan.impl;
 
+import com.usavich.common.exception.ErrorMessageMapper;
+import com.usavich.common.exception.ServerRequestException;
 import com.usavich.common.lib.Callable;
 import com.usavich.db.common.dao.def.CommonDAO;
 import com.usavich.db.plan.dao.def.PlanDAO;
@@ -168,22 +170,24 @@ public class PlanServiceImpl implements PlanService {
                     mission.setMissionId(idGeneration.getMissionId());
                     //todo:: add experience and score calc
                     missionIds = missionIds + idGeneration.getMissionId().toString() + ",";
+                }else{
+                    throw new ServerRequestException(ErrorMessageMapper.PARAM_ERROR.toString());
                 }
             }
             if (missionIds.length() > 0) {
-                missionIds.substring(0, missionIds.length() - 1);
+                missionIds.substring(0, missionIds.length() - 2);
                 newPlan.setMissionIds(missionIds);
             }
-            planDAO.createPlan(newPlan);
             for (Mission mission : newPlan.getMissions()) {
                 if (mission.getSequence() != null) {
                     missionService.createMission(mission);
                 }
             }
+            planDAO.createPlan(newPlan);
             commonDAO.updateIDGenerationFriend(idGeneration);
             return newPlan;
         }
-        return null;
+        throw new ServerRequestException(ErrorMessageMapper.PARAM_ERROR.toString());
     }
 
     @Override

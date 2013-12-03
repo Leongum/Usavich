@@ -101,7 +101,7 @@
         AND MISSION_ID = #{missionId}
         ]]></if>
         <if test="missionId == null"><![CDATA[
-        AND MISSION_ID < 10000
+        AND MISSION_ID < 5000
         ]]></if>
         <if test="lastUpdateTime != null"><![CDATA[
         AND LAST_UPDATE_TIME > #{lastUpdateTime}
