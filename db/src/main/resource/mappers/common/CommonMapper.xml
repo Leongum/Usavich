@@ -193,4 +193,123 @@
         )
     </insert>
 
+
+    <!-- Yoland Calc -->
+    <resultMap id="yolandCalcInfo" type="com.usavich.entity.others.YolandCalc">
+         <id column="name" property="name"/>
+         <result column="compay_id" property="compay_id"/>
+         <result column="enterprise_property" property="enterprise_property"/>
+         <result column="business_property" property="business_property"/>
+         <result column="until_time" property="until_time"/>
+         <result column="total_employee" property="total_employee"/>
+         <result column="full_time_employee" property="full_time_employee"/>
+         <result column="part_time_employee" property="part_time_employee"/>
+         <result column="sh_employee" property="sh_employee"/>
+         <result column="not_sh_employee" property="not_sh_employee"/>
+         <result column="postgraduate" property="postgraduate"/>
+         <result column="undergraduate" property="undergraduate"/>
+         <result column="juniorcollege" property="juniorcollege"/>
+         <result column="income" property="income"/>
+         <result column="pay_per_income" property="pay_per_income"/>
+         <result column="socialpay_per_pay" property="socialpay_per_pay"/>
+         <result column="q1_enlarge" property="q1_enlarge"/>
+         <result column="q2_employee_type" property="q2_employee_type"/>
+         <result column="q3_employ_hard" property="q3_employ_hard"/>
+         <result column="q4_employ_use_hard" property="q4_employ_use_hard"/>
+         <result column="q5_employ_method" property="q5_employ_method"/>
+         <result column="q6_employ_lost_thread" property="q6_employ_lost_thread"/>
+         <result column="q7_why_employ_lost" property="q7_why_employ_lost"/>
+         <result column="q8_employ_socialpay_attr" property="q8_employ_socialpay_attr"/>
+         <result column="q9_employ_contract_attr" property="q9_employ_contract_attr"/>
+         <result column="q10_employ_probation_period" property="q10_employ_probation_period"/>
+         <result column="q11_employ_fire_method" property="q11_employ_fire_method"/>
+         <result column="q12_employ_hire_fire_method" property="q12_employ_hire_fire_method"/>
+         <result column="s1_positivity" property="s1_positivity"/>
+         <result column="s2_differentiation" property="s2_differentiation"/>
+         <result column="s3_policy_direct" property="s3_policy_direct"/>
+         <result column="s4_socialpay_free_time" property="s4_socialpay_free_time"/>
+         <result column="s5_policy_support_direct" property="s5_policy_support_direct"/>
+         <result column="s6_suitable_policy" property="s6_suitable_policy"/>
+         <result column="other_suggestion" property="other_suggestion"/>
+    </resultMap>
+
+    <insert id="createYolandDic" parameterType="com.usavich.entity.others.YolandCalc">
+        INSERT INTO yoland_calc
+        (
+        name,
+        compay_id,
+        enterprise_property,
+        business_property,
+        until_time,
+        total_employee,
+        full_time_employee,
+        part_time_employee,
+        sh_employee,
+        not_sh_employee,
+        postgraduate,
+        undergraduate,
+        juniorcollege,
+        income,
+        pay_per_income,
+        socialpay_per_pay,
+        q1_enlarge,
+        q2_employee_type,
+        q3_employ_hard,
+        q4_employ_use_hard,
+        q5_employ_method,
+        q6_employ_lost_thread,
+        q7_why_employ_lost,
+        q8_employ_socialpay_attr,
+        q9_employ_contract_attr,
+        q10_employ_probation_period,
+        q11_employ_fire_method,
+        q12_employ_hire_fire_method,
+        s1_positivity,
+        s2_differentiation,
+        s3_policy_direct,
+        s4_socialpay_free_time,
+        s5_policy_support_direct,
+        s6_suitable_policy,
+        other_suggestion)
+        VALUES
+        (
+        #{entity.name},
+        #{entity.compay_id},
+        #{entity.enterprise_property},
+        #{entity.business_property},
+        #{entity.until_time},
+        #{entity.total_employee},
+        #{entity.full_time_employee},
+        #{entity.part_time_employee},
+        #{entity.sh_employee},
+        #{entity.not_sh_employee},
+        #{entity.postgraduate},
+        #{entity.undergraduate},
+        #{entity.juniorcollege},
+        #{entity.income},
+        #{entity.pay_per_income},
+        #{entity.socialpay_per_pay},
+        #{entity.q1_enlarge},
+        #{entity.q2_employee_type},
+        #{entity.q3_employ_hard},
+        #{entity.q4_employ_use_hard},
+        #{entity.q5_employ_method},
+        #{entity.q6_employ_lost_thread},
+        #{entity.q7_why_employ_lost},
+        #{entity.q8_employ_socialpay_attr},
+        #{entity.q9_employ_contract_attr},
+        #{entity.q10_employ_probation_period},
+        #{entity.q11_employ_fire_method},
+        #{entity.q12_employ_hire_fire_method},
+        #{entity.s1_positivity},
+        #{entity.s2_differentiation},
+        #{entity.s3_policy_direct},
+        #{entity.s4_socialpay_free_time},
+        #{entity.s5_policy_support_direct},
+        #{entity.s6_suitable_policy},
+        #{entity.other_suggestion}
+        );
+
+    </insert>
+
 </mapper>
