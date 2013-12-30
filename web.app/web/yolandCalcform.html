@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>统计数据</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body style="background:beige">
+<form action="yolandCalc.jsp" method="post">
+<table border="1" style="width: 1024px">
+<tr>
+    <td colspan="2">一、企业基本情况</td>
+</tr>
+<tr>
+    <td style="width:450px">0、企业编号：</td>
+    <td><input name="company_id" size="25"></td>
+</tr>
+<tr>
+    <td>1、企业名称：</td>
+    <td><input type="text" name="company_name" size="100"></td>
+</tr>
+<tr>
+    <td>2、企业性质：</td>
+    <td>
+        <input type="radio" name="enterprise_property" value="①国有"/>①国有<br/>
+        <input type="radio" name="enterprise_property" value="②民营"/>②民营<br/>
+        <input type="radio" name="enterprise_property" value="③外资"/>③外资 <br/>
+        <input type="radio" name="enterprise_property" value="④股份制"/>④股份制 <br/>
+        <input type="radio" name="enterprise_property" value="⑤其它"/>⑤其它
+    </td>
+</tr>
+<tr>
+    <td>3、行业类型：</td>
+    <td>
+        <input type="radio" name="business_property" value="采掘、制造业"/>采掘、制造业 <br/>
+        <input type="radio" name="business_property" value="建筑业"/>建筑业      <br/>
+        <input type="radio" name="business_property" value="交通运输、仓储及邮电通信业"/>交通运输、仓储及邮电通信业  <br/>
+        <input type="radio" name="business_property" value="信息传播、计算机服务和软件业"/>信息传播、计算机服务和软件业 <br/>
+        <input type="radio" name="business_property" value="批发和零售业"/>批发和零售业      <br/>
+        <input type="radio" name="business_property" value="住宿和餐饮业"/>住宿和餐饮业  <br/>
+        <input type="radio" name="business_property" value="金融业"/>金融业       <br/>
+        <input type="radio" name="business_property" value="房地产业"/>房地产业    <br/>
+        <input type="radio" name="business_property" value="租赁和商务服务业"/>租赁和商务服务业   <br/>
+        <input type="radio" name="business_property" value="科学研究、技术服务和地质勘察业"/>科学研究、技术服务和地质勘察业 <br/>
+        <input type="radio" name="business_property" value="水利、环境和公共设施管理业"/>水利、环境和公共设施管理业  <br/>
+        <input type="radio" name="business_property" value="居民服务和其他服务业"/>居民服务和其他服务业  <br/>
+        <input type="radio" name="business_property" value="教育"/>教育               <br/>
+        <input type="radio" name="business_property" value="卫生、社会保障和公共设施"/>卫生、社会保障和公共设施 <br/>
+        <input type="radio" name="business_property" value="文化、体育和娱乐业"/>文化、体育和娱乐业  <br/>
+        <input type="radio" name="business_property" value="其他"/>其他
+    </td>
+</tr>
+<tr>
+    <td>4、成立时间：</td>
+    <td>
+        <input type="radio" name="until_time" value="①0~1年"/>①0~1年  <br/>
+        <input type="radio" name="until_time" value="②2~5年"/>②2~5年<br/>
+        <input type="radio" name="until_time" value="③5年以上"/>③5年以上
+    </td>
+</tr>
+<tr>
+    <td>5、员工人数：</td>
+    <td>
+        总人数：<input type="text" name="total_employee" size="25"> 人。     <br/>
+        其中全日制用工<input type="text" name="full_time_employee" size="25"> 人，  <br/>
+        非全日制用工<input type="text" name="part_time_employee" size="25"> 人；<br/>
+        上海户籍员工<input type="text" name="sh_employee" size="25"> 人，<br/>
+        非上海户籍员工 <input type="text" name="not_sh_employee" size="25"> 人。
+    </td>
+</tr>
+<tr>
+    <td>6、员工学历：</td>
+    <td>
+        研究生以上学历： <input type="text" name="postgraduate" size="25"> 人，<br/>
+        大专及本科以上学历： <input type="text" name="undergraduate" size="25"> 人，<br/>
+        大专以下学历：<input type="text" name="juniorcollege" size="25"> 人。
+    </td>
+</tr>
+<tr>
+    <td>7、企业年营业收入（单位：人民币）：</td>
+    <td>
+        <input type="radio" name="income" value="①50万以下"/>①50万以下 <br/>
+        <input type="radio" name="income" value="②50万~100万"/>②50万~100万  <br/>
+        <input type="radio" name="income" value="③100万~500万"/>③100万~500万 <br/>
+        <input type="radio" name="income" value="④500万~2000万"/>④500万~2000万  <br/>
+        <input type="radio" name="income" value="⑤2000万以上"/>⑤2000万以上   <br/>
+    </td>
+</tr>
+<tr>
+    <td>8、员工薪资福利总额占企业营业收入的比例：</td>
+    <td>
+        <input type="radio" name="pay_per_income" value="①10%以下"/>①10%以下  <br/>
+        <input type="radio" name="pay_per_income" value="②10%~30%"/>②10%~30% <br/>
+        <input type="radio" name="pay_per_income" value="③30%~50%"/>③30%~50% <br/>
+        <input type="radio" name="pay_per_income" value="④50%~70%"/>④50%~70% <br/>
+        <input type="radio" name="pay_per_income" value="⑤70%以上"/>⑤70%以上
+    </td>
+</tr>
+<tr>
+    <td>9、企业缴纳社保以及公积金总额占员工薪资福利的比例：</td>
+    <td>
+        <input type="radio" name="socialpay_per_pay" value="①不缴纳社保"/>①不缴纳社保  <br/>
+        <input type="radio" name="socialpay_per_pay" value="②10%以下"/>②10%以下           <br/>
+        <input type="radio" name="socialpay_per_pay" value="③10%~20%"/>③10%~20%               <br/>
+        <input type="radio" name="socialpay_per_pay" value="④20%~30% "/>④20%~30%                 <br/>
+        <input type="radio" name="socialpay_per_pay" value="⑤30%以上"/>⑤30%以上
+    </td>
+</tr>
+<tr></tr>
+<tr>
+    <td colspan="2">二、企业在劳动用工中存在的问题</td>
+</tr>
+<tr>
+    <td>1、企业是否有扩大用工方面的需求：</td>
+    <td>
+        <input type="checkbox" name="q1_enlarge" value="①暂时没有招聘需求"/>①暂时没有招聘需求   <br/>
+        <input type="checkbox" name="q1_enlarge" value="②招聘需求不强烈，合适情况下可以考虑"/>②招聘需求不强烈，合适情况下可以考虑  <br/>
+        <input type="checkbox" name="q1_enlarge" value="③招聘需求强烈，但是受制于企业成本无法实施"/>③招聘需求强烈，但是受制于企业成本无法实施  <br/>
+        <input type="checkbox" name="q1_enlarge" value="④招聘需求强烈，但是由于各种原因招不到合适的人"/>④招聘需求强烈，但是由于各种原因招不到合适的人
+    </td>
+</tr>
+<tr>
+    <td>2、如有需要，企业主要希望招聘何种类型的员工：</td>
+    <td>
+        <input type="checkbox" name="q2_employee_type" value="①管理类"/>①管理类 <br/>
+        <input type="checkbox" name="q2_employee_type" value="②研发类"/>②研发类 <br/>
+        <input type="checkbox" name="q2_employee_type" value="③技术类"/>③技术类<br/>
+        <input type="checkbox" name="q2_employee_type" value="④销售类"/>④销售类<br/>
+        ⑤其它<input type="text" name="q2_employee_type" size="50">
+    </td>
+</tr>
+<tr>
+    <td>3、企业在招聘活动中的困难度：</td>
+    <td>
+        <input type="checkbox" name="q3_employ_hard" value="①所有职位都可以招到合适的人"/>①所有职位都可以招到合适的人 <br/>
+        <input type="checkbox" name="q3_employ_hard" value="②基本可以招到人"/>②基本可以招到人 <br/>
+        <input type="checkbox" name="q3_employ_hard" value="③只能招到一部分"/>③只能招到一部分<br/>
+        <input type="checkbox" name="q3_employ_hard" value="④很难招到人"/>④很难招到人<br/>
+    </td>
+</tr>
+<tr>
+    <td>4、企业在劳动用工中遇到的最大困难：</td>
+    <td>
+        <input type="checkbox" name="q4_employ_use_hard" value="①信息来源渠道不畅通，符合企业需求的人才难找"/>①所有职位都可以招到合适的人<br/>
+        <input type="checkbox" name="q4_employ_use_hard" value="②企业员工流失问题严重"/>②企业员工流失问题严重   <br/>
+        <input type="checkbox" name="q4_employ_use_hard" value="③员工薪资与培训成本高影响企业发展"/>③员工薪资与培训成本高影响企业发展 <br/>
+        ④其它<input type="text" name="q4_employ_use_hard" size="50">
+    </td>
+</tr>
+<tr>
+    <td>5、企业招聘的主要途径：</td>
+    <td>
+        <input type="checkbox" name="q5_employ_method" value="①猎头企业"/>①猎头企业    <br/>
+        <input type="checkbox" name="q5_employ_method" value="②招聘网站与报纸"/>②招聘网站与报纸<br/>
+        <input type="checkbox" name="q5_employ_method" value="③员工或其他人员介绍"/>③员工或其他人员介绍<br/>
+        ④其它<input type="text" name="q5_employ_method" size="50">
+    </td>
+</tr>
+<tr>
+    <td>6、企业流失员工的主要去向</td>
+    <td>
+        <input type="checkbox" name="q6_employ_lost_thread" value="①国有企业"/>①国有企业<br/>
+        <input type="checkbox" name="q6_employ_lost_thread" value="②外资企业"/>②外资企业<br/>
+        <input type="checkbox" name="q6_employ_lost_thread" value="③民营企业"/>③民营企业<br/>
+        <input type="checkbox" name="q6_employ_lost_thread" value="④其它城市"/>④其它城市<br/>
+        <input type="checkbox" name="q6_employ_lost_thread" value="⑤不清楚"/>⑤不清楚
+    </td>
+</tr>
+<tr>
+    <td>7、企业流失员工的主要原因：</td>
+    <td>
+        <input type="checkbox" name="q7_why_employ_lost" value="①对薪资福利不满意，跳槽至更高待遇企业"/>①对薪资福利不满意，跳槽至更高待遇企业<br/>
+        <input type="checkbox" name="q7_why_employ_lost" value="②对企业发展前景不看好，跳槽至大中企业"/>②对企业发展前景不看好，跳槽至大中企业<br/>
+        <input type="checkbox" name="q7_why_employ_lost" value="③对行业前景不看好，跳槽至其它行业"/>③对行业前景不看好，跳槽至其它行业  <br/>
+        <input type="checkbox" name="q7_why_employ_lost" value="④生活成本高，跳槽至其它城市"/>④生活成本高，跳槽至其它城市<br/>
+        ⑤其它<input type="text" name="q7_why_employ_lost" size="50">
+    </td>
+</tr>
+<tr>
+    <td>8、员工对于缴纳社保和公积金的主要态度：</td>
+    <td>
+        <input type="checkbox" name="q8_employ_socialpay_attr" value="①基本满意"/>①基本满意  <br/>
+        <input type="checkbox" name="q8_employ_socialpay_attr" value="②不满意，扣缴过多"/>②不满意，扣缴过多 <br/>
+        <input type="checkbox" name="q8_employ_socialpay_attr" value="③不满意，缴纳太少"/>③不满意，缴纳太少<br/>
+        ④其它<input type="text" name="q8_employ_socialpay_attr" size="50">
+    </td>
+</tr>
+<tr>
+    <td>9、企业对于劳动用工程序（建立和解除劳动合同）的看法：</td>
+    <td>
+        <input type="checkbox" name="q9_employ_contract_attr" value="①基本满意"/>①基本满意  <br/>
+        <input type="checkbox" name="q9_employ_contract_attr" value="②不满意，手续过于繁琐"/>②不满意，手续过于繁琐  <br/>
+        <input type="checkbox" name="q9_employ_contract_attr" value="③不满意，企业成本过高"/>③不满意，企业成本过高<br/>
+        ④其它<input type="text" name="q9_employ_contract_attr" size="50">
+    </td>
+</tr>
+<tr>
+    <td>10、目前企业招聘员工的试用期为：</td>
+    <td>
+        <input type="checkbox" name="q10_employ_probation_period" value="①1个月 "/>①1个月 <br/>
+        <input type="checkbox" name="q10_employ_probation_period" value="②2个月"/>②2个月  <br/>
+        <input type="checkbox" name="q10_employ_probation_period" value="③3~6个月"/>③3~6个月  <br/>
+        <input type="checkbox" name="q10_employ_probation_period" value="④6个月以上"/>④6个月以上
+    </td>
+</tr>
+<tr>
+    <td>11、目前企业解雇员工的主要方式：</td>
+    <td>
+        <input type="checkbox" name="q11_employ_fire_method" value="①要求员工主动提出辞职"/>①要求员工主动提出辞职 <br/>
+        <input type="checkbox" name="q11_employ_fire_method" value="②合同到期提前通知不予续约"/>②合同到期提前通知不予续约 <br/>
+        <input type="checkbox" name="q11_employ_fire_method" value="③合同未到期给予员工一定经济补偿"/>③合同未到期给予员工一定经济补偿<br/>
+        ④其它<input type="text" name="q11_employ_fire_method" size="50">
+    </td>
+</tr>
+<tr>
+    <td>12、企业认为目前雇佣和解雇员工的灵活度：</td>
+    <td>
+        <input type="checkbox" name="q12_employ_hire_fire_method" value="①灵活度合适"/>①灵活度合适<br/>
+        <input type="checkbox" name="q12_employ_hire_fire_method" value="②灵活度不足，束缚企业发展"/>②灵活度不足，束缚企业发展<br/>
+        <input type="checkbox" name="q12_employ_hire_fire_method" value="③过于灵活，损害员工利益"/>③过于灵活，损害员工利益<br/>
+        ④其它<input type="text" name="q12_employ_hire_fire_method" size="50">
+    </td>
+</tr>
+<tr></tr>
+<tr>
+    <td colspan="2">三、对于政府劳动用工政策的意见</td>
+</tr>
+<tr>
+    <td>1、当前的劳动用工政策是否影响企业招聘的积极性：</td>
+    <td>
+        <input type="checkbox" name="s1_positivity" value="①是"/>①是   <br/>
+        <input type="checkbox" name="s1_positivity" value="②否"/>②否   <br/>
+        <input type="checkbox" name="s1_positivity" value="③不确定"/>③不确定
+    </td>
+</tr>
+<tr>
+    <td>2、是否支持对于小微企业实行差异化的用工政策：</td>
+    <td>
+        <input type="checkbox" name="s2_differentiation" value="①是"/>①是 <br/>
+        <input type="checkbox" name="s2_differentiation" value="②否"/>②否  <br/>
+        <input type="checkbox" name="s2_differentiation" value="③不确定"/>③不确定
+    </td>
+</tr>
+<tr>
+    <td>3、差异化用工政策最希望落实在哪些方面：</td>
+    <td>
+        <input type="checkbox" name="s3_policy_direct" value="①允许小微企业在最低工资线标准以下一定程度浮动"/>①允许小微企业在最低工资线标准以下一定程度浮动 <br/>
+        <input type="checkbox" name="s3_policy_direct" value="②允许经验困难的小微企业在一定时期缓缴社保和公积金"/>②允许经验困难的小微企业在一定时期缓缴社保和公积金 <br/>
+        <input type="checkbox" name="s3_policy_direct" value="③降低小微企业缴纳社保和公积金的比例"/>③降低小微企业缴纳社保和公积金的比例    <br/>
+        <input type="checkbox" name="s3_policy_direct" value="④政府增加对小微企业的补贴力度"/>④政府增加对小微企业的补贴力度      <br/>
+        <input type="checkbox" name="s3_policy_direct" value="⑤简化劳动用工程序，增加雇佣和解雇员工的灵活度"/>⑤简化劳动用工程序，增加雇佣和解雇员工的灵活度<br/>
+        ⑥其它<input type="text" name="s3_policy_direct" size="50">
+    </td>
+</tr>
+<tr>
+    <td>4、如果给予初创小微企业缴纳社保和公积金的豁免期，合适的时间长度是：</td>
+    <td>
+        <input type="checkbox" name="s4_socialpay_free_time" value="①1年以内"/>①1年以内  <br/>
+        <input type="checkbox" name="s4_socialpay_free_time" value="②1~2年"/>②1~2年<br/>
+        <input type="checkbox" name="s4_socialpay_free_time" value="③2~3年"/>③2~3年 <br/>
+        <input type="checkbox" name="s4_socialpay_free_time" value="④3年以上"/>④3年以上
+    </td>
+</tr>
+<tr>
+    <td>5、如果增加对小微企业的补贴，企业最希望补贴的是：</td>
+    <td>
+        <input type="checkbox" name="s5_policy_support_direct" value="①开办费用"/>①开办费用 <br/>
+        <input type="checkbox" name="s5_policy_support_direct" value="②房租补贴"/>②房租补贴 <br/>
+        <input type="checkbox" name="s5_policy_support_direct" value="③社保支出"/>③社保支出 <br/>
+        <input type="checkbox" name="s5_policy_support_direct" value="④个人所得税"/>④个人所得税<br/>
+        ⑤其它<input type="text" name="s5_policy_support_direct" size="50">
+    </td>
+</tr>
+<tr>
+    <td>6、企业认为最适合小微企业的劳动用工程序有：</td>
+    <td>
+        <input type="checkbox" name="s6_suitable_policy" value="①允许小微企业在员工试用期内缓缴社保和公积金，转正后补缴，若未通过试用期则不再补缴"/>①允许小微企业在员工试用期内缓缴社保和公积金，转正后补缴，若未通过试用期则不再补缴<br/>
+        <input type="checkbox" name="s6_suitable_policy" value="②在协商一致和员工自愿的基础上，小微企业可不为其缴纳社保和公积金"/>②在协商一致和员工自愿的基础上，小微企业可不为其缴纳社保和公积金    <br/>
+        <input type="checkbox" name="s6_suitable_policy" value="③在提前通知员工的基础上，小微企业可以自由解除劳动合同而不必进行经济补偿"/>③在提前通知员工的基础上，小微企业可以自由解除劳动合同而不必进行经济补偿  <br/>
+        <input type="checkbox" name="s6_suitable_policy" value="④员工跳槽至大中型企业，该企业须支付给小微企业一定经济补偿"/>④员工跳槽至大中型企业，该企业须支付给小微企业一定经济补偿<br/>
+        ⑤其它<input type="text" name="s6_suitable_policy" size="50">
+    </td>
+</tr>
+<tr></tr>
+<tr>
+    <td colspan="2">四、其它建议</td>
+</tr>
+<tr>
+    <td colspan="2"><input type="text" name="other_suggestion" height="50px" width="300px" size = "300"></td>
+</tr>
+<tr>
+    <td colspan="2"><input type="submit" name="submit" value="提交"/></td>
+</tr>
+</table>
+
+</form>
+</body>
+</html>

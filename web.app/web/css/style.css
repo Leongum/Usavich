@@ -34,3 +34,8 @@ body {
 	overflow: hidden;
 	text-align: center;
 }
+
+tr,td,table {
+    border: 1px solid darkslategrey;
+    padding: 3px;
+}

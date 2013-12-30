@@ -193,4 +193,101 @@
         )
     </insert>
 
+
+    <!-- Yoland Calc -->
+    <insert id="createYolandDic" parameterType="com.usavich.entity.others.YolandCalc">
+        INSERT INTO yoland_calc
+        (
+        name,
+        compay_id,
+        enterprise_property,
+        business_property,
+        until_time,
+        total_employee,
+        full_time_employee,
+        part_time_employee,
+        sh_employee,
+        not_sh_employee,
+        postgraduate,
+        undergraduate,
+        juniorcollege,
+        income,
+        pay_per_income,
+        socialpay_per_pay,
+        q1_enlarge,
+        q2_employee_type,
+        q3_employ_hard,
+        q4_employ_use_hard,
+        q5_employ_method,
+        q6_employ_lost_thread,
+        q7_why_employ_lost,
+        q8_employ_socialpay_attr,
+        q9_employ_contract_attr,
+        q10_employ_probation_period,
+        q11_employ_fire_method,
+        q12_employ_hire_fire_method,
+        s1_positivity,
+        s2_differentiation,
+        s3_policy_direct,
+        s4_socialpay_free_time,
+        s5_policy_support_direct,
+        s6_suitable_policy,
+        other_suggestion)
+        VALUES
+        (
+        #{entity.name},
+        #{entity.compay_id},
+        #{entity.enterprise_property},
+        #{entity.business_property},
+        #{entity.until_time},
+        #{entity.total_employee},
+        #{entity.full_time_employee},
+        #{entity.part_time_employee},
+        #{entity.sh_employee},
+        #{entity.not_sh_employee},
+        #{entity.postgraduate},
+        #{entity.undergraduate},
+        #{entity.juniorcollege},
+        #{entity.income},
+        #{entity.pay_per_income},
+        #{entity.socialpay_per_pay},
+        #{entity.q1_enlarge},
+        #{entity.q2_employee_type},
+        #{entity.q3_employ_hard},
+        #{entity.q4_employ_use_hard},
+        #{entity.q5_employ_method},
+        #{entity.q6_employ_lost_thread},
+        #{entity.q7_why_employ_lost},
+        #{entity.q8_employ_socialpay_attr},
+        #{entity.q9_employ_contract_attr},
+        #{entity.q10_employ_probation_period},
+        #{entity.q11_employ_fire_method},
+        #{entity.q12_employ_hire_fire_method},
+        #{entity.s1_positivity},
+        #{entity.s2_differentiation},
+        #{entity.s3_policy_direct},
+        #{entity.s4_socialpay_free_time},
+        #{entity.s5_policy_support_direct},
+        #{entity.s6_suitable_policy},
+        #{entity.other_suggestion}
+        );
+    </insert>
+
+    <insert id="createYolandAnalytics" parameterType="com.usavich.entity.others.YolandAnalytics">
+        INSERT INTO yoland_analytics
+        (
+        company_id,
+        company_name,
+        question_id,
+        question_name,
+        question_answer)
+        VALUES
+        (
+        #{entity.company_id},
+        #{entity.company_name},
+        #{entity.question_id},
+        #{entity.question_name},
+        #{entity.question_answer}
+        );
+    </insert>
 </mapper>

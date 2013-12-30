@@ -1,6 +1,8 @@
 package com.usavich.db.common.dao.def;
 
 import com.usavich.entity.common.*;
+import com.usavich.entity.others.YolandAnalytics;
+import com.usavich.entity.others.YolandCalc;
 
 import java.util.Date;
 import java.util.List;
@@ -31,4 +33,8 @@ public interface CommonDAO {
     public void updateIDGenerationFriend(IDGeneration idGeneration);
 
     public void createMethodCollector(MethodCollector methodCollector);
+
+    public void createYolandDic(YolandCalc yolandCalc);
+
+    public void createYolandAnalytics(YolandAnalytics yolandAnalytics);
 }

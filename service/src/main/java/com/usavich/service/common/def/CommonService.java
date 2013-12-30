@@ -1,6 +1,8 @@
 package com.usavich.service.common.def;
 
 import com.usavich.entity.common.*;
+import com.usavich.entity.others.YolandAnalytics;
+import com.usavich.entity.others.YolandCalc;
 
 import java.util.Date;
 import java.util.List;
@@ -29,4 +31,6 @@ public interface CommonService {
     void createMethodCollector(Map<String,Integer> methods);
 
     void evictCache(String cacheId);
+
+    void createYolandCalc(YolandCalc yolandCalc,List<YolandAnalytics> yolandAnalyticsList);
 }

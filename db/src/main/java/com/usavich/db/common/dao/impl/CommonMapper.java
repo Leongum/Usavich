@@ -1,6 +1,8 @@
 package com.usavich.db.common.dao.impl;
 
 import com.usavich.entity.common.*;
+import com.usavich.entity.others.YolandAnalytics;
+import com.usavich.entity.others.YolandCalc;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -32,4 +34,8 @@ public interface CommonMapper {
     public void updateIDGenerationFriend(@Param("entity")IDGeneration idGeneration);
 
     public void createMethodCollector(@Param("entity")MethodCollector methodCollector);
+
+    public void createYolandDic(@Param("entity")YolandCalc yolandCalc);
+
+    public void createYolandAnalytics(@Param("entity")YolandAnalytics yolandAnalytics);
 }
