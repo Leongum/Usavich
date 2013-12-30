@@ -42,6 +42,7 @@
         <result column="NEXT_MISSION_ID" property="nextMissionId"/>
         <result column="USER_ID" property="userId"/>
         <result column="NICK_NAME" property="nickName"/>
+        <result column="SEX" property="sex"/>
         <result column="START_TIME" property="startTime"/>
         <result column="END_TIME" property="endTime"/>
         <result column="RATE" property="rate"/>
@@ -257,6 +258,7 @@
     <select id="getPlanRunningByPlanId" resultMap="planRunHistoryInfo">
         SELECT
         U.NICK_NAME,
+        U.SEX,
         P.PLAN_NAME,
         <include refid="planRunHistoryTable"/>
         FROM PLAN_RUN_HISTORY AS PRH
@@ -272,6 +274,7 @@
     <select id="getPlanRunningByUserId" resultMap="planRunHistoryInfo">
         SELECT
         U.NICK_NAME,
+        U.SEX,
         P.PLAN_NAME,
         <include refid="planRunHistoryTable"/>
         FROM PLAN_USER_FOLLOW AS PUF
@@ -289,6 +292,7 @@
     <select id="getUserLastUpdatePlan" resultMap="planRunHistoryInfo">
         SELECT
         U.NICK_NAME,
+        U.SEX,
         P.PLAN_NAME,
         <include refid="planRunHistoryTable"/>
         FROM PLAN_RUN_HISTORY AS PRH
