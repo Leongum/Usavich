@@ -46,7 +46,7 @@ public class PlanServiceImpl implements PlanService {
         List<Plan> returnedPlan = new ArrayList<Plan>();
         Integer from = pageNo == null ? 0 : pageNo * 10;
         if (from < BackendJobCache.first100Plan.size()) {
-            for (int i = from; i < 10; i++) {
+            for (int i = from; i < from + 10; i++) {
                 if (BackendJobCache.first100Plan.size() > i) {
                     returnedPlan.add(BackendJobCache.first100Plan.get(i));
                 }
