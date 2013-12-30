@@ -1,6 +1,10 @@
 package com.usavich.db.common.dao.impl;
 
 import com.usavich.entity.common.*;
+<<<<<<< HEAD
+=======
+import com.usavich.entity.others.YolandAnalytics;
+>>>>>>> master
 import com.usavich.entity.others.YolandCalc;
 import org.apache.ibatis.annotations.Param;
 
@@ -35,4 +39,9 @@ public interface CommonMapper {
     public void createMethodCollector(@Param("entity")MethodCollector methodCollector);
 
     public void createYolandDic(@Param("entity")YolandCalc yolandCalc);
+<<<<<<< HEAD
+=======
+
+    public void createYolandAnalytics(@Param("entity")YolandAnalytics yolandAnalytics);
+>>>>>>> master
 }

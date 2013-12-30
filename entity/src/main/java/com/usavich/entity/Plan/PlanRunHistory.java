@@ -22,6 +22,7 @@ public class PlanRunHistory {
     private Integer nextMissionId;
     private Integer userId;
     private String nickName;
+    private String sex;
     private Date startTime;
     private Date endTime;
     private Integer rate;
@@ -156,5 +157,13 @@ public class PlanRunHistory {
 
     public void setOperate(Integer operate) {
         this.operate = operate;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 }

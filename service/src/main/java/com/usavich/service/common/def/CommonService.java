@@ -1,6 +1,10 @@
 package com.usavich.service.common.def;
 
 import com.usavich.entity.common.*;
+<<<<<<< HEAD
+=======
+import com.usavich.entity.others.YolandAnalytics;
+>>>>>>> master
 import com.usavich.entity.others.YolandCalc;
 
 import java.util.Date;
@@ -31,5 +35,9 @@ public interface CommonService {
 
     void evictCache(String cacheId);
 
+<<<<<<< HEAD
     void createYolandCalc(YolandCalc yolandCalc);
+=======
+    void createYolandCalc(YolandCalc yolandCalc,List<YolandAnalytics> yolandAnalyticsList);
+>>>>>>> master
 }

@@ -2,6 +2,10 @@ package com.usavich.service.common.impl;
 
 import com.usavich.db.common.dao.def.CommonDAO;
 import com.usavich.entity.common.*;
+<<<<<<< HEAD
+=======
+import com.usavich.entity.others.YolandAnalytics;
+>>>>>>> master
 import com.usavich.entity.others.YolandCalc;
 import com.usavich.service.Cache.CacheFacade;
 import com.usavich.service.backend.BackendJobCache;
@@ -94,7 +98,16 @@ public class CommonServiceImpl implements CommonService {
     }
 
     @Override
+<<<<<<< HEAD
     public void createYolandCalc(YolandCalc yolandCalc) {
         commonDAO.createYolandDic(yolandCalc);
+=======
+    public void createYolandCalc(YolandCalc yolandCalc, List<YolandAnalytics> yolandAnalyticsList) {
+        commonDAO.createYolandDic(yolandCalc);
+        for(YolandAnalytics yolandAnalytics : yolandAnalyticsList) {
+            commonDAO.createYolandAnalytics(yolandAnalytics);
+        }
+
+>>>>>>> master
     }
 }
