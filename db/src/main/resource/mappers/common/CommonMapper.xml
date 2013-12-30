@@ -195,7 +195,6 @@
 
 
     <!-- Yoland Calc -->
-<<<<<<< HEAD
     <resultMap id="yolandCalcInfo" type="com.usavich.entity.others.YolandCalc">
          <id column="name" property="name"/>
          <result column="compay_id" property="compay_id"/>
@@ -234,8 +233,6 @@
          <result column="other_suggestion" property="other_suggestion"/>
     </resultMap>
 
-=======
->>>>>>> master
     <insert id="createYolandDic" parameterType="com.usavich.entity.others.YolandCalc">
         INSERT INTO yoland_calc
         (
@@ -312,11 +309,6 @@
         #{entity.s6_suitable_policy},
         #{entity.other_suggestion}
         );
-<<<<<<< HEAD
-
-    </insert>
-
-=======
     </insert>
 
     <insert id="createYolandAnalytics" parameterType="com.usavich.entity.others.YolandAnalytics">
@@ -336,5 +328,4 @@
         #{entity.question_answer}
         );
     </insert>
->>>>>>> master
 </mapper>

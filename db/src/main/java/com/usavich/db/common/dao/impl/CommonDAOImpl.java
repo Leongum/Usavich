@@ -2,10 +2,7 @@ package com.usavich.db.common.dao.impl;
 
 import com.usavich.db.common.dao.def.CommonDAO;
 import com.usavich.entity.common.*;
-<<<<<<< HEAD
-=======
 import com.usavich.entity.others.YolandAnalytics;
->>>>>>> master
 import com.usavich.entity.others.YolandCalc;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -65,14 +62,11 @@ public class CommonDAOImpl implements CommonDAO{
     }
 
     @Override
-<<<<<<< HEAD
-=======
     public void createYolandAnalytics(YolandAnalytics yolandAnalytics) {
         commonMapper.createYolandAnalytics(yolandAnalytics);
     }
 
     @Override
->>>>>>> master
     public VersionControl getVersionControl(String platform) {
         return commonMapper.getVersionControl(platform);
     }
