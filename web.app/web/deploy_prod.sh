@@ -87,6 +87,14 @@ function deploy(){
     check_task_status $?
     run_scp_cmd_r "${_app_root_path}/WEB-INF/*.xml" "/usr/local/tomcat/webapps/ROOT/WEB-INF/"
     check_task_status $?
+    run_scp_cmd_r "${_app_root_path}/css/*.css" "/usr/local/tomcat/webapps/ROOT/css/"
+    check_task_status $?
+    run_scp_cmd_r "${_app_root_path}/js/*.js" "/usr/local/tomcat/webapps/ROOT/js/"
+    check_task_status $?
+    run_scp_cmd_r "${_app_root_path}/images/*.*" "/usr/local/tomcat/webapps/ROOT/images/"
+    check_task_status $?
+    run_scp_cmd_r "${_app_root_path}/index.html" "/usr/local/tomcat/webapps/ROOT/"
+    check_task_status $?
 
     echo Waiting for remote 1box to finish deploying ...
     echo Shutdown Old service ...

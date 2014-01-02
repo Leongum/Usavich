@@ -1,3 +1,4 @@
+/* css reset */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -7,30 +8,124 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
-article, aside, details, figcaption, figure, 
+fieldset,img {
+    border:0;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-weight:normal;
+}
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-	display: block;
+    display: block;
 }
 body {
-	font-family: arial, sans-serif;
-	background: url(../images/bg.jpg) no-repeat #77ab4c;
-    background-position: top;
+    line-height: 1;
 }
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.clearfix{*zoom:1;}
+.clearfix:after{display:block; overflow:hidden; clear:both; height:0; visibility:hidden; content:".";}
 
-#wrapper {
-	width: 1055px;
-    height: 800px;
-	overflow: hidden;
-	text-align: center;
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration:underline;
+}
+.window{
+    background:#119d28 url(../images/bg.jpg) no-repeat center top;
+}
+.banner{
+    height:800px;
+    position:relative;
+}
+.banner h1{display:none;}
+.top_share{
+    width: 81px;
+    height: 80px;
+    position:absolute;
+    top:0;
+    left:0;
+    padding: 45px 17px 0;
+    background: url(../images/icons.png) no-repeat -182px -65px;
+}
+.top_share a{
+    width: 38px;
+    height: 38px;
+    float:left;
+    text-indent: -9999px;
+    overflow: hidden;
+    /* margin-top:30px; */
+    background: url(../images/icons.png) no-repeat -197px 0px;
+}
+.top_share .weibo_share{
+
+}
+.top_share .tencent_share{
+    background-position: -249px 0px;
+    float: right;
+}
+.body_wrap{
+    width:1000px;margin:0 auto;
+}
+.footer{background-color:#119d28;}
+.copy_right{
+    width:1000px;
+    padding:20px 0;
+    margin:0 auto;
+    font-size:14px;
+    text-align:center;
+    line-height:26px;
+    color:#f0f9f2;
+    font-family:"MicroSoft YaHei",SimHei,Arial;
+}
+.copy_right a,.copy_right a:visited{
+    color:#f0f9f2;
+}
+.app_download{
+    position:absolute;
+    top: 375px;
+    right: 0px;
+}
+.ios_link,.android_link{
+    display:block;
+    width: 175px;
+    height: 51px;
+    overflow:hidden;
+    text-indent: -9999px;
+    background: url(../images/icons.png) no-repeat 0px 0px;
+}
+.ios_link:hover{
+    background-position: 0 -52px;
+}
+.android_link{
+    background-position: 0px -106px;
+    margin-top: 10px;
+}
+.android_link:hover{
+    background-position: 0px -158px;
 }
