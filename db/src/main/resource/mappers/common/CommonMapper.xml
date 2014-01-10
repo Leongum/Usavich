@@ -202,6 +202,7 @@
         <result column="LAST_UPDATE_TIME" property="lastUpdateTime"/>
         <result column="RECOMMEND_STATUS" property="recommendStatus"/>
         <result column="SEQUENCE" property="sequence"/>
+        <result column="APP_ADDRESS" property="appAddress"/>
     </resultMap>
 
     <sql id="recommendAppTable">
@@ -211,7 +212,8 @@
         APP_PIC_LINK,
         LAST_UPDATE_TIME,
         RECOMMEND_STATUS,
-        SEQUENCE
+        SEQUENCE,
+        APP_ADDRESS
     </sql>
 
     <select id="getRecommendApp" resultMap="recommendAppInfo">

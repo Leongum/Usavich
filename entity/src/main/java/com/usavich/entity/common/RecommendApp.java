@@ -20,6 +20,7 @@ public class RecommendApp {
     private String appName;
     private String appDescription;
     private String appPicLink;
+    private String appAddress;
     private Date lastUpdateTime;
     private Integer recommendStatus;
     private Integer sequence;
@@ -30,6 +31,14 @@ public class RecommendApp {
 
     public void setAppId(Integer appId) {
         this.appId = appId;
+    }
+
+    public String getAppAddress() {
+        return appAddress;
+    }
+
+    public void setAppAddress(String appAddress) {
+        this.appAddress = appAddress;
     }
 
     public String getAppName() {
