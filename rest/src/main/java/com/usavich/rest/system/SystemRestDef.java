@@ -29,6 +29,11 @@ public interface SystemRestDef extends RestDef {
     List<SystemMessage> getSystemMessage(
             @PathParam(PARAM_LAST_UPDATE_TIME) String lastUpdateTime);
 
+    @GET
+    @Path("/recommend/{" + PARAM_LAST_UPDATE_TIME + "}")
+    List<RecommendApp> getRecommendApp(
+            @PathParam(PARAM_LAST_UPDATE_TIME) String lastUpdateTime);
+
     @POST
     @Path("/feedback")
     void createFeedbackInfo(Feedback feedback);
@@ -41,4 +46,9 @@ public interface SystemRestDef extends RestDef {
     @Path("/cache/evict/{" + PARAM_CACHE_ID + "}")
     void evictCache(
             @PathParam(PARAM_CACHE_ID) String cacheId);
+
+    @GET
+    @Path("/jobcache/evict/{" + PARAM_CACHE_ID + "}")
+    void evictJobCache(
+            @PathParam(PARAM_CACHE_ID) String jobCache);
 }

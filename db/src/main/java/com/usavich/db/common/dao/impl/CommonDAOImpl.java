@@ -55,6 +55,11 @@ public class CommonDAOImpl implements CommonDAO{
     }
 
     @Override
+    public List<RecommendApp> getRecommendApp(Date lastUpdateTime) {
+        return commonMapper.getRecommendApp(lastUpdateTime);
+    }
+
+    @Override
     public VersionControl getVersionControl(String platform) {
         return commonMapper.getVersionControl(platform);
     }

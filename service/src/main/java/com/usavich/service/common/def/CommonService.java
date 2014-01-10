@@ -29,4 +29,10 @@ public interface CommonService {
     void createMethodCollector(Map<String,Integer> methods);
 
     void evictCache(String cacheId);
+
+    List<RecommendApp> getRecommendApp(Date lastUpdateTime);
+
+    List<RecommendApp> getRecommendAppForRest(Date lastUpdateTime);
+
+    void evictJobCache(String jobCache);
 }

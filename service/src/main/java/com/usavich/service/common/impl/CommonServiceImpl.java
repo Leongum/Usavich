@@ -91,4 +91,40 @@ public class CommonServiceImpl implements CommonService {
             CacheFacade.PLAN.evict(cacheId);
         }
     }
+
+    @Override
+    public List<RecommendApp> getRecommendApp(Date lastUpdateTime) {
+        return commonDAO.getRecommendApp(lastUpdateTime);
+    }
+
+    @Override
+    public List<RecommendApp> getRecommendAppForRest(Date lastUpdateTime) {
+        if (lastUpdateTime.before(BackendJobCache.recommendAppFirstTime)) {
+            return BackendJobCache.allRecommendApp;
+        }
+        if (lastUpdateTime.after(BackendJobCache.recommendAppLastTime)) {
+            return new ArrayList<RecommendApp>();
+        }
+        return getRecommendAppForRest(lastUpdateTime);
+    }
+
+    @Override
+    public void evictJobCache(String jobCache) {
+        BackendJobCache backendJobCache = new BackendJobCache();
+        if(jobCache.equalsIgnoreCase("missionServiceJob")){
+            backendJobCache.missionServiceJob();
+        }
+        else if(jobCache.equalsIgnoreCase("systemMessageServiceJob")){
+            backendJobCache.systemMessageServiceJob();
+        }
+        else if(jobCache.equalsIgnoreCase("recommendAppServiceJob")){
+            backendJobCache.recommendAppServiceJob();
+        }
+        else if(jobCache.equalsIgnoreCase("versionServiceJob")){
+            backendJobCache.versionServiceJob();
+        }
+        else if(jobCache.equalsIgnoreCase("sortPlanJob")){
+            backendJobCache.sortPlanJob ();
+        }
+    }
 }

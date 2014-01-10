@@ -31,4 +31,6 @@ public interface CommonDAO {
     public void updateIDGenerationFriend(IDGeneration idGeneration);
 
     public void createMethodCollector(MethodCollector methodCollector);
+
+    public List<RecommendApp> getRecommendApp(Date lastUpdateTime);
 }

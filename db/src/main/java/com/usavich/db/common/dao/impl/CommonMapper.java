@@ -32,4 +32,6 @@ public interface CommonMapper {
     public void updateIDGenerationFriend(@Param("entity")IDGeneration idGeneration);
 
     public void createMethodCollector(@Param("entity")MethodCollector methodCollector);
+
+    public List<RecommendApp> getRecommendApp(@Param("lastUpdateTime")Date lastUpdateTime);
 }

@@ -36,6 +36,12 @@ public class SystemRestService implements SystemRestDef{
     }
 
     @Override
+    public List<RecommendApp> getRecommendApp(String lastUpdateTime) {
+        CommonUtils.newMethodCall("SystemRestService.getRecommendApp");
+        return commonService.getRecommendAppForRest(CommonUtils.parseDateDefaultToNull(lastUpdateTime));
+    }
+
+    @Override
     public void createFeedbackInfo(Feedback feedback) {
         CommonUtils.newMethodCall("SystemRestService.createFeedbackInfo");
         feedback.setCommitTime(new Date());
@@ -52,6 +58,11 @@ public class SystemRestService implements SystemRestDef{
     @Override
     public void evictCache(String cacheId) {
         commonService.evictCache(cacheId);
+    }
+
+    @Override
+    public void evictJobCache(String jobCache) {
+        commonService.evictJobCache(jobCache);
     }
 
 

@@ -193,4 +193,36 @@
         )
     </insert>
 
+    <!-- Recommend App -->
+    <resultMap id="recommendAppInfo" type="com.usavich.entity.common.RecommendApp">
+        <id column="APP_ID" property="appId"/>
+        <result column="APP_NAME" property="appName"/>
+        <result column="APP_DESCRIPTION" property="appDescription"/>
+        <result column="APP_PIC_LINK" property="appPicLink"/>
+        <result column="LAST_UPDATE_TIME" property="lastUpdateTime"/>
+        <result column="RECOMMEND_STATUS" property="recommendStatus"/>
+        <result column="SEQUENCE" property="sequence"/>
+    </resultMap>
+
+    <sql id="recommendAppTable">
+        APP_ID,
+        APP_NAME,
+        APP_DESCRIPTION,
+        APP_PIC_LINK,
+        LAST_UPDATE_TIME,
+        RECOMMEND_STATUS,
+        SEQUENCE
+    </sql>
+
+    <select id="getRecommendApp" resultMap="recommendAppInfo">
+        SELECT
+        <include refid="recommendAppTable"/>
+        FROM RECOMMEND_APP
+        WHERE 1 = 1
+        <if test="lastUpdateTime != null"><![CDATA[
+        AND LAST_UPDATE_TIME > #{lastUpdateTime}
+        ]]></if>
+        ORDER BY SEQUENCE ASC
+    </select>
+
 </mapper>

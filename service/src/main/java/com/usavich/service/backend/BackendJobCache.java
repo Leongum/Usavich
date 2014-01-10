@@ -2,6 +2,7 @@ package com.usavich.service.backend;
 
 import com.usavich.common.lib.CommonUtils;
 import com.usavich.common.lib.MethodCollector;
+import com.usavich.entity.common.RecommendApp;
 import com.usavich.entity.common.SystemMessage;
 import com.usavich.entity.common.VersionControl;
 import com.usavich.entity.mission.Mission;
@@ -44,6 +45,8 @@ public class BackendJobCache {
 
     public static List<Plan> first100Plan  = new ArrayList<Plan>();
 
+    public static List<RecommendApp> allRecommendApp = new ArrayList<RecommendApp>();
+
     public static Date missionLastTime = CommonUtils.parseDateDefaultToNull("2001-01-01 00:00:00");
 
     public static Date missionFirstTime = CommonUtils.parseDateDefaultToNull("3001-01-01 00:00:00");
@@ -51,6 +54,10 @@ public class BackendJobCache {
     public static Date messageLastTime = CommonUtils.parseDateDefaultToNull("2001-01-01 00:00:00");
 
     public static Date messageFirstTime = CommonUtils.parseDateDefaultToNull("3001-01-01 00:00:00");
+
+    public static Date recommendAppLastTime = CommonUtils.parseDateDefaultToNull("2001-01-01 00:00:00");
+
+    public static Date recommendAppFirstTime = CommonUtils.parseDateDefaultToNull("3001-01-01 00:00:00");
 
     public void missionServiceJob() {
         allMissions = missionService.getMissions(null, CommonUtils.parseDateDefaultToNull("2001-01-01 00:00:00"), -1);
@@ -73,6 +80,18 @@ public class BackendJobCache {
             }
             if (systemMessage.getLastUpdateTime().before(messageFirstTime)) {
                 messageFirstTime = systemMessage.getLastUpdateTime();
+            }
+        }
+    }
+
+    public void recommendAppServiceJob() {
+        allRecommendApp = commonService.getRecommendApp(CommonUtils.parseDateDefaultToNull("2001-01-01 00:00:00"));
+        for (RecommendApp recommendApp : allRecommendApp) {
+            if (recommendApp.getLastUpdateTime().after(recommendAppLastTime)) {
+                recommendAppLastTime = recommendApp.getLastUpdateTime();
+            }
+            if (recommendApp.getLastUpdateTime().before(recommendAppFirstTime)) {
+                recommendAppFirstTime = recommendApp.getLastUpdateTime();
             }
         }
     }
