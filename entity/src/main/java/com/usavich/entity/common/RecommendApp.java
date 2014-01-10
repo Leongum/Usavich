@@ -1,5 +1,10 @@
 package com.usavich.entity.common;
 
+import com.usavich.common.lib.CustomDateDeserializer;
+import com.usavich.common.lib.CustomDateSerializer;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.util.Date;
 
 /**
@@ -51,10 +56,12 @@ public class RecommendApp {
         this.appPicLink = appPicLink;
     }
 
+    @JsonSerialize(using = CustomDateSerializer.class)
     public Date getLastUpdateTime() {
         return lastUpdateTime;
     }
 
+    @JsonDeserialize(using = CustomDateDeserializer.class)
     public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
     }

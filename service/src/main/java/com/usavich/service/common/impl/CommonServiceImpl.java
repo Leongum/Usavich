@@ -25,6 +25,9 @@ public class CommonServiceImpl implements CommonService {
     @Autowired
     private CommonDAO commonDAO;
 
+    @Autowired
+    private BackendJobCache backendJobCache;
+
     @Override
     @Transactional
     public VersionControl getVersionControl(String platform) {
@@ -110,7 +113,6 @@ public class CommonServiceImpl implements CommonService {
 
     @Override
     public void evictJobCache(String jobCache) {
-        BackendJobCache backendJobCache = new BackendJobCache();
         if(jobCache.equalsIgnoreCase("missionServiceJob")){
             backendJobCache.missionServiceJob();
         }
