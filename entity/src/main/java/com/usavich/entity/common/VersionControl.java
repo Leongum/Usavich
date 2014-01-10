@@ -30,6 +30,8 @@ public class VersionControl {
 
     private Date messageLastUpdateTime;
 
+    private Date recommendLastUpdateTime;
+
     public String getPlatform() {
         return platform;
     }
@@ -90,5 +92,15 @@ public class VersionControl {
     @JsonDeserialize(using = CustomDateDeserializer.class)
     public void setMessageLastUpdateTime(Date messageLastUpdateTime) {
         this.messageLastUpdateTime = messageLastUpdateTime;
+    }
+
+    @JsonSerialize(using = CustomDateSerializer.class)
+    public Date getRecommendLastUpdateTime() {
+        return recommendLastUpdateTime;
+    }
+
+    @JsonDeserialize(using = CustomDateDeserializer.class)
+    public void setRecommendLastUpdateTime(Date recommendLastUpdateTime) {
+        this.recommendLastUpdateTime = recommendLastUpdateTime;
     }
 }

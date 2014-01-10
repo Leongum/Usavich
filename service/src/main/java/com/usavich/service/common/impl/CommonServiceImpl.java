@@ -44,6 +44,7 @@ public class CommonServiceImpl implements CommonService {
         }
         versionControl.setMessageLastUpdateTime(BackendJobCache.messageLastTime);
         versionControl.setMissionLastUpdateTime(BackendJobCache.missionLastTime);
+        versionControl.setRecommendLastUpdateTime(BackendJobCache.recommendAppLastTime);
         return versionControl;
     }
 
